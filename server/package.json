@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A consulting website",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AipuAmeh/PSQ.git"
+  },
+  "author": "Aipu Ameh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AipuAmeh/PSQ/issues"
+  },
+  "homepage": "https://github.com/AipuAmeh/PSQ#readme"
+}
