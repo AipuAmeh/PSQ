@@ -1,0 +1,27 @@
+{
+  "name": "psychquiconsult",
+  "version": "1.0.0",
+  "description": "A consulting website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AipuAmeh/PSQ.git"
+  },
+  "author": "Aipu Ameh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AipuAmeh/PSQ/issues"
+  },
+  "homepage": "https://github.com/AipuAmeh/PSQ#readme",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
