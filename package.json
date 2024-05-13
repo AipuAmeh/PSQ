@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/AipuAmeh/PSQ#readme",
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "install": "^0.13.0",
+    "npm": "^10.7.0"
   }
 }
