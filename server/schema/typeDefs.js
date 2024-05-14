@@ -17,6 +17,11 @@ type Patient {
     email: String
     password: String
 }
+
+type Query {
+    patient(patientId: ID!): Patient
+    provider(providerId: ID!): Provider 
+}
 `;
 
 export default typeDefs;

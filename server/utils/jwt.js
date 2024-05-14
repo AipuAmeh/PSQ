@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-
-const secret = process.env.JWT_SECRET;
-const expiration = process.env.JWT_EXPIRATION;
+import { secret, expiration } from './constants.js';
 
 const signProviderToken = async ({ email, providerName, _id }) => {
     const payload = { email, providerName, _id };
