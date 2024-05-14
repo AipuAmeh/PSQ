@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { secret, expiration } from '../utils/jwt';
+import { secret, expiration } from '../utils/constants.js';
 
 const authMiddleware = async ({ req }) => {
 
@@ -10,7 +10,7 @@ const authMiddleware = async ({ req }) => {
     };
 
     if (!token) {
-        return req;
+        return {...req};
     }
     try {
         const { data } = jwt.verify(token, secret, { maxAge: expiration });
@@ -18,7 +18,7 @@ const authMiddleware = async ({ req }) => {
     } catch (error) {
         console.log('JWT Verfication Failed', error.message);
     }
-    return await req;
+    return await {...req};
 };
 
 export default authMiddleware;
