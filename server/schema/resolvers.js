@@ -1,16 +1,22 @@
 import Patient from '../models/Patient.js';
 import Provider from '../models/Provider.js';
+import { signPatientToken, signProviderToken } from '../utils/jwt.js';
 
 const resolvers = {
 Query: {
     patient: async (parent, { patientId }) => {
-        const patient = Patient.findById({ id: patientId });
-        console.log('PATIENT', patient)
+        return await Patient.findById({ _id: patientId });
     },
     provider: async (parent, { providerId }) => {
-        const provider = Patient.findById({ id: patientId });
-        console.log('PROVIDER', provider)
+        return await Provider.findById({ _id: providerId });
     },
+},
+Mutation: {
+    addPatient: async (parent, { firstName, lastName, dob, userName, email, password}) => {
+        const patient = await Patient.create({ firstName, lastName, dob, userName, email, password });
+        const token = await signPatientToken(patient);
+        return { token, patient };
+    }
 }
 };
 
