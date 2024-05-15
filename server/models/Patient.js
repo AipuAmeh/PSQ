@@ -16,6 +16,7 @@ const patientSchema = new Schema({
     },
     dob: {
         type: String,
+        required: true,
         trim: true,
     },
     userName: {
