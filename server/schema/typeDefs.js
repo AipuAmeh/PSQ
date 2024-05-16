@@ -23,6 +23,11 @@ type patientAuth {
     patient: Patient
 }
 
+type providerAuth {
+    token: ID!
+    provider: Provider
+}
+
 type Query {
     patient(patientId: ID!): Patient
     provider(providerId: ID!): Provider 
@@ -30,7 +35,7 @@ type Query {
 
 type Mutation {
     addPatient(firstName:String!, lastName: String!, dob:String!,userName: String!, email: String!, password: String!): patientAuth
-
+    addProvider(providerName: String!, email: String!, password: String!): providerAuth
 }
 `;
 
