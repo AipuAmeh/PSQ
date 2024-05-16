@@ -6,7 +6,7 @@ export const signProviderToken = async ({ email, providerName, _id }) => {
     const payload = { email, providerName, _id };
     if (secret) {
 
-        return await jwt.signAsync({ data: payload }, secret, { expiresIn: expiration});
+        return jwt.sign({ data: payload }, secret, { expiresIn: expiration});
     } else {
         return 'NO SECRET, WILL DELETE LATER';
     };
@@ -15,7 +15,7 @@ export const signProviderToken = async ({ email, providerName, _id }) => {
 export const signPatientToken = async ({ email, userName, _id }) => {
     const payload = { email, userName, _id };
     if (secret) {
-        return await jwt.sign({ data: payload}, secret, { expiresIn: expiration});
+        return jwt.sign({ data: payload}, secret, { expiresIn: expiration});
     } else {
         return 'NO SECRET, WILL DELETE LATER';
     }

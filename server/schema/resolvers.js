@@ -16,6 +16,11 @@ Mutation: {
         const patient = await Patient.create({ firstName, lastName, dob, userName, email, password });
         const token = await signPatientToken(patient);
         return { token, patient };
+    },
+    addProvider: async (parent, { providerName, email, password }) => {
+        const provider = await Provider.create({ providerName, email, password });
+        const token = await signProviderToken(provider);
+        return { token, provider };
     }
 }
 };
