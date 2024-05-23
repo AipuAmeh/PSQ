@@ -9,6 +9,8 @@ import {
 } from '@apollo/client'
 import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
+import Header from './components/Header';
+import { Box } from '@chakra-ui/react';
 
 function App() {
 const cookies = useCookies(['auth_token']);
@@ -31,9 +33,12 @@ const client = new ApolloClient({
 
   return (
 <ApolloProvider client={client}>
-<main>
+  <Box>
+  <Header />
+<Box>
   <Outlet />
-</main>
+</Box>
+  </Box>
 </ApolloProvider>
   )
 }
