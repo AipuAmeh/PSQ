@@ -10,12 +10,12 @@ const Header = () => {
   // add image for header
 
 return (
-<Flex minWidth='max-content' gap={15}>
+<Flex minWidth='max-content'  mt={3}>
   <Box p='2'>
     <Heading size='md'>PsychQuiConsult</Heading>
   </Box>
-  <Spacer gap={20} />
-<Box display='flex' justifyContent='flex-end' gap={2}>
+  <Spacer gap={15} />
+<Box display='flex' justifyContent='flex-end' gap={2} mr={4}>
   <h2>
   <Link to='/signup'>Sign Up</Link>
   </h2>
