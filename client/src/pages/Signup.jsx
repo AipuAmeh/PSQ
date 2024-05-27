@@ -46,6 +46,8 @@ const Signup = () => {
         variables: { ...formState },
       });
       console.log('PATIENT DATA:', dataResponse);
+      // drop database and recreate it with new schema
+      // changed my naming conventions for schema without updating database so index names are not registering
     } catch (error) {
       console.error(error.message);
     }
