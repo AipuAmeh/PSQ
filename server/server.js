@@ -4,6 +4,9 @@ import { expressMiddleware } from "@apollo/server/express4";
 import typeDefs from "./schema/typeDefs.js";
 import resolvers from "./schema/resolvers.js";
 import mongoose from "./config/connection.js";
+import authMiddleware from "./middleware/auth.js";
+import cors from "cors"
+import cookie from "cookie";
 
 const PORT = process.env.PORT;
 const db = mongoose;
@@ -12,6 +15,10 @@ const app = express();
 db.once("open", async () => {
 
   app.use(express.json());
+
+  const corsOptions = {
+    credentials: true
+  };
   
   const server = new ApolloServer({
     typeDefs,
@@ -22,9 +29,11 @@ db.once("open", async () => {
 
   app.use(
     "/graphql",
-    // cors(),
+    cors(corsOptions),
     express.json(),
-    expressMiddleware(server)
+    expressMiddleware(server, {
+      context: authMiddleware
+    })
   );
 
   if (process.env.NODE_ENV === "production") {

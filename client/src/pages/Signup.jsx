@@ -42,14 +42,16 @@ const Signup = () => {
     e.preventDefault();
     console.log(formState);
     try {
-      const dataResponse = await addPatient({
-        variables: { ...formState },
-      });
-      console.log('PATIENT DATA:', dataResponse);
-      // drop database and recreate it with new schema
-      // changed my naming conventions for schema without updating database so index names are not registering
+      if (!formState) {
+        console.log('please fill out fields');
+      } else {
+        const dataResponse = await addPatient({
+          variables: { ...formState }
+        });
+        console.log(dataResponse);
+      }
     } catch (error) {
-      console.error(error.message);
+      console.log(error.message);
     }
   }
 
@@ -172,7 +174,7 @@ const Signup = () => {
           Sign Up
         </Button>
       </Center>
-
+      {error ? <div>{error.message}</div> : null}
     </Box>
   );
 };

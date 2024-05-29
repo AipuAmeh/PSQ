@@ -23,14 +23,7 @@ Mutation: {
             console.log('PATIENTS TOKEN', token);
             return { token, patient };    
         } catch (error) {
-            if (error.code === 11000) {
-                console.error('Duplicate key error:', error.message);
-                // Handle the duplicate key error, e.g., send a user-friendly message
-                throw new Error('Duplicate field value: ' + Object.keys(error.keyValue).join(', '));
-            } else {
-                console.error('Error adding patient:', error.message);
-                throw new Error('Error adding patient');
-            }
+            console.log(error.message);
         }
 
     },

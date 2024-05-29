@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { jwtDecode } from 'jwt-decode';
 
@@ -11,14 +11,30 @@ export const CurrentUserContext = createContext();
 export const useCurrentUserContext = () => useContext(CurrentUserContext);
 
 // eslint-disable-next-line react/prop-types
-export const CurrentUserContextProvider = ({ children }) => {
+export default function CurrentUserContextProvider({ children }){
 const [ cookies, setCookies, removeCookies ] = useCookies(['auth_token']);
 
 let initialUser = { isAuthenticated: false };
-if (cookies.auth_token) {
-    const decodedToken = jwtDecode(cookies.auth_token);
-    initialUser = { ...decodedToken.data, isAuthenticated: true }
-  }
+
+
+useEffect(() => {
+    if (cookies.auth_token) {
+      try {
+        const decodedToken = jwtDecode(cookies.auth_token);
+        console.log('DECODED TOKEN', decodedToken);
+        setCurrentUser({ ...decodedToken.data, isAuthenticated: true });
+      } catch (error) {
+        console.error('Invalid token:', error);
+        // Optionally remove the invalid token
+        removeCookies('auth_token');
+      }
+    }
+  }, [cookies.auth_token, removeCookies]);
+// if (cookies.auth_token) {
+//     const decodedToken = jwtDecode(cookies.auth_token);
+//     console.log('DECODED TOKEN', decodedToken);
+//     initialUser = { ...decodedToken.data, isAuthenticated: true }
+//   }
 
 const [ currentUser, setCurrentUser ] = useState(initialUser);
 const isProvider = currentUser?.providerName != undefined;
@@ -29,15 +45,14 @@ setCookies('auth_token', token, {
     path: '/',
     maxAge: 60*60*24,
     secure: true,
-    httpOnly: true,
     sameSite: 'Strict'
 });
-},[setCurrentUser, setCookies]);
+},[setCookies]);
 
 const logoutUser = useCallback(() => {
-removeCookies('auth_token');
-setCurrentUser({ isAuthenticated: false}, {path: '/'});
-},[setCurrentUser, removeCookies]);
+removeCookies('auth_token', {path: '/'});
+setCurrentUser({ isAuthenticated: false});
+},[removeCookies]);
 
 const isLoggedIn = useCallback(() => currentUser.isAuthenticated, [currentUser.isAuthenticated]);
 
@@ -55,7 +70,6 @@ return (
         {children}
     </CurrentUserContext.Provider>
 )
-
 }
 
 
