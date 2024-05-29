@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
+import 'dotenv/config'
 
-mongoose.connect(process.env.MONDODB_URI || 'mongodb://localhost:27017/psychquiconsult');
+mongoose.connect(process.env.MONGODB_URI )
 
 export default mongoose.connection;

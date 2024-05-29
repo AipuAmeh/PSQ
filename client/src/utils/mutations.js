@@ -21,8 +21,9 @@ export const ADD_PROVIDER = gql`
   }
 `;
 
+
 export const ADD_PATIENT = gql`
-  mutation addProvider(
+  mutation addPatient(
     $firstName: String!
     $lastName: String!
     $userName: String!

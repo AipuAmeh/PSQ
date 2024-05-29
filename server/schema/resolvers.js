@@ -10,16 +10,26 @@ Query: {
     provider: async (parent, { providerId }) => {
         return await Provider.findById({ _id: providerId });
     },
+    allPatients: async (parent) => {
+        return Patient.find();
+    }
 },
 Mutation: {
     addPatient: async (parent, { firstName, lastName, dob, userName, email, password}) => {
-        const patient = await Patient.create({ firstName, lastName, dob, userName, email, password });
-        const token = await signPatientToken(patient);
-        return { token, patient };
+        try {
+            const patient = await Patient.create({ firstName, lastName, dob, userName, email, password });
+            const token = await signPatientToken(patient);
+            console.log('ADDING PATIENT', patient);
+            console.log('PATIENTS TOKEN', token);
+            return { token, patient };    
+        } catch (error) {
+            console.log(error.message);
+        }
+
     },
     addProvider: async (parent, { providerName, email, password }) => {
         const provider = await Provider.create({ providerName, email, password });
-        const token = await signProviderToken(provider);
+        const token = signProviderToken(provider);
         return { token, provider };
     }
 }

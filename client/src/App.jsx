@@ -1,6 +1,6 @@
 
 import './App.css'
-import { useCookies } from 'react-cookie'
+import { useCookies,} from 'react-cookie'
 import {
   ApolloClient,
   ApolloProvider,
@@ -13,17 +13,21 @@ import Header from './components/Header';
 import { Box } from '@chakra-ui/react';
 
 function App() {
-const cookies = useCookies(['auth_token']);
+const [cookies] = useCookies(["auth_token"]);
+console.log('COOKIES', cookies?.auth_token);
 
 const httpLink = createHttpLink({
-  uri: '/graphql'
+  uri: 'http://localhost:3001/graphql',
+  opts: {
+    credentials: "include"
+  }
 });
 
 const authLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    authorization: cookies?.auth_token ? `Bearer ${cookies.auth_token}` : ""
-  }
+     authorization: cookies?.auth_token ? `Bearer ${cookies.auth_token}` : ""  
+  },
 }));
 
 const client = new ApolloClient({
@@ -37,6 +41,7 @@ const client = new ApolloClient({
   <Header />
 <Box>
   <Outlet />
+  {cookies.auth_token ? `Auth token: ${cookies.auth_token}` : 'No auth token found'}
 </Box>
   </Box>
 </ApolloProvider>
