@@ -1,9 +1,6 @@
-import { createContext, useContext, useState, useCallback, useMemo, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo} from 'react';
 import { useCookies } from 'react-cookie';
 import { jwtDecode } from 'jwt-decode';
-
-
-
 
 export const CurrentUserContext = createContext();
 
@@ -16,25 +13,10 @@ const [ cookies, setCookies, removeCookies ] = useCookies(['auth_token']);
 
 let initialUser = { isAuthenticated: false };
 
-
-useEffect(() => {
-    if (cookies.auth_token) {
-      try {
-        const decodedToken = jwtDecode(cookies.auth_token);
-        console.log('DECODED TOKEN', decodedToken);
-        setCurrentUser({ ...decodedToken.data, isAuthenticated: true });
-      } catch (error) {
-        console.error('Invalid token:', error);
-        // Optionally remove the invalid token
-        removeCookies('auth_token');
-      }
-    }
-  }, [cookies.auth_token, removeCookies]);
-// if (cookies.auth_token) {
-//     const decodedToken = jwtDecode(cookies.auth_token);
-//     console.log('DECODED TOKEN', decodedToken);
-//     initialUser = { ...decodedToken.data, isAuthenticated: true }
-//   }
+if (cookies.auth_token) {
+    const decodedToken = jwtDecode(cookies.auth_token);
+    initialUser = { ...decodedToken.data, isAuthenticated: true }
+  }  
 
 const [ currentUser, setCurrentUser ] = useState(initialUser);
 const isProvider = currentUser?.providerName != undefined;
@@ -56,7 +38,8 @@ setCurrentUser({ isAuthenticated: false});
 
 const isLoggedIn = useCallback(() => currentUser.isAuthenticated, [currentUser.isAuthenticated]);
 
-const contextValue = useMemo(() => ({
+const contextValue = useMemo(() => 
+({
     currentUser,
     isProvider,
     loginUser,
@@ -69,7 +52,7 @@ return (
     <CurrentUserContext.Provider value={contextValue}>
         {children}
     </CurrentUserContext.Provider>
-)
+);
 }
 
 

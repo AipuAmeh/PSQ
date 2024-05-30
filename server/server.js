@@ -16,6 +16,7 @@ db.once("open", async () => {
 
   app.use(express.json());
 
+  // make sure it allows requests on frontend
   const corsOptions = {
     credentials: true
   };
@@ -44,9 +45,7 @@ db.once("open", async () => {
     });
   }
 
-  console.log("TRYING TO TURN ON");
 
-  console.log("open");
   app.listen(PORT, () => {
   console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
   });

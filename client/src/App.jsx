@@ -14,7 +14,6 @@ import { Box } from '@chakra-ui/react';
 
 function App() {
 const [cookies] = useCookies(["auth_token"]);
-console.log('COOKIES', cookies?.auth_token);
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -41,7 +40,6 @@ const client = new ApolloClient({
   <Header />
 <Box>
   <Outlet />
-  {cookies.auth_token ? `Auth token: ${cookies.auth_token}` : 'No auth token found'}
 </Box>
   </Box>
 </ApolloProvider>
