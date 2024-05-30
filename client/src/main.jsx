@@ -6,8 +6,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { CurrentUserProvider } from "./utils/context/index.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Signup from "./pages/Signup.jsx";
+import { CookiesProvider } from "react-cookie";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
-      <RouterProvider router={router} />
+      <CookiesProvider>
+        <CurrentUserProvider>
+          <RouterProvider router={router} />
+        </CurrentUserProvider>
+      </CookiesProvider>
     </ChakraProvider>
   </React.StrictMode>
 );
