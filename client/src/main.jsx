@@ -2,14 +2,17 @@
 // import { extendTheme } from '@chakra-ui/react'
 import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
+
 import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
+
 import App from "./App.jsx";
 import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { CurrentUserProvider } from "./utils/context/index.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Signup from "./pages/Signup.jsx";
-import { CookiesProvider } from "react-cookie";
+
 
 const router = createBrowserRouter([
   {

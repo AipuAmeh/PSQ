@@ -12,14 +12,25 @@ import {
   Stack,
   Link,
 } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PATIENT } from "../utils/mutations";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 
+export const isInvalidEmail = (email) => {
+  const emailFormat = /\S+@\S+\.\S+/;
+  if (email.match(emailFormat) && email.length > 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
 // mobile development once screen gets smaller
 const Signup = () => {
+  const toast = useToast();
   const { loginUser } = useCurrentUserContext();
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
@@ -44,9 +55,37 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formState);
+    const { name } = e.target;
+
     try {
-      if (!formState) {
-        console.log("please fill out fields");
+      if (name === "email") {
+        const invalidEmail = isInvalidEmail(formState.email);
+        if (invalidEmail) {
+          console.log("INVALID EMAIL", true);
+          toast({
+            title: "Error",
+            description: "Please enter a valid email.",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+          return;
+        }
+      } 
+      else if (
+        formState.firstName === "" ||
+        formState.lastName === "" ||
+        formState.dob === "" ||
+        formState.email === "" ||
+        formState.userName === ""
+      ) {
+        return toast({
+          title: "Error",
+          description: "Please create an account!",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
       } else {
         const dataResponse = await addPatient({
           variables: { ...formState },
@@ -54,7 +93,7 @@ const Signup = () => {
         console.log(dataResponse);
         const { token, patient } = dataResponse.data.addPatient;
         loginUser(patient, token);
-        navigate("/");
+        // navigate("/");
       }
     } catch (error) {
       console.log(error.message);
