@@ -1,8 +1,9 @@
+import React from "react";
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
+  InputRightElement,
   Box,
   Input,
   Text,
@@ -18,6 +19,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_PATIENT } from "../utils/mutations";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
+import PasswordChecklistComp from "../components/Validation/PasswordChecklist";
 
 export const isInvalidEmail = (email) => {
   const emailFormat = /\S+@\S+\.\S+/;
@@ -41,6 +43,15 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const [show, setShow] = React.useState(false);
+  const [showChecklist, setShowChecklist] = useState(false);
+  const [input, setInput] = useState('')
+
+  const handlePasswordClick = () => setShow(!show);
+
+  const showListOnClick = () => {
+    setShowChecklist(true);
+  };
 
   const [addPatient, { error, data }] = useMutation(ADD_PATIENT);
 
@@ -50,13 +61,15 @@ const Signup = () => {
       ...formState,
       [name]: value,
     });
+    setInput(e.target.value);
   };
+
+  const isError = input === '';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formState);
     const { name } = e.target;
-
     try {
       if (name === "email") {
         const invalidEmail = isInvalidEmail(formState.email);
@@ -71,14 +84,10 @@ const Signup = () => {
           });
           return;
         }
-      } 
-      else if (
-        formState.firstName === "" ||
-        formState.lastName === "" ||
-        formState.dob === "" ||
-        formState.email === "" ||
-        formState.userName === ""
-      ) {
+        // work on this isError
+      } else if (isError) 
+        {
+        console.log(isError);
         return toast({
           title: "Error",
           description: "Please create an account!",
@@ -93,7 +102,7 @@ const Signup = () => {
         console.log(dataResponse);
         const { token, patient } = dataResponse.data.addPatient;
         loginUser(patient, token);
-        // navigate("/");
+        navigate("/");
       }
     } catch (error) {
       console.log(error.message);
@@ -108,8 +117,8 @@ const Signup = () => {
       justifyContent="center"
       flexDirection="column"
     >
-      <Text fontSize="2xl" display="flex" justifyContent="center" mt={6}>
-        Create Your Account
+      <Text fontSize="2xl" display="flex" justifyContent="center" my={6}>
+        Sign Up
       </Text>
 
       {data ? (
@@ -118,9 +127,13 @@ const Signup = () => {
         </p>
       ) : (
         <Box mx={4}>
+          <Text fontSize="xl" m={6}>
+            General Information
+          </Text>
           <FormControl
+           isInvalid={!isError}
             isRequired
-            mt={8}
+            mt={4}
             display="flex"
             flexDirection="row"
             justifyContent="center"
@@ -150,6 +163,7 @@ const Signup = () => {
           </FormControl>
 
           <FormControl
+           isInvalid={!isError}
             isRequired
             mt={4}
             display="flex"
@@ -179,42 +193,72 @@ const Signup = () => {
               />
             </Stack>
           </FormControl>
-
+          <Text fontSize="xl" m={6}>
+            Account Information
+          </Text>
+          
           <FormControl
+           isInvalid={!isError}
             isRequired
             mt={4}
             display="flex"
             flexDirection="row"
             justifyContent="center"
-            w="100%"
+            w="65%"
           >
-            <Stack mr={3} flex="1">
-              <FormLabel>Username</FormLabel>
-              <Input
-                placeholder="Username"
-                name="userName"
-                type="text"
-                onChange={handleChange}
-                value={formState.userName}
-              />
-            </Stack>
+            <FormLabel>Username</FormLabel>
+            <Input
+              placeholder="Username"
+              name="userName"
+              type="text"
+              onChange={handleChange}
+              value={formState.userName}
+            />
+          </FormControl>
 
-            <Stack flex="1">
+          <FormControl
+           isInvalid={!isError}
+            isRequired
+            mt={4}
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            w="65%"
+          >
+            <InputGroup>
               <FormLabel>Password</FormLabel>
               <Input
                 placeholder="******"
                 name="password"
-                type="password"
+                type={show ? "text" : "password"}
                 onChange={handleChange}
                 value={formState.password}
+                onClick={showListOnClick}
               />
-            </Stack>
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  // backgroundColor='#371236'
+                  // _hover={{ bg: '#F7F9F7', color: 'black' }}
+                  // color='white'
+                  onClick={handlePasswordClick}
+                >
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            {showChecklist ? (
+              <PasswordChecklistComp password={formState.password} />
+            ) : (
+              false
+            )}
           </FormControl>
         </Box>
       )}
       <Center>
-        <Button mt={4} w="50%" onClick={handleSubmit}>
-          Sign Up
+        <Button mt={6} size="lg" onClick={handleSubmit}>
+          Create Your Account
         </Button>
       </Center>
       {error ? <div>{error.message}</div> : null}
