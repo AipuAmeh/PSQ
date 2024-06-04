@@ -21,7 +21,7 @@ import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 import PasswordChecklistComp from "../components/Validation/PasswordChecklist";
 
-export const isInvalidEmail = (email) => {
+const isInvalidEmail = (email) => {
   const emailFormat = /\S+@\S+\.\S+/;
   if (email.match(emailFormat) && email.length > 0) {
     return false;
@@ -43,9 +43,17 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const [formErrors, setFormErrors] = useState({
+    firstName: false,
+    lastName: false,
+    dob: false,
+    userName: false,
+    email: false,
+    password: false,
+  });
   const [show, setShow] = React.useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState("");
 
   const handlePasswordClick = () => setShow(!show);
 
@@ -61,41 +69,50 @@ const Signup = () => {
       ...formState,
       [name]: value,
     });
+    setFormErrors({
+      ...formErrors,
+      [name]: false,
+    });
     setInput(e.target.value);
   };
 
-  const isError = input === '';
+  const isError = input === "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formState);
-    const { name } = e.target;
+    const errors = {
+      firstName: formState.firstName === "",
+      lastName: formState.lastName === "",
+      dob: formState.dob === "",
+      userName: formState.userName === "",
+      email: formState.email === "",
+      password: formState.password === "",
+    };
+    if (isError) {
+      return toast({
+        title: "Error",
+        description: "Please fill out all fields.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    } 
+
+    if (isInvalidEmail(formState.email)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    setFormErrors(errors);
+    
     try {
-      if (name === "email") {
-        const invalidEmail = isInvalidEmail(formState.email);
-        if (invalidEmail) {
-          console.log("INVALID EMAIL", true);
-          toast({
-            title: "Error",
-            description: "Please enter a valid email.",
-            status: "error",
-            duration: 2000,
-            isClosable: true,
-          });
-          return;
-        }
-        // work on this isError
-      } else if (isError) 
-        {
-        console.log(isError);
-        return toast({
-          title: "Error",
-          description: "Please create an account!",
-          status: "error",
-          duration: 2000,
-          isClosable: true,
-        });
-      } else {
         const dataResponse = await addPatient({
           variables: { ...formState },
         });
@@ -103,7 +120,7 @@ const Signup = () => {
         const { token, patient } = dataResponse.data.addPatient;
         loginUser(patient, token);
         navigate("/");
-      }
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -127,11 +144,11 @@ const Signup = () => {
         </p>
       ) : (
         <Box mx={4}>
-          <Text fontSize="xl" m={6}>
+          <Text fontSize="xl" m={8}>
             General Information
           </Text>
           <FormControl
-           isInvalid={!isError}
+            isInvalid={formErrors.firstName}
             isRequired
             mt={4}
             display="flex"
@@ -148,6 +165,9 @@ const Signup = () => {
                 type="text"
                 value={formState.firstName}
               />
+              {isError ? (
+                <FormErrorMessage>First name is required.</FormErrorMessage>
+              ) : null}
             </Stack>
 
             <Stack flex="1">
@@ -159,11 +179,14 @@ const Signup = () => {
                 onChange={handleChange}
                 value={formState.lastName}
               />
+                            {isError ? (
+                <FormErrorMessage>Last name is required.</FormErrorMessage>
+              ) : null}
             </Stack>
           </FormControl>
 
           <FormControl
-           isInvalid={!isError}
+            isInvalid={formErrors.email}
             isRequired
             mt={4}
             display="flex"
@@ -180,6 +203,9 @@ const Signup = () => {
                 onChange={handleChange}
                 value={formState.email}
               />
+                            {isError ? (
+                <FormErrorMessage>Email is required.</FormErrorMessage>
+              ) : null}
             </Stack>
 
             <Stack flex="1">
@@ -191,14 +217,17 @@ const Signup = () => {
                 onChange={handleChange}
                 value={formState.dob}
               />
+                            {isError ? (
+                <FormErrorMessage>Date of birth is required.</FormErrorMessage>
+              ) : null}
             </Stack>
           </FormControl>
-          <Text fontSize="xl" m={6}>
+          <Text fontSize="xl" m={8}>
             Account Information
           </Text>
-          
+
           <FormControl
-           isInvalid={!isError}
+            isInvalid={formErrors.userName}
             isRequired
             mt={4}
             display="flex"
@@ -217,7 +246,7 @@ const Signup = () => {
           </FormControl>
 
           <FormControl
-           isInvalid={!isError}
+            isInvalid={formErrors.password}
             isRequired
             mt={4}
             display="flex"
@@ -235,6 +264,7 @@ const Signup = () => {
                 value={formState.password}
                 onClick={showListOnClick}
               />
+   
               <InputRightElement width="4.5rem">
                 <Button
                   h="1.75rem"
