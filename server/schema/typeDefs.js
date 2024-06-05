@@ -37,6 +37,8 @@ type Query {
 type Mutation {
     addPatient(firstName:String!, lastName: String!, dob:String!,userName: String!, email: String!, password: String!): patientAuth
     addProvider(providerName: String!, email: String!, password: String!): providerAuth
+    loginPatient(email: String!, password: String!): patientAuth
+    loginProvider(email: String!, password: String!): providerAuth
 }
 `;
 
