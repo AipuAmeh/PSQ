@@ -12,6 +12,7 @@ import "./index.css";
 import { CurrentUserProvider } from "./utils/context/index.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Signup from "./pages/Signup.jsx";
+import Login from "./pages/Login.jsx";
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
+      {
+        path: '/login',
+        element: <Login />
+      }
     ],
   },
 ]);

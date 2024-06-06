@@ -5,5 +5,10 @@ export default  {
     extensions: {
         code: 'UNAUTHENTICATED',
     },
+}),
+    BadRequestError: new GraphQLError('email not found', {
+    extensions: {
+        code: 'BAD_USER_INPUT'
+    }
 })
 };
