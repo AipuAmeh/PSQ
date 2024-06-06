@@ -1,4 +1,10 @@
-import { Box, Flex, Heading, Spacer, useBreakpointValue } from '@chakra-ui/react'
+import { 
+  Box, 
+  Flex, 
+  Heading, 
+  Spacer, 
+  // useBreakpointValue 
+} from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 
 
@@ -20,7 +26,7 @@ return (
   <Link to='/signup'>Sign Up</Link>
   </h2>
   <h2>
-  <Link >Log in</Link>
+  <Link to='/login'>Log in</Link>
   </h2>
 </Box>
 
