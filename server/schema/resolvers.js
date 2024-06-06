@@ -1,7 +1,9 @@
 import Patient from '../models/Patient.js';
 import Provider from '../models/Provider.js';
 import { signPatientToken, signProviderToken } from '../utils/jwt.js';
-import AuthenticationError from '../utils/error.js';
+import AuthenticationError  from '../utils/error.js';
+import BadRequestError from '../utils/error.js';
+import mailService from '../mail/mailService.js';
 
 const resolvers = {
 Query: {
@@ -56,7 +58,17 @@ Mutation: {
         };
         const token = signProviderToken(provider);
         return { token, provider };
+    },
+    sendResetPasswordEmail: async (parent, { email }) => {
+       const patient = await Patient.findOne({ email });
+       if (patient === null) {
+        throw BadRequestError;
+       }
+       const token = signPatientToken(patient);
+       return await mailService.sendResetPasswordEmail(patient, token);
     }
+    // add logic for saving password once patient enters it on frontend
+
 }
 };
 
