@@ -21,7 +21,6 @@ export const ADD_PROVIDER = gql`
   }
 `;
 
-
 export const ADD_PATIENT = gql`
   mutation addPatient(
     $firstName: String!
@@ -45,6 +44,34 @@ export const ADD_PATIENT = gql`
         firstName
         lastName
         userName
+        email
+      }
+    }
+  }
+`;
+
+export const LOGIN_PATIENT = gql`
+  mutation loginPatient($email: String!, $password: String!) {
+    loginPatient(email: $email, password: $password) {
+      token
+      patient {
+        _id
+        firstName
+        lastName
+        userName
+        email
+      }
+    }
+  }
+`;
+
+export const LOGIN_PROVIDER = gql`
+  mutation loginProvider($email: String!, $password: String!) {
+    loginProvider(email: $email, password: $password) {
+      token
+      provider {
+        _id
+        providerName
         email
       }
     }
