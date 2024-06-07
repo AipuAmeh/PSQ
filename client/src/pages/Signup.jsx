@@ -20,15 +20,8 @@ import { ADD_PATIENT } from "../utils/mutations";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 import PasswordChecklistComp from "../components/Validation/PasswordChecklist";
+import { isInvalidEmail } from "../utils/validation/invalidEmail";
 
-const isInvalidEmail = (email) => {
-  const emailFormat = /\S+@\S+\.\S+/;
-  if (email.match(emailFormat) && email.length > 0) {
-    return false;
-  } else {
-    return true;
-  }
-};
 
 // mobile development once screen gets smaller
 const Signup = () => {
@@ -116,6 +109,7 @@ const Signup = () => {
         const dataResponse = await addPatient({
           variables: { ...formState },
         });
+        // remove this console log
         console.log(dataResponse);
         const { token, patient } = dataResponse.data.addPatient;
         loginUser(patient, token);
