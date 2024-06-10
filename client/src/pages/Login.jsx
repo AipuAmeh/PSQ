@@ -71,9 +71,14 @@ const Login = () => {
           loginUser(patient, token);
           navigate("/");
         } else if (e.target.id == "provider-login") {
-          console.log('provider');
+          const providerResponse = await loginProvider({
+            variables: { ...formState },
+          });
+          const { token, provider } = providerResponse.data.loginProvider;
+          loginUser(provider, token);
+          navigate("/");
         }
-
+// error handling for XSS attacks
       } catch (error) {
         console.log(error.message);
           return toast({
@@ -96,7 +101,6 @@ const Login = () => {
         flexDirection="column"
         justifyContent="center"
         w="80%"
-        onClick={handleSubmit}
       >
         <FormLabel>Email</FormLabel>
         <Input
@@ -118,9 +122,11 @@ const Login = () => {
         <Button 
         my={4}
         id='patient-login'
+        onClick={handleSubmit}
         >Login Patient</Button>
         <Button
         id='provider-login'
+        onClick={handleSubmit}
         >Login Provider</Button>
       </FormControl>
     </Center>
