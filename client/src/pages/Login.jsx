@@ -1,15 +1,19 @@
 import { useMutation } from "@apollo/client";
-import { Box, FormControl, FormLabel, Input, Center, Text, Button, useToast } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Center, Text, Button, useToast, Stack, Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../utils/mutations";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 import { isInvalidEmail } from "../utils/validation/invalidEmail";
+import ForgotPasswordModal from "../components/ForgotPasswordModal";
+import { useDisclosure } from "@chakra-ui/react";
 
 const Login = () => {
     const { loginUser } = useCurrentUserContext();
     const navigate = useNavigate();
     const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     const [formState, setFormState] = useState({
         email: "",
         password: ""
@@ -71,9 +75,14 @@ const Login = () => {
           loginUser(patient, token);
           navigate("/");
         } else if (e.target.id == "provider-login") {
-          console.log('provider');
+          const providerResponse = await loginProvider({
+            variables: { ...formState },
+          });
+          const { token, provider } = providerResponse.data.loginProvider;
+          loginUser(provider, token);
+          navigate("/");
         }
-
+// error handling for XSS attacks
       } catch (error) {
         console.log(error.message);
           return toast({
@@ -87,6 +96,7 @@ const Login = () => {
     };
     
     return (
+      <Stack>
     <Center className="login-form" display='flex' flexDirection='column'>
                 <Text fontSize='2xl' display='flex' justifyContent='center' flexDirection='column' my={6}>Login To Your Account</Text>
       <FormControl
@@ -95,8 +105,7 @@ const Login = () => {
         display="flex"
         flexDirection="column"
         justifyContent="center"
-        w="80%"
-        onClick={handleSubmit}
+        w="65%"
       >
         <FormLabel>Email</FormLabel>
         <Input
@@ -118,12 +127,31 @@ const Login = () => {
         <Button 
         my={4}
         id='patient-login'
+        onClick={handleSubmit}
         >Login Patient</Button>
         <Button
         id='provider-login'
+        onClick={handleSubmit}
         >Login Provider</Button>
       </FormControl>
     </Center>
+    <Box 
+    display='flex'
+    justifyContent='center'
+    flexDirection='row'
+    gap={10}
+    mt={4}
+      >
+    <Text
+      lineHeight='2.5em'
+    >Forgot Password</Text>
+    <Button
+    onClick={onOpen}
+    >Reset Password</Button>
+    </Box>
+      <ForgotPasswordModal isOpen={isOpen} onClose={onClose}/>
+      </Stack>
+
   );
 };
 
