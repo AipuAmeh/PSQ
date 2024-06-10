@@ -1,15 +1,19 @@
 import { useMutation } from "@apollo/client";
-import { Box, FormControl, FormLabel, Input, Center, Text, Button, useToast } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Center, Text, Button, useToast, Stack, Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../utils/mutations";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 import { isInvalidEmail } from "../utils/validation/invalidEmail";
+import ForgotPasswordModal from "../components/ForgotPasswordModal";
+import { useDisclosure } from "@chakra-ui/react";
 
 const Login = () => {
     const { loginUser } = useCurrentUserContext();
     const navigate = useNavigate();
     const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     const [formState, setFormState] = useState({
         email: "",
         password: ""
@@ -92,6 +96,7 @@ const Login = () => {
     };
     
     return (
+      <Stack>
     <Center className="login-form" display='flex' flexDirection='column'>
                 <Text fontSize='2xl' display='flex' justifyContent='center' flexDirection='column' my={6}>Login To Your Account</Text>
       <FormControl
@@ -100,7 +105,7 @@ const Login = () => {
         display="flex"
         flexDirection="column"
         justifyContent="center"
-        w="80%"
+        w="65%"
       >
         <FormLabel>Email</FormLabel>
         <Input
@@ -130,6 +135,23 @@ const Login = () => {
         >Login Provider</Button>
       </FormControl>
     </Center>
+    <Box 
+    display='flex'
+    justifyContent='center'
+    flexDirection='row'
+    gap={10}
+    mt={4}
+      >
+    <Text
+      lineHeight='2.5em'
+    >Forgot Password</Text>
+    <Button
+    onClick={onOpen}
+    >Reset Password</Button>
+    </Box>
+      <ForgotPasswordModal isOpen={isOpen} onClose={onClose}/>
+      </Stack>
+
   );
 };
 
