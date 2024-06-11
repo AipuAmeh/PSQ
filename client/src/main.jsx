@@ -13,6 +13,7 @@ import { CurrentUserProvider } from "./utils/context/index.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/reset-password',
+        element: <ResetPassword />
       }
     ],
   },

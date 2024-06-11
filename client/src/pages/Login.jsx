@@ -23,8 +23,8 @@ const Login = () => {
       password: false
     });
     const [input, setInput] = useState("");
-    const [loginPatient, { error, data}] = useMutation(LOGIN_PATIENT);
-    const [loginProvider, { error: providerError }] = useMutation(LOGIN_PROVIDER);
+    const [loginPatient] = useMutation(LOGIN_PATIENT);
+    const [loginProvider] = useMutation(LOGIN_PROVIDER);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,7 +44,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       console.log(formState);
-      const submitterId =   await e.target.id;
+      const submitterId = await e.target.id;
     console.log('Form submitted by:', submitterId);
       if (isError) {
         return toast({

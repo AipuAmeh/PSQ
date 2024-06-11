@@ -1,8 +1,7 @@
 import { sendMail } from "./mail.js";
 import { resetPasswordTemplate } from "./resetPasswordTemplate.js";
 
-class mailService {
-  async sendPasswordResetEmail(user, token) {
+  export const sendPasswordResetEmail = async (user, token) => {
     sendMail(
       {
         from: "aipuameh.16@gmail.com",
@@ -14,7 +13,4 @@ class mailService {
         console.log("Password reset email sent.");
       }
     );
-  }
-}
-
-export default mailService;
+  };
