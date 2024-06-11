@@ -3,7 +3,7 @@ import Provider from '../models/Provider.js';
 import { signPatientToken, signProviderToken } from '../utils/jwt.js';
 import AuthenticationError  from '../utils/error.js';
 import BadRequestError from '../utils/error.js';
-import mailService from '../mail/mailService.js';
+import {sendPasswordResetEmail} from '../mail/mailService.js';
 
 const resolvers = {
 Query: {
@@ -65,10 +65,17 @@ Mutation: {
         throw BadRequestError;
        }
        const token = signPatientToken(patient);
-       return await mailService.sendResetPasswordEmail(patient, token);
-    }
+       console.log('PATIENT ID', patient);
+       return await sendPasswordResetEmail(patient, token);
+    },
     // add logic for saving password once patient enters it on frontend
-
+    saveNewPassword: async (parent, { newPassword, id, email}) => {
+        
+        // find patient by id
+        // verify token
+        // hash password
+        // save password with existing user
+    }
 }
 };
 

@@ -77,3 +77,17 @@ export const LOGIN_PROVIDER = gql`
     }
   }
 `;
+
+export const RESET_PASSWORD = gql`
+  mutation sendResetPasswordEmail($email: String!) {
+    sendResetPasswordEmail(email: $email) {
+      token
+      patient {
+      _id
+      userName
+      email
+      }
+    }
+  }
+
+`
