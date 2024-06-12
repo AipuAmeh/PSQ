@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import 'dotenv/config';
 import { secret, expiration } from './constants.js';
 
@@ -19,4 +20,8 @@ export const signPatientToken = async ({ email, userName, _id }) => {
     } else {
         return 'NO SECRET, WILL DELETE LATER';
     }
+};
+
+export const hashPassword = async (password) => {
+    return await bcrypt.hash(password, 10);
 };

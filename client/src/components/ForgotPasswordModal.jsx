@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
     Modal,
     ModalOverlay,
@@ -17,12 +18,13 @@ import { isInvalidEmail } from '../utils/validation/invalidEmail';
 import { useMutation } from '@apollo/client';
 import { RESET_PASSWORD } from '../utils/mutations';
 
+
 const ForgotPasswordModal = ({ isOpen, onClose }) => {
     const [email, setEmail] = useState('');
     const toast = useToast();
     const [sendResetPasswordEmail, { error, data }] = useMutation(RESET_PASSWORD);
+    
     const saveEmail = (e) => {
-
         setEmail(e.target.value);
     };
 
@@ -52,10 +54,10 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
           });      
         } catch (error) {
           console.log(error);
+        } finally {
+          onClose();
         }
-
       }
-      onClose();
     }
 
 return (
@@ -87,5 +89,12 @@ onChange={saveEmail}
 )
 
 }
+
+ForgotPasswordModal.propTypes = {
+  isOpen:  PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
+};
+
+
 
 export default ForgotPasswordModal;
