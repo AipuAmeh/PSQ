@@ -1,4 +1,4 @@
-export const resetPasswordTemplate = (token,id) => {
+export const resetPasswordTemplate = (token, id) => {
 return `
 <html>
 <h1>Reset Your Password</h1>

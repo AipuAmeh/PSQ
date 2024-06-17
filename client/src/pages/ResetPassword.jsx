@@ -1,7 +1,8 @@
 import { Box, Button, Center, FormControl, FormLabel, Input, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useMutation } from "@apollo/client";
+import { SAVE_NEW_PASSWORD } from "../utils/mutations";
 
 
 
@@ -14,6 +15,8 @@ const [secondPassword, setSecondPassword] = useState('');
 
 const [submitPassword, setSubmitPassword] = useState(false);
 const [submitSecondPassword, setSubmitSecondPassword] = useState(false);
+
+const [saveNewPassword, { error, data}] = useMutation(SAVE_NEW_PASSWORD);
 
 const isErrorPassword = password === "" && submitPassword;
 const isErrorSecondPassword = password !== secondPassword && submitSecondPassword;
@@ -29,6 +32,36 @@ const onChangeSecondPassword = (e) => {
     setSubmitSecondPassword(false);
 }   
 
+const onSubmit = async () => {
+console.log('PASSWORD:', password),
+console.log('SECOND PASSWORD:', secondPassword);
+
+setSubmitPassword(true);
+setSubmitSecondPassword(true);
+
+try {
+    const dataResponse = await saveNewPassword({
+        variables: { 
+            newPassword: password,
+            patientId: id,
+            token
+        }
+    });
+    console.log(dataResponse);
+    navigate('/login');
+    return toast({
+        title: "Success",
+        description: "Successfully changed password.",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+    })
+} catch (error) {
+    console.error(error);
+}
+
+}
+
 return (
     <Center>
     <Box display='flex' flexDirection='column' w='65%' mt={4} alignItems='center'>
@@ -39,6 +72,7 @@ return (
           name='password'
           value={password}
           onChange={onChangePassword}
+          type='password'
           />
         </FormControl>
         <FormControl isRequired isInvalid={isErrorSecondPassword}>
@@ -46,14 +80,16 @@ return (
           <Input
           name='password'
           value={secondPassword} 
-             onChange={onChangeSecondPassword}
+        onChange={onChangeSecondPassword}
+        type='password'
           />
         </FormControl>
         <Button
         size='lg'
         mt={6}
-        w='30%'
-        >Submit</Button>
+        w='50%'
+        onClick={onSubmit}
+        >Save New Password</Button>
     </Box>
     </Center>
 
