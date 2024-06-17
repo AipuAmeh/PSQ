@@ -4,7 +4,6 @@ import Provider from "../models/Provider.js";
 import {
   signPatientToken,
   signProviderToken,
-  hashPassword,
 } from "../utils/jwt.js";
 import AuthenticationError from "../utils/error.js";
 import BadRequestError from "../utils/error.js";
@@ -77,9 +76,8 @@ const resolvers = {
       if (patient === null) {
         throw BadRequestError;
       }
-      const token = signPatientToken(patient);
-      console.log("PATIENT ID", patient);
-      return await sendPasswordResetEmail(patient, token);
+      const token = await signPatientToken(patient);
+      return sendPasswordResetEmail(patient, token);
     },
     saveNewPassword: async (parent, { newPassword, patientId, token }) => {
       try {
@@ -91,8 +89,7 @@ const resolvers = {
         if (decoded.data._id !== patientId) {
           throw AuthenticationError;
         }
-        const hashedPassword = await hashPassword(newPassword);
-        patient.password = hashedPassword;
+        patient.password = newPassword;
         const updatedPatient = await patient.save();
         return { updatedPatient, token };
       } catch (error) {

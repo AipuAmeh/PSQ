@@ -1,7 +1,7 @@
 import { sendMail } from "./mail.js";
 import { resetPasswordTemplate } from "./resetPasswordTemplate.js";
 
-  export const sendPasswordResetEmail = async (user, token) => {
+  export const sendPasswordResetEmail = (user, token) => {
     sendMail(
       {
         from: "aipuameh.16@gmail.com",

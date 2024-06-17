@@ -118,9 +118,9 @@ const Login = () => {
         />
         <FormLabel>Password</FormLabel>
         <Input
-        placeholder='Email'
+        placeholder='Password'
         value={formState.password}
-        type="text"
+        type="password"
         name='password'
         onChange={handleChange}
         />

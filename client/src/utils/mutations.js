@@ -83,11 +83,24 @@ export const RESET_PASSWORD = gql`
     sendResetPasswordEmail(email: $email) {
       token
       patient {
-      _id
-      userName
-      email
+        _id
+        userName
+        email
       }
     }
   }
+`;
 
-`
+export const SAVE_NEW_PASSWORD = gql`
+  mutation saveNewPassword($newPassword: String!, $patientId: ID!, $token: String!) {
+    saveNewPassword(newPassword: $newPassword, patientId: $patientId, token: $token){
+    token
+    patient {
+      _id
+      userName
+      email
+    }
+    }
+  }
+
+`;
