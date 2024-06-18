@@ -16,4 +16,4 @@ N/A
 
 ## License
 
-ISC
+MIT
