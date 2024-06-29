@@ -6,10 +6,16 @@ import {
   // useBreakpointValue 
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
-
+import { useCurrentUserContext } from '../utils/context/CurrentUser';
 
 
 const Header = () => {
+  const { isLoggedIn, logoutUser } = useCurrentUserContext();
+
+  const logout = (e) => {
+    e.preventDefault();
+    logoutUser();
+  }
   // mobile development
   // const isMobile = useBreakpointValue({ base: true, md: false, sm: false });
 
@@ -23,12 +29,18 @@ return (
   </Box>
   <Spacer gap={15} />
 <Box display='flex' justifyContent='flex-end' gap={2} mr={4}>
-  <h2>
-  <Link to='/signup'>Sign Up</Link>
-  </h2>
-  <h2>
-  <Link to='/login'>Log in</Link>
-  </h2>
+  { isLoggedIn() ? (
+  <button onClick={logout}>Logout</button> ) : (
+  <>
+    <h2>
+    <Link to='/signup'>Sign Up</Link>
+    </h2>
+    <h2>
+    <Link to='/login'>Log in</Link>
+    </h2>
+    </> )
+  }
+
 </Box>
 </Flex>
 )}

@@ -4,7 +4,8 @@ const theme = extendTheme({
     colors: {
         brand: {
             callToActionButtons: "#87D68D",
-            header: "#F7FFF6",
+            homePageLoginSection: "#F7FFF6",
+            homePageSecondSection: "#93B48B",
         }
     }
 })
