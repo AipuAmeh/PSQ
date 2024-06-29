@@ -128,10 +128,12 @@ const Login = () => {
         my={4}
         id='patient-login'
         onClick={handleSubmit}
+        bg="brand.callToActionButtons"
         >Login Patient</Button>
         <Button
         id='provider-login'
         onClick={handleSubmit}
+        bg="brand.callToActionButtons"
         >Login Provider</Button>
       </FormControl>
     </Center>
@@ -147,6 +149,7 @@ const Login = () => {
     >Forgot Password</Text>
     <Button
     onClick={onOpen}
+      bg="brand.callToActionButtons"
     >Reset Password</Button>
     </Box>
       <ForgotPasswordModal isOpen={isOpen} onClose={onClose}/>
