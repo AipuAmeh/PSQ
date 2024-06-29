@@ -281,7 +281,7 @@ const Signup = () => {
         </Box>
       )}
       <Center>
-        <Button mt={6} size="lg" onClick={handleSubmit}>
+        <Button mt={6} size="lg" onClick={handleSubmit} bg="brand.callToActionButtons">
           Create Your Account
         </Button>
       </Center>
