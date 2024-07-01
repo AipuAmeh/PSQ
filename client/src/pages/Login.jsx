@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { FormControl, FormLabel, Input, Center, Text, Button, useToast, Stack, Box } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Center, Text, Button, useToast, Stack, Box, Link } from "@chakra-ui/react";
 import { useState } from "react";
 import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../utils/mutations";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
@@ -124,17 +124,22 @@ const Login = () => {
         name='password'
         onChange={handleChange}
         />
+        <Center gap={10}>
         <Button 
         my={4}
         id='patient-login'
         onClick={handleSubmit}
         bg="brand.callToActionButtons"
+        w='fit-content'
         >Login Patient</Button>
         <Button
         id='provider-login'
         onClick={handleSubmit}
         bg="brand.callToActionButtons"
+        w='fit-content'
         >Login Provider</Button>
+        </Center>
+
       </FormControl>
     </Center>
     <Box 
@@ -142,15 +147,17 @@ const Login = () => {
     justifyContent='center'
     flexDirection='row'
     gap={10}
-    mt={4}
+    my={4}
       >
     <Text
-      lineHeight='2.5em'
-    >Forgot Password</Text>
-    <Button
+    lineHeight='1.5em'
+    >Forgot Password?</Text>
+    <Text  className="reset-password-link">
+    <Link
     onClick={onOpen}
-      bg="brand.callToActionButtons"
-    >Reset Password</Button>
+    >Reset Password</Link>
+    </Text>
+
     </Box>
       <ForgotPasswordModal isOpen={isOpen} onClose={onClose}/>
       </Stack>
