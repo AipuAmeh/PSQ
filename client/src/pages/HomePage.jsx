@@ -15,13 +15,13 @@ const HomePage = () => {
         justifyContent="space-evenly"
         m={6}
       >
-        <Stack mt={8} gap={9}>
+        <Stack pt={10} gap={9}>
           <Text fontSize="6xl" textShadow="3px 3px #93B48B">
             PSYCHQUICONSULT
           </Text>
           <Text fontSize="xl">
             Bridging the gap in psychiatry management through consultation and
-            integration.
+            integration
           </Text>
           <Button size="lg" w="fit-content" bg="brand.callToActionButtons">
             Book Consultation Now!
@@ -33,6 +33,7 @@ const HomePage = () => {
           src="src/images/logo-trans.png"
           alt="psychquiconsult-logo"
           className="brand-logo-homepage"
+          pt={10}
           mb={6}
         ></Image>
       </Box>
@@ -40,13 +41,16 @@ const HomePage = () => {
         className="login-section"
         p={8}
         w="100%"
-        h='200px'
+        h='300px'
         display="flex"
-        alignItems="center"
+        justifyContent="center"
+        alignItems='center'
         flexDirection="column"
         bg="brand.homePageLoginSection"
       >
-        <Text fontSize="2xl">New Here? Login or Sign up</Text>
+        <Text fontSize="2xl" align='center'>New Here? Login or Sign up</Text>
+     
+      
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
           <Button bg="brand.callToActionButtons" size="lg">
             Login

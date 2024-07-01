@@ -127,9 +127,11 @@ const Signup = () => {
       display="flex"
       justifyContent="center"
       flexDirection="column"
+      mb={6}
+      px={10}
     >
       <Text fontSize="2xl" display="flex" justifyContent="center" my={6}>
-        Sign Up
+        Sign-Up
       </Text>
 
       {data ? (
@@ -220,6 +222,7 @@ const Signup = () => {
             Account Information
           </Text>
 
+          
           <FormControl
             isInvalid={formErrors.userName}
             isRequired
@@ -229,6 +232,7 @@ const Signup = () => {
             justifyContent="center"
             w="65%"
           >
+            <Stack mr={3} flex="1">
             <FormLabel>Username</FormLabel>
             <Input
               placeholder="Username"
@@ -237,6 +241,7 @@ const Signup = () => {
               onChange={handleChange}
               value={formState.userName}
             />
+            </Stack>
           </FormControl>
 
           <FormControl
@@ -249,6 +254,7 @@ const Signup = () => {
             w="65%"
           >
             <InputGroup>
+            <Stack mr={3} flex="1">
               <FormLabel>Password</FormLabel>
               <Input
                 placeholder="******"
@@ -258,8 +264,9 @@ const Signup = () => {
                 value={formState.password}
                 onClick={showListOnClick}
               />
+           
    
-              <InputRightElement width="4.5rem">
+              {/* <InputRightElement width="4.5rem">
                 <Button
                   h="1.75rem"
                   size="sm"
@@ -269,8 +276,11 @@ const Signup = () => {
                   onClick={handlePasswordClick}
                 >
                   {show ? "Hide" : "Show"}
+
                 </Button>
-              </InputRightElement>
+              
+              </InputRightElement> */}
+              </Stack>
             </InputGroup>
             {showChecklist ? (
               <PasswordChecklistComp password={formState.password} />

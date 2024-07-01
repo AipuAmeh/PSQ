@@ -7,7 +7,7 @@ import {
   // useBreakpointValue
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useCurrentUserContext } from "../utils/context/CurrentUser";
+import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 
 const Header = () => {
   const { isLoggedIn, logoutUser } = useCurrentUserContext();
@@ -28,7 +28,7 @@ const Header = () => {
           {" "}
           <Link to="/">
             <Image
-              boxSize="40px"
+              boxSize="50px"
               src="src/images/logo-trans.png"
               alt="psychquiconsult-logo"
               className="brand-logo-homepage"
@@ -44,10 +44,10 @@ const Header = () => {
         ) : (
           <>
             <h2>
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup">SIGN-UP</Link>
             </h2>
             <h2>
-              <Link to="/login">Log in</Link>
+              <Link to="/login">LOGIN</Link>
             </h2>
           </>
         )}

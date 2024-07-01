@@ -37,3 +37,20 @@
 .read-the-docs {
   color: #888;
 }
+
+.footer-list{
+  list-style-type: none;
+}
+
+.sources-list {
+  list-style-type: none;
+}
+
+.vertical-line {
+  border-left: 4px solid #93B48B;
+  height: 85px;
+}
+
+.reset-password-link {
+  text-decoration: underline;
+}
