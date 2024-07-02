@@ -16,7 +16,7 @@ const [secondPassword, setSecondPassword] = useState('');
 const [submitPassword, setSubmitPassword] = useState(false);
 const [submitSecondPassword, setSubmitSecondPassword] = useState(false);
 
-const [saveNewPassword, { error, data}] = useMutation(SAVE_NEW_PASSWORD);
+const [saveNewPassword] = useMutation(SAVE_NEW_PASSWORD);
 
 const isErrorPassword = password === "" && submitPassword;
 const isErrorSecondPassword = password !== secondPassword && submitSecondPassword;

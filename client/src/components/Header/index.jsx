@@ -4,6 +4,7 @@ import {
   Heading,
   Spacer,
   Image,
+  Text,
   // useBreakpointValue
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -22,33 +23,38 @@ const Header = () => {
   // add image for header
 
   return (
-    <Flex minWidth="max-content" p={4}>
-      <Box >
-        <Heading size="md">
-          {" "}
-          <Link to="/">
-            <Image
-              boxSize="50px"
-              src="src/images/logo-trans.png"
-              alt="psychquiconsult-logo"
-              className="brand-logo-homepage"
-           
-            ></Image>
-          </Link>
-        </Heading>
+    <Flex minWidth="max-content" p={4} boxShadow="lg" alignItems='center'>
+      <Box>
+        {" "}
+        <Link to="/">
+          <Image
+            boxSize="50px"
+            w="100%"
+            src="src/images/logo-trans.png"
+            alt="psychquiconsult-logo"
+            className="brand-logo-homepage"
+          ></Image>
+        </Link>
       </Box>
       <Spacer gap={15} />
       <Box display="flex" justifyContent="flex-end" gap={2} mr={4}>
         {isLoggedIn() ? (
-          <button onClick={logout}>Logout</button>
+          <Box display="flex" flexDirection="row" gap={2} >
+            <Text onClick={logout} cursor='pointer'>Logout</Text>
+            <Text fontSize="md">
+              <Link to="/dashboard">
+                Dashboard
+              </Link>
+            </Text>
+          </Box>
         ) : (
           <>
-            <h2>
-              <Link to="/signup">SIGN-UP</Link>
-            </h2>
-            <h2>
-              <Link to="/login">LOGIN</Link>
-            </h2>
+            <Text fontSize="md">
+              <Link to="/signup">Sign up</Link>
+            </Text>
+            <Text fontSize="md">
+              <Link to="/login">Login</Link>
+            </Text>
           </>
         )}
       </Box>
