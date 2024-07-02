@@ -15,6 +15,7 @@ import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import theme from "./Themes.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/reset-password/:token/:id',
         element: <ResetPassword />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
       }
     ],
   },

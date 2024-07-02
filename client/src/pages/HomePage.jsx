@@ -20,11 +20,11 @@ const HomePage = () => {
             PSYCHQUICONSULT
           </Text>
           <Text fontSize="xl">
-            Bridging the gap in psychiatry management through consultation and
-            integration
+            Bridging the gap in psychiatric management through consultation and
+            integration.
           </Text>
-          <Button size="lg" w="fit-content" bg="brand.callToActionButtons">
-            Book Consultation Now!
+          <Button size="md" w="fit-content" bg="brand.callToActionButtons">
+           Book Consultation Now!
           </Button>
         </Stack>
 
@@ -52,10 +52,10 @@ const HomePage = () => {
      
       
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
-          <Button bg="brand.callToActionButtons" size="lg">
+          <Button bg="brand.callToActionButtons" size="md">
             Login
           </Button>
-          <Button bg="brand.callToActionButtons" size="lg">
+          <Button bg="brand.callToActionButtons" size="md">
             Sign up
           </Button>
         </Box>
@@ -76,17 +76,17 @@ const HomePage = () => {
           <Features
             icon={<Icon as={PiStethoscopeDuotone} boxSize={8} />}
             title="Consultations"
-            desc="Speak directly to a healthcare provider at  your own convenience"
+            desc="Speak directly to a healthcare provider at  your own convenience."
           />
           <Features
             icon={<Icon as={BsClockHistory} boxSize={8} />}
-            title="Timely Response"
-            desc="Respond to e-consultations from your Primary Care Providers"
+            title="Timely Responses"
+            desc="We respond to e-consultations from your Primary Care Providers so you don't have to."
           />
           <Features
             icon={<Icon as={FaHandHoldingHeart} boxSize={8} />}
             title="Care"
-            desc="Provide care and customized treatment plans to meet individual needs "
+            desc="Utilize a customized treatment plan to meet your individual mental health needs."
           />
         </Stack>
       </Box>
