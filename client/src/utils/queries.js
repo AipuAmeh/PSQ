@@ -18,6 +18,8 @@ export const QUERY_CURRENT_PATIENT = gql`
       lastName
       userName
       email
+      password
+      dob
     }
   }
 `;
