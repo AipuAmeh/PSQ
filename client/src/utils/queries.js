@@ -12,7 +12,7 @@ export const QUERY_PROVIDER = gql`
 
 export const QUERY_CURRENT_PATIENT = gql`
   query currentPatient($patientId: ID!) {
-    provider(patientId: $patientId) {
+    patient(patientId: $patientId) {
       _id
       firstName
       lastName
