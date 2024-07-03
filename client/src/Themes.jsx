@@ -5,6 +5,7 @@ const theme = extendTheme({
         brand: {
             callToActionButtons: "#87D68D",
             homePageLoginSection: "#F7FFF6",
+            homePageLoginBtns: "#93B48B",
             homePageSecondSection: "#93B48B",
             footer: "#F7FFF6",
             cardBorder: "#F7FFF6",

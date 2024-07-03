@@ -52,10 +52,10 @@ const HomePage = () => {
      
       
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
-          <Button bg="brand.callToActionButtons" size="md">
+          <Button bg="brand.homePageLoginBtns" size="md">
             Login
           </Button>
-          <Button bg="brand.callToActionButtons" size="md">
+          <Button bg="brand.homePageLoginBtns" size="md">
             Sign up
           </Button>
         </Box>
