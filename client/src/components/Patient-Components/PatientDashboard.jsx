@@ -17,18 +17,29 @@ import Demographics from "../Profile/UserDemographicsRow";
 const PatientDashboard = () => {
   // const toast = useToast();
   const { currentUser } = useCurrentUserContext();
-  console.log(currentUser);
  
     const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
         variables: { patientId: currentUser._id }
       });  
       console.log('QUERIED DATA:', data)
 
+// checking for loading and error states
 if (loading) return <p>Loading...</p>;
 if (error) return <p>Error: {error.message}</p>;
 
-      const formattedBirthday = new Date(data.patient.dob);
-      console.log(formattedBirthday);
+// formatting birthday
+      const birthday = data.patient.dob;
+    // check if birthday is a number, if not return
+      if (isNaN(birthday)) {
+        return;
+      }
+        const date = new Date(parseInt(birthday, 10));
+          const month = date.getMonth() + 1;
+          const day = date.getDate() + 1;
+          const year = date.getFullYear();  
+          const formattedBday = `${month}/${day}/${year}`;  
+ 
+     
 
   return (
     <Box display="flex" alignItems="center" mt={6} flexDirection="column">
@@ -45,7 +56,7 @@ if (error) return <p>Error: {error.message}</p>;
         <Demographics field={'Last Name'} value={data.patient.lastName} />
         <Demographics field={'Username'} value={data.patient.userName} />
         <Demographics field={'Email'} value={data.patient.email} />
-        <Demographics field={'Date of Birth'} value={data.patient.dob} />
+        <Demographics field={'Date of Birth'} value={formattedBday} />
         <Demographics field={'Password'} value={'******'} />
         </Stack>
   
