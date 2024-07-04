@@ -32,7 +32,7 @@ setCookies('auth_token', token, {
 },[setCookies]);
 
 const logoutUser = useCallback(() => {
-removeCookies('auth_token', {path: '/'});
+removeCookies('auth_token');
 setCurrentUser({ isAuthenticated: false});
 },[removeCookies]);
 

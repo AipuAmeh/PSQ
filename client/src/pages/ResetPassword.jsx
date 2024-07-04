@@ -33,8 +33,6 @@ const onChangeSecondPassword = (e) => {
 }   
 
 const onSubmit = async () => {
-console.log('PASSWORD:', password),
-console.log('SECOND PASSWORD:', secondPassword);
 
 setSubmitPassword(true);
 setSubmitSecondPassword(true);

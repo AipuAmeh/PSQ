@@ -7,15 +7,17 @@ import {
   Text,
   // useBreakpointValue
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 
 const Header = () => {
   const { isLoggedIn, logoutUser } = useCurrentUserContext();
+  const navigate = useNavigate();
 
   const logout = (e) => {
     e.preventDefault();
     logoutUser();
+    navigate('/');
   };
   // mobile development
   // const isMobile = useBreakpointValue({ base: true, md: false, sm: false });
@@ -42,7 +44,7 @@ const Header = () => {
           <Box display="flex" flexDirection="row" gap={2} >
             <Text onClick={logout} cursor='pointer'>Logout</Text>
             <Text fontSize="md">
-              <Link to="/dashboard">
+              <Link to="/dashboard/">
                 Dashboard
               </Link>
             </Text>
