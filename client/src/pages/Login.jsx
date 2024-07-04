@@ -43,7 +43,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(formState);
       const submitterId = await e.target.id;
     console.log('Form submitted by:', submitterId);
       if (isError) {
@@ -71,16 +70,15 @@ const Login = () => {
             variables: { ...formState },
           });
           const { token, patient } = patientResponse.data.loginPatient;
-  
           loginUser(patient, token);
-          navigate("/");
+          navigate("/dashboard");
         } else if (e.target.id == "provider-login") {
           const providerResponse = await loginProvider({
             variables: { ...formState },
           });
           const { token, provider } = providerResponse.data.loginProvider;
           loginUser(provider, token);
-          navigate("/");
+          navigate("/dashboard");
         }
 // error handling for XSS attacks
       } catch (error) {
