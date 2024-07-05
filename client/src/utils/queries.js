@@ -5,6 +5,7 @@ export const QUERY_PROVIDER = gql`
     provider(providerId: $providerId) {
       _id
       providerName
+      password
       email
     }
   }
@@ -19,6 +20,18 @@ export const QUERY_CURRENT_PATIENT = gql`
       userName
       email
       password
+      dob
+    }
+  }
+`;
+
+export const QUERY_ALL_PATIENTS = gql`
+  query getAllPatients {
+    allPatients {
+      _id
+      firstName
+      lastName
+      email
       dob
     }
   }

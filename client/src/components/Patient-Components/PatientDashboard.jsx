@@ -1,27 +1,22 @@
 import {
   Box,
   Text,
-  Avatar,
-  AvatarBadge,
-  AvatarGroup,
   Spacer,
   Stack
 } from "@chakra-ui/react";
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
-import { useToast } from "@chakra-ui/react";
 import { useQuery } from "@apollo/client";
 import DashboardAvatar from "../Avatar";
 import { QUERY_CURRENT_PATIENT } from "../../utils/queries";
 import Demographics from "../Profile/UserDemographicsRow";
 
 const PatientDashboard = () => {
-  // const toast = useToast();
   const { currentUser } = useCurrentUserContext();
  
     const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
         variables: { patientId: currentUser._id }
       });  
-      console.log('QUERIED DATA:', data)
+const patientName = `${data.patient.firstName} ${data.patient.lastName}`;
 
 // checking for loading and error states
 if (loading) return <p>Loading...</p>;
@@ -45,7 +40,7 @@ if (error) return <p>Error: {error.message}</p>;
     <Box display="flex" alignItems="center" mt={6} flexDirection="column">
       <Text fontSize="2xl">Patient Portal</Text>
       <Box display="flex" flexDirection="row" gap={20} mt={10}>
-        <DashboardAvatar name={currentUser.userName} />
+        <DashboardAvatar name={patientName} />
 
         <Spacer />
         <Stack>
