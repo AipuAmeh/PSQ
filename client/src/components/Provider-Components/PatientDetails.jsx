@@ -1,8 +1,15 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
-const PatientDetails = () => {
+const PatientDetails = ({name, email, dob, id}) => {
 return (
-    <Box>PATIENT DETAILS</Box>
+    <Box display='flex' gap={10} key={id}>
+        {/* <ul> */}
+        <Text flex={1} fontSize='lg'>{name}</Text>
+        <Text flex={1} fontSize='lg'>{email}</Text>
+        <Text flex={1} fontSize='lg'>{dob}</Text>
+        {/* </ul> */}
+
+    </Box>
 )
 
 };
