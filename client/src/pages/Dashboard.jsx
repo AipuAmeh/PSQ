@@ -20,7 +20,6 @@ const Dashboard = () => {
 
   return (
     <Box>
-      DASHBOARD
     {renderDashboard()}
     </Box>
   )
