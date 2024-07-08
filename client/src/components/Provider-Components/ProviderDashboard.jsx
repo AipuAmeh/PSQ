@@ -36,6 +36,20 @@ const ProviderDashboard = () => {
 
   console.log("PATIENT DATA ARRAY:", patientData);
 
+  // function for formatting each patient's birthday
+  const formattedBirthday = (bday) => {
+    if (isNaN(bday)) {
+      return
+    }
+    const date = new Date(parseInt(bday, 10));
+    const month = date.getMonth() + 1;
+    const day = date.getDate() + 1;
+    const year = date.getFullYear();
+    const newBirthday = `${month}/${day}/${year}`; 
+    // if day is one digit, add 0 in front of it 
+    return newBirthday;  
+  }
+
   // checking for loading and error states
   if (loading || patientLoading) return <p>Loading...</p>;
   if (error || patientError) return <p>Error: {error.message}</p>;
@@ -65,28 +79,31 @@ const ProviderDashboard = () => {
           <Demographics field={"Password"} value={"******"} />
         </Stack>
       </Box>
-      <Box px={10} display="flex" flexDirection="column">
-        <Text fontSize="xl" mt="3em">
-          Patients
-        </Text>
+      <Box px={10} display="flex" flexDirection="column" mt={6}>
         <Accordion defaultIndex={[0]} allowMultiple mt={8}>
           <AccordionItem>
             <h2>
               <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
+                <Box as="span" flex="1" textAlign="left" fontSize='xl'>
                   View All Patients
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
+              <Box display='flex' justifyContent='space-between'  mr='20em'>
+                <Text fontSize='xl' className="accordion-header">Patient Name</Text>
+                <Text fontSize='xl' className="accordion-header">Email</Text>
+                <Text fontSize='xl' >Date of Birth</Text>
+              </Box>
               {patientData.allPatients.map((patient) => {
                 return (
                   <>
                     <PatientDetails
-                      name={patient.firstName}
+                      firstname={patient.firstName}
+                      lastname={patient.lastName}
                       email={patient.email}
-                      dob={patient.dob}
+                      dob={formattedBirthday(patient.dob)}
                     />
                   </>
                 );
@@ -97,7 +114,7 @@ const ProviderDashboard = () => {
           <AccordionItem>
             <h2>
               <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
+                <Box as="span" flex="1" textAlign="left" fontSize='xl'>
                   Add a Patient
                 </Box>
                 <AccordionIcon />
