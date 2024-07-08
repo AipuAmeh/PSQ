@@ -18,6 +18,7 @@ import { QUERY_ALL_PATIENTS } from "../../utils/queries";
 import Demographics from "../Profile/UserDemographicsRow";
 import { useQuery } from "@apollo/client";
 import PatientDetails from "./PatientDetails";
+import SignupForm from "../Forms/SignupForm";
 
 const ProviderDashboard = () => {
   const { currentUser } = useCurrentUserContext();
@@ -121,10 +122,7 @@ const ProviderDashboard = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              <SignupForm />
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
