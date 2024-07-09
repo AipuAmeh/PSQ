@@ -112,8 +112,8 @@ const SignupForm = () => {
           // remove this console log
           console.log(dataResponse);
           const { token, patient } = dataResponse.data.addPatient;
-          loginUser(patient, token);
-          navigate("/");
+          return { token, patient }
+          
         
       } catch (error) {
         console.log(error.message);
