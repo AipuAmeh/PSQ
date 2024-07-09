@@ -95,7 +95,7 @@ const ProviderDashboard = () => {
               <Box display='flex' justifyContent='space-between'  mr='20em'>
                 <Text fontSize='xl' className="accordion-header">Patient Name</Text>
                 <Text fontSize='xl' className="accordion-header">Email</Text>
-                <Text fontSize='xl' >Date of Birth</Text>
+                <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
               </Box>
               {patientData.allPatients.map((patient) => {
                 return (
