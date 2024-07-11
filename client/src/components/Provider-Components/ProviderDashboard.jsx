@@ -9,6 +9,8 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
+import { useState } from "react";
+
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import DashboardAvatar from "../Avatar";
 
@@ -36,7 +38,8 @@ const ProviderDashboard = () => {
   } = useQuery(QUERY_ALL_PATIENTS);
 
   console.log("PATIENT DATA ARRAY:", patientData);
-
+  const [queriedPatientData, setQueriedPatientData] = useState(patientData);
+  
   // function for formatting each patient's birthday
   const formattedBirthday = (bday) => {
     if (isNaN(bday)) {
@@ -81,7 +84,7 @@ const ProviderDashboard = () => {
         </Stack>
       </Box>
       <Box px={10} display="flex" flexDirection="column" mt={6}>
-        <Accordion defaultIndex={[0]} allowMultiple mt={8}>
+        <Accordion defaultIndex={[0]} allowToggle mt={8}>
           <AccordionItem>
             <h2>
               <AccordionButton>
@@ -92,7 +95,7 @@ const ProviderDashboard = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Box display='flex' justifyContent='space-between'  mr='20em'>
+              <Box display='flex' justifyContent='space-between'  mr='20em' key={patientData.allPatients._id}>
                 <Text fontSize='xl' className="accordion-header">Patient Name</Text>
                 <Text fontSize='xl' className="accordion-header">Email</Text>
                 <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
