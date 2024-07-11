@@ -26,7 +26,6 @@ import { isInvalidEmail } from "../../utils/validation/invalidEmail";
 
 const SignupForm = () => {
     const toast = useToast();
-    const { loginUser } = useCurrentUserContext();
     const navigate = useNavigate();
     const [formState, setFormState] = useState({
       firstName: "",
@@ -47,7 +46,8 @@ const SignupForm = () => {
     const [show, setShow] = React.useState(false);
     const [showChecklist, setShowChecklist] = useState(false);
     const [input, setInput] = useState("");
-  
+    const [createdPatient, setCreatedPatient]
+ = useState();  
     const handlePasswordClick = () => setShow(!show);
   
     const showListOnClick = () => {
@@ -73,7 +73,6 @@ const SignupForm = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(formState);
       const errors = {
         firstName: formState.firstName === "",
         lastName: formState.lastName === "",
@@ -109,9 +108,22 @@ const SignupForm = () => {
           const dataResponse = await addPatient({
             variables: { ...formState },
           });
-          // remove this console log
-          console.log(dataResponse);
+          console.log('DATA RESPONSE', dataResponse);
           const { token, patient } = dataResponse.data.addPatient;
+          if (dataResponse !== null) {
+            toast({
+              title: "Success",
+              description: "Successfully added patient",
+              status: "success",
+              duration: 2000,
+              isClosable: true,
+            });
+          }
+          setCreatedPatient(dataResponse.data.addPatient.patient);
+          console.log('CREATED PATIENT FROM FORM', createdPatient);
+          // navigate('/dashboard');
+          // figure out a way to load date automatically without reload
+          window.location.reload();
           return { token, patient }
           
         
