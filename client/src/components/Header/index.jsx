@@ -48,6 +48,11 @@ const Header = () => {
                 Dashboard
               </Link>
             </Text>
+            <Text fontSize="md">
+              <Link to="/contact">
+               Contact
+              </Link>
+            </Text>
           </Box>
         ) : (
           <>
