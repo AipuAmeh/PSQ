@@ -2,7 +2,8 @@ import {
   Box,
   Text,
   Spacer,
-  Stack
+  Stack,
+  Flex
 } from "@chakra-ui/react";
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import { useQuery } from "@apollo/client";
@@ -16,7 +17,7 @@ const PatientDashboard = () => {
     const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
         variables: { patientId: currentUser._id }
       });  
-const patientName = `${data.patient.firstName} ${data.patient.lastName}`;
+// const patientName = `${data.patient.firstName} ${data.patient.lastName}`;
 
 // checking for loading and error states
 if (loading) return <p>Loading...</p>;
@@ -37,14 +38,14 @@ if (error) return <p>Error: {error.message}</p>;
      
 
   return (
-    <Box display="flex" alignItems="center" mt={6} flexDirection="column">
-      <Text fontSize="2xl">Patient Portal</Text>
-      <Box display="flex" flexDirection="row" gap={20} mt={10}>
-        <DashboardAvatar name={patientName} />
+    <Flex display="flex"  mt={6} flexDirection="column">
+      <Text fontSize="2xl" display='flex' justifyContent='center'>Patient Portal</Text>
+      <Box display="flex" flexDirection="row" mt={10} mx='30%' >
+        <DashboardAvatar name={data.patient.firstName} />
 
         <Spacer />
         <Stack>
-        <Text fontSize="xl" mt='3em'>
+        <Text fontSize="2xl" mt='3em' mb='1em'>
           Demographics
         </Text>
         <Demographics field={'First Name'} value={data.patient.firstName} />
@@ -57,7 +58,7 @@ if (error) return <p>Error: {error.message}</p>;
   
       </Box>
  
-    </Box>
+    </Flex>
   );
 };
 

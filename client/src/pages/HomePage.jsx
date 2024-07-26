@@ -1,11 +1,14 @@
 import { Box, Button, Flex, Text, Stack, Image } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import Features from "../components/HomePageFeature";
 import { Icon } from "@chakra-ui/react";
 import { PiStethoscopeDuotone } from "react-icons/pi";
 import { BsClockHistory } from "react-icons/bs";
 import { FaHandHoldingHeart } from "react-icons/fa6";
+import { useCurrentUserContext } from "../utils/context/CurrentUser";
 
 const HomePage = () => {
+  // const { isLoggedIn } = useCurrentUserContext();
   return (
     <Flex alignItems="center" flexDirection="column">
       <Box
@@ -23,9 +26,13 @@ const HomePage = () => {
             Bridging the gap in psychiatric management through consultation and
             integration.
           </Text>
-          <Button size="md" w="fit-content" bg="brand.callToActionButtons">
-           Book Consultation Now!
-          </Button>
+
+            <Link to="/contact">
+            <Button size="md" w="fit-content" bg="brand.callToActionButtons">
+               Book Consultation Now!
+              </Button>
+            </Link>   
+
         </Stack>
 
         <Image
@@ -41,16 +48,17 @@ const HomePage = () => {
         className="login-section"
         p={8}
         w="100%"
-        h='300px'
+        h="300px"
         display="flex"
         justifyContent="center"
-        alignItems='center'
+        alignItems="center"
         flexDirection="column"
         bg="brand.homePageLoginSection"
       >
-        <Text fontSize="2xl" align='center'>New Here? Login or Sign up</Text>
-     
-      
+        <Text fontSize="2xl" align="center">
+          New Here? Login or Sign up
+        </Text>
+
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
           <Button bg="brand.homePageLoginBtns" size="md">
             Login

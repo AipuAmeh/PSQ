@@ -102,5 +102,4 @@ export const SAVE_NEW_PASSWORD = gql`
     }
     }
   }
-
 `;
