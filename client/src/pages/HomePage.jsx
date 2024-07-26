@@ -8,7 +8,7 @@ import { FaHandHoldingHeart } from "react-icons/fa6";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 
 const HomePage = () => {
-  const { isLoggedIn } = useCurrentUserContext();
+  // const { isLoggedIn } = useCurrentUserContext();
   return (
     <Flex alignItems="center" flexDirection="column">
       <Box
@@ -26,19 +26,13 @@ const HomePage = () => {
             Bridging the gap in psychiatric management through consultation and
             integration.
           </Text>
-          {isLoggedIn() ? (
-            <>
-              <Button size="md" w="fit-content" bg="brand.callToActionButtons">
-                <Link to="/contact">Book Consultation Now!</Link>
+
+            <Link to="/contact">
+            <Button size="md" w="fit-content" bg="brand.callToActionButtons">
+               Book Consultation Now!
               </Button>
-            </>
-          ) : (
-            <>
-              <Button size="md" w="fit-content" bg="brand.callToActionButtons">
-                <Link to="/login">Book Consultation Now!</Link>
-              </Button>
-            </>
-          )}
+            </Link>   
+
         </Stack>
 
         <Image

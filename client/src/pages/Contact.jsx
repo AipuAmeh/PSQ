@@ -1,4 +1,10 @@
-import { Box } from "@chakra-ui/react";
+import {
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Box
+  } from '@chakra-ui/react'
 
 const Contact = () => {
 return (
