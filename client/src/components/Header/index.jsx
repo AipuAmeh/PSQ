@@ -5,6 +5,7 @@ import {
   Spacer,
   Image,
   Text,
+  Button
   // useBreakpointValue
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
@@ -42,8 +43,8 @@ const Header = () => {
       <Box display="flex" justifyContent="flex-end" gap={2} mr={4}>
         {isLoggedIn() ? (
           <Box display="flex" flexDirection="row" gap={2} >
-            <Text onClick={logout} cursor='pointer'>Logout</Text>
-            <Text fontSize="md">
+            <Button onClick={logout} cursor='pointer' bg='brand.callToActionButtons'>Logout</Button>
+            <Text fontSize="md" lineHeight='40px'>
               <Link to="/dashboard/">
                 Dashboard
               </Link>
@@ -59,7 +60,7 @@ const Header = () => {
             </Text>
           </>
         )}
-          <Text fontSize="md">
+          <Text fontSize="md" lineHeight='40px'>
               <Link to="/contact">
                Contact
               </Link>
