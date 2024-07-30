@@ -19,10 +19,23 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
   // add form error handling/validation
+
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (name === '' || email === '' || message === ''){
+      toast({
+        title: "Error",
+        description: "Please complete all fields",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+      
+      return;
+    }
     if (isInvalidEmail(email)) {
       toast({
         title: "Error",
@@ -57,7 +70,7 @@ const Contact = () => {
       setEmail("");
       setMessage("");
     } else {
-      console.log("it does not work");
+      return;
     }
   };
   return (
@@ -69,7 +82,7 @@ const Contact = () => {
       my={6}
     >
       <Text fontSize="3xl">Contact Us</Text>
-      <FormControl w="80%">
+      <FormControl w="80%" isRequired >
         <FormLabel mt={4}>Name</FormLabel>
         <Input
           type="text"
@@ -77,6 +90,7 @@ const Contact = () => {
           onChange={(e) => {
             setName(e.target.value);
           }}
+          placeholder="First and Last name"
         />
         <FormLabel mt={4}>Email address</FormLabel>
         <Input
@@ -84,7 +98,9 @@ const Contact = () => {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
+      
           }}
+          placeholder="Email"
         />
         <FormHelperText>We'll never share your email.</FormHelperText>
         <FormLabel mt={4}>Message</FormLabel>
@@ -93,7 +109,9 @@ const Contact = () => {
           value={message}
           onChange={(e) => {
             setMessage(e.target.value);
+    
           }}
+          placeholder="How Can We Help?"
         ></Textarea>
       </FormControl>
       <Button mt={6} bg="brand.callToActionButtons" onClick={handleFormSubmit}>

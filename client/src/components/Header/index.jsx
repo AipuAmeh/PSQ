@@ -52,11 +52,11 @@ const Header = () => {
           </Box>
         ) : (
           <>
-            <Text fontSize="md">
-              <Link to="/signup">Sign up</Link>
+            <Text fontSize="md" lineHeight='40px'>
+              <Link to="/signup" >Sign up</Link>
             </Text>
-            <Text fontSize="md">
-              <Link to="/login">Login</Link>
+            <Text fontSize="md" lineHeight='40px'>
+              <Link to="/login" >Login</Link>
             </Text>
           </>
         )}

@@ -131,7 +131,7 @@ const Signup = () => {
       px={10}
     >
       <Text fontSize="2xl" display="flex" justifyContent="center" my={6}>
-        Sign-Up
+        Sign Up
       </Text>
 
       {data ? (
