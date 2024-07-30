@@ -97,6 +97,14 @@ const resolvers = {
       }
     }
   },
+  // changeAccountDetails: async (parent, { firstName, lastName, dob, userName, email, password }) => {
+    // find patient by email
+    // validate patient
+    // find password field
+    // hash plain text password
+    // save updated patient
+    // return patient
+  // }
 };
 
 export default resolvers;
