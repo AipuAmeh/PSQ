@@ -1,10 +1,7 @@
 import jwt from "jsonwebtoken";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
-import {
-  signPatientToken,
-  signProviderToken,
-} from "../utils/jwt.js";
+import { signPatientToken, signProviderToken } from "../utils/jwt.js";
 import AuthenticationError from "../utils/error.js";
 import BadRequestError from "../utils/error.js";
 import { sendPasswordResetEmail } from "../mail/mailService.js";
@@ -95,16 +92,36 @@ const resolvers = {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    changePatientAccountDetails: async (
+      parent,
+      { firstName, lastName, dob, userName, email, password, patientId}
+    ) => {
+      try {
+        // find one and update patient
+        const patient = await Patient.findById({ _id: patientId })
+        if (!patient) {
+          throw AuthenticationError;
+        }
+        // updated values
+        patient.firstName = firstName;
+        patient.lastName = lastName;
+        patient.dob = dob;
+        patient.userName = userName;
+        patient.email = email;
+        // will fix for security later
+        patient.password = password;
+  
+        const updatedPatient = await patient.save();
+        console.log('UPDATED PATIENT:' + updatedPatient);
+        return updatedPatient;
+        // return  
+      } catch (error) {
+        console.log(error);
+     throw new Error('Failed to update patient details');
+      }
+    },
   },
-  // changeAccountDetails: async (parent, { firstName, lastName, dob, userName, email, password }) => {
-    // find patient by email
-    // validate patient
-    // find password field
-    // hash plain text password
-    // save updated patient
-    // return patient
-  // }
 };
 
 export default resolvers;
