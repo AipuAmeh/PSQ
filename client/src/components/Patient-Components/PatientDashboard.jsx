@@ -50,9 +50,9 @@ if (error) return <p>Error: {error.message}</p>;
         </Text>
         <Demographics field={'First Name'} value={data.patient.firstName} />
         <Demographics field={'Last Name'} value={data.patient.lastName} />
-        <Demographics field={'Username'} value={data.patient.userName} />
-        <Demographics field={'Email'} value={data.patient.email} />
         <Demographics field={'Date of Birth'} value={formattedBday} />
+        <Demographics field={'Email'} value={data.patient.email} />
+        <Demographics field={'Username'} value={data.patient.userName} />
         <Demographics field={'Password'} value={'******'} />
         </Stack>
   
