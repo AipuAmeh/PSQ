@@ -93,29 +93,27 @@ const resolvers = {
         console.error(error);
       }
     },
-    changePatientAccountDetails: async (
-      parent,
-      { firstName, lastName, dob, userName, email, password, patientId}
-    ) => {
+    changePatientAccountDetails: async (parent, { _id, userName}) => {
       try {
         // find one and update patient
-        const patient = await Patient.findById({ _id: patientId })
-        if (!patient) {
-          throw AuthenticationError;
-        }
+        const patient = await Patient.findByIdAndUpdate(
+       _id, { userName: userName }, 
+          { new: true,
+            returnDocument: "after"
+           }
+        );
+        // if (!patient) {
+        //   throw AuthenticationError;
+        // }
         // updated values
-        patient.firstName = firstName;
-        patient.lastName = lastName;
-        patient.dob = dob;
-        patient.userName = userName;
-        patient.email = email;
+        // patient.userName = userName;
+        // patient.email = email;
         // will fix for security later
-        patient.password = password;
-  
-        const updatedPatient = await patient.save();
-        console.log('UPDATED PATIENT:' + updatedPatient);
-        return updatedPatient;
-        // return  
+        // patient.password = password;
+
+        // const updatedPatient = await patient.save();
+        console.log(`Updated patient: ${patient}`);
+        return patient;
       } catch (error) {
         console.log(error);
      throw new Error('Failed to update patient details');
