@@ -93,25 +93,22 @@ const resolvers = {
         console.error(error);
       }
     },
-    changePatientAccountDetails: async (parent, { _id, userName}) => {
+    changePatientAccountDetails: async (parent, { _id, userName, email, password}) => {
       try {
         // find one and update patient
         const patient = await Patient.findByIdAndUpdate(
-       _id, { userName: userName }, 
+       _id, { 
+        userName: userName,
+        email: email,
+        password: password
+      }, 
           { new: true,
             returnDocument: "after"
            }
         );
-        // if (!patient) {
-        //   throw AuthenticationError;
-        // }
-        // updated values
-        // patient.userName = userName;
-        // patient.email = email;
-        // will fix for security later
-        // patient.password = password;
-
-        // const updatedPatient = await patient.save();
+        if (!patient) {
+          throw new AuthenticationError;
+        }
         console.log(`Updated patient: ${patient}`);
         return patient;
       } catch (error) {

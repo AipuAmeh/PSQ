@@ -41,15 +41,14 @@ if (error) return <p>Error: {error.message}</p>;
     <Flex display="flex"  mt={6} flexDirection="column">
       <Text fontSize="2xl" display='flex' justifyContent='center'>Patient Portal</Text>
       <Box display="flex" flexDirection="row" mt={10} mx='30%' >
-        <DashboardAvatar name={data.patient.firstName} />
+        <DashboardAvatar name={`${data.patient.firstName} ${data.patient.lastName}`} />
 
         <Spacer />
         <Stack>
         <Text fontSize="2xl" mt='3em' mb='1em'>
           Demographics
         </Text>
-        <Demographics field={'First Name'} value={data.patient.firstName} />
-        <Demographics field={'Last Name'} value={data.patient.lastName} />
+        <Demographics field={'Name'} value={`${data.patient.firstName} ${data.patient.lastName}`} />
         <Demographics field={'Date of Birth'} value={formattedBday} />
         <Demographics field={'Email'} value={data.patient.email} />
         <Demographics field={'Username'} value={data.patient.userName} />
