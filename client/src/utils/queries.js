@@ -31,7 +31,9 @@ export const QUERY_ALL_PATIENTS = gql`
       _id
       firstName
       lastName
+      userName
       email
+      password
       dob
     }
   }
