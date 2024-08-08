@@ -92,14 +92,43 @@ export const RESET_PASSWORD = gql`
 `;
 
 export const SAVE_NEW_PASSWORD = gql`
-  mutation saveNewPassword($newPassword: String!, $patientId: ID!, $token: String!) {
-    saveNewPassword(newPassword: $newPassword, patientId: $patientId, token: $token){
-    token
-    patient {
-      _id
-      userName
-      email
-    }
+  mutation saveNewPassword(
+    $newPassword: String!
+    $patientId: ID!
+    $token: String!
+  ) {
+    saveNewPassword(
+      newPassword: $newPassword
+      patientId: $patientId
+      token: $token
+    ) {
+      token
+      patient {
+        _id
+        userName
+        email
+      }
     }
   }
+`;
+
+export const CHANGE_ACCOUNT_DETAILS = gql`
+  mutation changePatientAccountDetails(
+    $_id: ID!
+    $userName: String
+    $email: String
+    $password: String
+  ) {
+    changePatientAccountDetails(
+      _id: $_id
+      userName: $userName
+      email: $email
+      password: $password
+    ) {
+        _id
+        userName
+        email
+        password
+      }
+    }
 `;

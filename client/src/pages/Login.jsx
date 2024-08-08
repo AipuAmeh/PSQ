@@ -9,6 +9,8 @@ import ForgotPasswordModal from "../components/ForgotPasswordModal";
 import { useDisclosure } from "@chakra-ui/react";
 
 const Login = () => {
+  // SEE USER DEMOGRAPHICS ROW FOR ERRORS AND OUTLINE
+  // LESS TOAST MESSAGES
     const { loginUser } = useCurrentUserContext();
     const navigate = useNavigate();
     const toast = useToast();

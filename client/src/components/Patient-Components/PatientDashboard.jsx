@@ -48,11 +48,11 @@ if (error) return <p>Error: {error.message}</p>;
         <Text fontSize="2xl" mt='3em' mb='1em'>
           Demographics
         </Text>
-        <Demographics field={'Name'} value={`${data.patient.firstName} ${data.patient.lastName}`} />
+        <Demographics  field={'Name'} value={`${data.patient.firstName} ${data.patient.lastName}`} />
         <Demographics field={'Date of Birth'} value={formattedBday} />
-        <Demographics field={'Email'} value={data.patient.email} />
-        <Demographics field={'Username'} value={data.patient.userName} />
-        <Demographics field={'Password'} value={'******'} />
+        <Demographics _id={currentUser._id} field={'Email'} value={data.patient.email} />
+        <Demographics _id={currentUser._id} field={'Username'} value={data.patient.userName} />
+        <Demographics _id={currentUser._id} field={'Password'} value={'******'} />
         </Stack>
   
       </Box>
