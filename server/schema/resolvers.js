@@ -96,12 +96,15 @@ const resolvers = {
     changePatientAccountDetails: async (parent, { _id, userName, email, password}) => {
       try {
         // find one and update patient
+        // add token so patient can login again
+        // hash new password
+        const updateFields = {};
+        if (userName !== undefined) updateFields.userName = userName;
+        if (email !== undefined) updateFields.email = email;
+        if (password !== undefined) updateFields.password = password;
+        console.log(updateFields);
         const patient = await Patient.findByIdAndUpdate(
-       _id, { 
-        userName: userName,
-        email: email,
-        password: password
-      }, 
+       _id, updateFields,
           { new: true,
             returnDocument: "after"
            }

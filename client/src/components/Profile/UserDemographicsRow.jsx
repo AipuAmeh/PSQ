@@ -4,37 +4,57 @@ import { useState } from "react";
 import { isInvalidEmail }from "../../utils/validation/invalidEmail.js";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_PATIENTS } from "../../utils/queries";
+import { useMutation } from "@apollo/client";
+import { CHANGE_ACCOUNT_DETAILS } from "../../utils/mutations.js";
 
-const Demographics = ({ field, value }) => {
+
+// eslint-disable-next-line react/prop-types
+const Demographics = ({ field, value, _id }) => {
   const toast = useToast();
   const [updateField, setUpdates] = useState(false);
-  const [valueState, setValueState] = useState(value);
+  const [formState, setFormState] = useState({
+    Email: field === "Email" ? value : '',
+    Username: field === "Username" ? value : '',
+    Password: field === "Password" ? value : ''
+  });
   const [errorResponse, setErrorResponse] = useState(false);
   // query all patients and make sure username is not the same as one that already exists
   const { loading, error, data } = useQuery(QUERY_ALL_PATIENTS);
+  const [changePatientAccountDetails] = useMutation(CHANGE_ACCOUNT_DETAILS);
 
   // checking for loading and error states
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  console.log("ALL PATIENTS:", data);
-
   const onChange = (e) => {
-    setValueState(e.target.value);
+    setFormState({
+      ...formState,
+      [field]: e.target.value
+    });
   };
 
   const onClickEdit = () => {
     setUpdates(!false);
   };
 
-  const onClickCheck = () => {
-    if (valueState === value) {
+  const onClickCheck = async () => {
+    const updatedFields = {};
+    if (formState.Email !== value && formState.Email !== "") {
+      updatedFields.email = formState.Email;
+    }  
+    if (formState.Username !== value && formState.Username !== "") {
+      updatedFields.userName = formState.Username;
+    }
+   if (formState.Password !== value && formState.Password !== "") {
+      updatedFields.password = formState.Password;
+    }
+    if (formState[field] === value) {
       setUpdates(!updateField);
       return;
     }
 
     if (field === "Email") {
-      const emailValidation = isInvalidEmail(valueState);
+      const emailValidation = isInvalidEmail(formState.Email);
       if (emailValidation) {
         toast({
           title: "Error",
@@ -43,11 +63,10 @@ const Demographics = ({ field, value }) => {
           duration: 2000,
           isClosable: true,
         });
-        setValueState(value);
         return;
       }
     } else {
-      if (valueState === "") {
+      if (formState[field] === "") {
         toast({
           title: "Error",
           description: `Please enter a value.`,
@@ -60,7 +79,7 @@ const Demographics = ({ field, value }) => {
         // check for existing user
         const existingUsers = data.allPatients;
         for (let i = 0; i < existingUsers.length; i++) {
-          if (existingUsers[i].userName === valueState) {
+          if (existingUsers[i].userName === formState.Username) {
             setErrorResponse(true);
             return toast({
               title: 'Error',
@@ -70,13 +89,37 @@ const Demographics = ({ field, value }) => {
             });
           }
         }
+      } 
+      console.log('UPDATED FIELDS', updatedFields);
+      try {
+        if (updatedFields) {
+          console.log('Sending mutation with variables:', {
+            _id, ...updatedFields
+          });
+          const result = await changePatientAccountDetails({
+            variables: {
+              _id,
+              ...updatedFields       
+            }
+          });
+          setUpdates(false);
+          toast({
+            title: 'Success',
+            description: 'Successfully changed account details',
+            status: 'success',
+            isClosable: true,
+          })
+          return result
+         
+        } else {
+          console.log('im the problem');
+        }
+      } catch (error) {
+        console.log('ERROR UPDATING ACCOUNT');
+        console.log(error.message);
       }
-
       // no values changed when clicked don't do anything
     }
-    setUpdates(!updateField);
-
-    // change account details logic here
   };
 
   return (
@@ -88,7 +131,8 @@ const Demographics = ({ field, value }) => {
         {updateField ? (
           <Box>
             <Input
-              value={valueState}
+        
+              value={formState[field]}
               h="32px"
               variant="filled"
               flex={1}
