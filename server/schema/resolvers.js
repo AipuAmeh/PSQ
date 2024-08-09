@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
-import { signPatientToken, signProviderToken } from "../utils/jwt.js";
+import { signPatientToken, signProviderToken, hashPassword } from "../utils/jwt.js";
 import AuthenticationError from "../utils/error.js";
 import BadRequestError from "../utils/error.js";
 import { sendPasswordResetEmail } from "../mail/mailService.js";
@@ -96,12 +96,16 @@ const resolvers = {
     changePatientAccountDetails: async (parent, { _id, userName, email, password}) => {
       try {
         // find one and update patient
-        // add token so patient can login again
-        // hash new password
         const updateFields = {};
         if (userName !== undefined) updateFields.userName = userName;
         if (email !== undefined) updateFields.email = email;
-        if (password !== undefined) updateFields.password = password;
+        // hash new password for safekeeping in db
+        if (password !== undefined) {
+          updateFields.password = password;
+          const hashedPassword = await hashPassword(password);
+          updateFields.password = hashedPassword;
+          console.log('HASHED PASSWORD', hashedPassword);
+        } 
         console.log(updateFields);
         const patient = await Patient.findByIdAndUpdate(
        _id, updateFields,
@@ -113,7 +117,7 @@ const resolvers = {
           throw new AuthenticationError;
         }
         console.log(`Updated patient: ${patient}`);
-        return patient;
+        return patient ;
       } catch (error) {
         console.log(error);
      throw new Error('Failed to update patient details');

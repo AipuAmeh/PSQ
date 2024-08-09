@@ -22,4 +22,8 @@ export const signPatientToken = async ({ email, userName, _id }) => {
     }
 };
 
+export const hashPassword = async (password) => {
+    return bcrypt.hash(password, 10);
+}
+
 
