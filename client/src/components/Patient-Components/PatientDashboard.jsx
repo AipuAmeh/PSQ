@@ -3,7 +3,8 @@ import {
   Text,
   Spacer,
   Stack,
-  Flex
+  Flex,
+  Button
 } from "@chakra-ui/react";
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import { useQuery } from "@apollo/client";
@@ -54,9 +55,12 @@ if (error) return <p>Error: {error.message}</p>;
         <Demographics _id={currentUser._id} field={'Username'} value={data.patient.userName} />
         <Demographics _id={currentUser._id} field={'Password'} value={'******'} />
         </Stack>
-  
+
       </Box>
- 
+      <Box display='flex' justifyContent='center' mt={8}>
+      <Button size='md' w='fit-content' bg='brand.accentBtns'>Delete My Account</Button>
+      </Box>
+
     </Flex>
   );
 };
