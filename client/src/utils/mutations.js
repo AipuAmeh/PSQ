@@ -130,5 +130,5 @@ export const CHANGE_ACCOUNT_DETAILS = gql`
         email
         password
       }
-    }
+      }
 `;
