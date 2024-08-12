@@ -3,17 +3,21 @@ import {
   Text,
   Spacer,
   Stack,
-  Flex
+  Flex,
+  Button
 } from "@chakra-ui/react";
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import { useQuery } from "@apollo/client";
 import DashboardAvatar from "../Avatar";
 import { QUERY_CURRENT_PATIENT } from "../../utils/queries";
 import Demographics from "../Profile/UserDemographicsRow";
+import ConfirmationModal from "../ConfirmationModal";
+import { useDisclosure } from "@chakra-ui/react";
+
 
 const PatientDashboard = () => {
   const { currentUser } = useCurrentUserContext();
- 
+  const { isOpen, onOpen, onClose } = useDisclosure();
     const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
         variables: { patientId: currentUser._id }
       });  
@@ -54,9 +58,13 @@ if (error) return <p>Error: {error.message}</p>;
         <Demographics _id={currentUser._id} field={'Username'} value={data.patient.userName} />
         <Demographics _id={currentUser._id} field={'Password'} value={'******'} />
         </Stack>
-  
+
       </Box>
- 
+      <Box display='flex' justifyContent='center' mt={8}>
+      <Button onClick={onOpen} size='md' w='fit-content' bg='brand.accentBtns'>Delete My Account</Button>
+      <ConfirmationModal _id={currentUser._id} isOpen={isOpen} onClose={onClose} />
+      </Box>
+
     </Flex>
   );
 };

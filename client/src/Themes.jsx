@@ -7,6 +7,7 @@ const theme = extendTheme({
             homePageLoginSection: "#F7FFF6",
             homePageLoginBtns: "#93B48B",
             homePageSecondSection: "#93B48B",
+            accentBtns: "#93B48B",
             footer: "#F7FFF6",
             cardBorder: "#F7FFF6",
             header: "#F7FFF6"

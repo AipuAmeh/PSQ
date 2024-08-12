@@ -125,10 +125,18 @@ export const CHANGE_ACCOUNT_DETAILS = gql`
       email: $email
       password: $password
     ) {
-        _id
-        userName
-        email
-        password
-      }
-      }
+      _id
+      userName
+      email
+      password
+    }
+  }
+`;
+
+export const DELETE_ACCOUNT = gql`
+  mutation deletePatientAccount($_id: ID!) {
+    deletePatientAccount(_id: $_id) {
+      _id
+    }
+  }
 `;
