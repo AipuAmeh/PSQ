@@ -15,12 +15,14 @@ import {
   import { DELETE_ACCOUNT } from '../utils/mutations';
   import { useNavigate } from 'react-router-dom';
   import { useToast } from '@chakra-ui/react';
+  import { useCurrentUserContext } from '../utils/context/CurrentUser';
 
 
 
 const ConfirmationModal = ({ _id, isOpen,onClose }) => {
     const navigate = useNavigate();
     const toast = useToast();
+    const { logoutUser } = useCurrentUserContext();
 
     const [deletePatientAccount] = useMutation(DELETE_ACCOUNT);
 
@@ -29,15 +31,16 @@ const ConfirmationModal = ({ _id, isOpen,onClose }) => {
             const dataResponse = await deletePatientAccount({
                 variables: { _id }
             });
-            console.log('DELETED PATIENT:', dataResponse);
+            logoutUser();
             navigate('/')
-            return toast({
+            toast({
                 title: "Success",
                 description: "Account successfully deleted",
                 status: "success",
                 duration: 2000,
                 isClosable: true,
             });
+            return dataResponse;
         } catch (error) {
             console.log(error);
         }
