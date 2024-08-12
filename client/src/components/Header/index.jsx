@@ -21,10 +21,9 @@ const Header = () => {
     navigate('/');
   };
   // mobile development
-  // const isMobile = useBreakpointValue({ base: true, md: false, sm: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false, sm: false });sla
 
-  // add image for header
-
+  // add sticy position?
   return (
     <Flex minWidth="max-content" p={4} boxShadow="lg" alignItems='center'>
       <Box>

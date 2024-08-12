@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
 import { signPatientToken, signProviderToken, hashPassword } from "../utils/jwt.js";
@@ -123,6 +124,10 @@ const resolvers = {
      throw new Error('Failed to update patient details');
       }
     },
+    deletePatientAccount: async (parent, { _id }) => {
+      const deletedPatient = Patient.findByIdAndDelete({ _id });
+      return deletedPatient;
+    }
   },
 };
 

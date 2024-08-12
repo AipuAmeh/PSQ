@@ -42,6 +42,7 @@ type Mutation {
     sendResetPasswordEmail(email: String!): patientAuth
     saveNewPassword(newPassword: String!, patientId: ID!, token: String!): patientAuth
     changePatientAccountDetails(_id: ID!, userName: String, email: String, password: String): Patient
+    deletePatientAccount(_id: ID!): Patient
 }
 `;
 
