@@ -17,6 +17,7 @@ import ResetPassword from "./pages/ResetPassword.jsx";
 import theme from "./Themes.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Contact from "./pages/Contact.jsx";
+import PatientPage from "./pages/PatientPage.jsx";
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact />
+      },
+      {
+        path: '/patient/:id',
+        element: <PatientPage />
       }
     ],
   },

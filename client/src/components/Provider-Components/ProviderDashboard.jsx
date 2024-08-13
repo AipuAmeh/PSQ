@@ -118,6 +118,7 @@ console.log('SORTED:', sortedPatients);
                 return (
                   <>
                     <PatientDetails
+                      id={patient._id}
                       firstname={patient.firstName}
                       lastname={patient.lastName}
                       email={patient.email}
