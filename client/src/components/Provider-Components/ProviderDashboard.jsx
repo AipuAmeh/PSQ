@@ -37,8 +37,9 @@ const ProviderDashboard = () => {
     data: patientData,
   } = useQuery(QUERY_ALL_PATIENTS);
 
-  console.log("PATIENT DATA ARRAY:", patientData);
-  const [queriedPatientData, setQueriedPatientData] = useState(patientData);
+console.log('PATIENT DATA', patientData);
+
+  // const [queriedPatientData, setQueriedPatientData] = useState(patientData);
   
   // function for formatting each patient's birthday
   const formattedBirthday = (bday) => {
@@ -57,6 +58,19 @@ const ProviderDashboard = () => {
   // checking for loading and error states
   if (loading || patientLoading) return <p>Loading...</p>;
   if (error || patientError) return <p>Error: {error.message}</p>;
+
+    // sort patient data by alphabetical order
+    const sortedPatients = [...patientData.allPatients]
+ .sort((a,b) => {
+  if (a.lastName < b.lastName) {
+    return -1
+  } else if (a.lastName > b.lastName) {
+    return 1 
+  } else {
+    return 0
+  }
+});
+console.log('SORTED:', sortedPatients);
 
   return (
     <Box display="flex" mt={6} flexDirection="column">
@@ -100,7 +114,7 @@ const ProviderDashboard = () => {
                 <Text fontSize='xl' className="accordion-header">Email</Text>
                 <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
               </Box>
-              {patientData.allPatients.map((patient) => {
+              {sortedPatients.map((patient) => {
                 return (
                   <>
                     <PatientDetails
