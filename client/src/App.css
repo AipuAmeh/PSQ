@@ -58,3 +58,7 @@
 .accordion-header {
 text-decoration: underline;
 }
+
+.pt-page-link:hover {
+  text-decoration: underline;
+}

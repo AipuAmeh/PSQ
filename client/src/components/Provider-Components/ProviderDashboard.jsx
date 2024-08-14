@@ -3,13 +3,12 @@ import {
   Text,
   Stack,
   Accordion,
-  Center,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import { useState } from "react";
+// import { useState } from "react";
 
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import DashboardAvatar from "../Avatar";
@@ -36,8 +35,6 @@ const ProviderDashboard = () => {
     error: patientError,
     data: patientData,
   } = useQuery(QUERY_ALL_PATIENTS);
-
-console.log('PATIENT DATA', patientData);
 
   // const [queriedPatientData, setQueriedPatientData] = useState(patientData);
   
@@ -70,7 +67,6 @@ console.log('PATIENT DATA', patientData);
     return 0
   }
 });
-console.log('SORTED:', sortedPatients);
 
   return (
     <Box display="flex" mt={6} flexDirection="column">
@@ -109,7 +105,7 @@ console.log('SORTED:', sortedPatients);
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Box display='flex' justifyContent='space-between'  mr='20em' key={patientData.allPatients._id}>
+              <Box display='flex' justifyContent='space-between' gap={7}  key={patientData.allPatients._id}>
                 <Text fontSize='xl' className="accordion-header">Patient Name</Text>
                 <Text fontSize='xl' className="accordion-header">Email</Text>
                 <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
