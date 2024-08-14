@@ -13,6 +13,7 @@ import { QUERY_CURRENT_PATIENT } from "../../utils/queries";
 import Demographics from "../Profile/UserDemographicsRow";
 import ConfirmationModal from "../ConfirmationModal";
 import { useDisclosure } from "@chakra-ui/react";
+import { formattedBday } from "../../utils/validation/formattedBday";
 
 
 const PatientDashboard = () => {
@@ -21,27 +22,13 @@ const PatientDashboard = () => {
     const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
         variables: { patientId: currentUser._id }
       });  
-// const patientName = `${data.patient.firstName} ${data.patient.lastName}`;
 
 // checking for loading and error states
 if (loading) return <p>Loading...</p>;
 if (error) return <p>Error: {error.message}</p>;
 
-// formatting birthday
-      const birthday = data.patient.dob;
-    // check if birthday is a number, if not return
-      if (isNaN(birthday)) {
-        return;
-      }
-        const date = new Date(parseInt(birthday, 10));
-          const month = date.getMonth() + 1;
-          const day = date.getDate() + 1;
-          const year = date.getFullYear();  
-          const formattedBday = `${month}/${day}/${year}`;  
  
-     
-
-  return (
+   return (
     <Flex display="flex"  mt={6} flexDirection="column">
       <Text fontSize="2xl" display='flex' justifyContent='center'>Patient Portal</Text>
       <Box display="flex" flexDirection="row" mt={10} mx='30%' >
@@ -53,7 +40,7 @@ if (error) return <p>Error: {error.message}</p>;
           Demographics
         </Text>
         <Demographics  field={'Name'} value={`${data.patient.firstName} ${data.patient.lastName}`} />
-        <Demographics field={'Date of Birth'} value={formattedBday} />
+        <Demographics field={'Date of Birth'} value={formattedBday(data.patient.dob)} />
         <Demographics _id={currentUser._id} field={'Email'} value={data.patient.email} />
         <Demographics _id={currentUser._id} field={'Username'} value={data.patient.userName} />
         <Demographics _id={currentUser._id} field={'Password'} value={'******'} />

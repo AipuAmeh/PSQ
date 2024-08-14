@@ -20,6 +20,7 @@ import Demographics from "../Profile/UserDemographicsRow";
 import { useQuery } from "@apollo/client";
 import PatientDetails from "./PatientDetails";
 import SignupForm from "../Forms/SignupForm";
+import { formattedBday } from "../../utils/validation/formattedBday";
 
 const ProviderDashboard = () => {
   const { currentUser } = useCurrentUserContext();
@@ -38,19 +39,7 @@ const ProviderDashboard = () => {
 
   // const [queriedPatientData, setQueriedPatientData] = useState(patientData);
   
-  // function for formatting each patient's birthday
-  const formattedBirthday = (bday) => {
-    if (isNaN(bday)) {
-      return
-    }
-    const date = new Date(parseInt(bday, 10));
-    const month = date.getMonth() + 1;
-    const day = date.getDate() + 1;
-    const year = date.getFullYear();
-    const newBirthday = `${month}/${day}/${year}`; 
-    // if day is one digit, add 0 in front of it 
-    return newBirthday;  
-  }
+
 
   // checking for loading and error states
   if (loading || patientLoading) return <p>Loading...</p>;
@@ -118,7 +107,7 @@ const ProviderDashboard = () => {
                       firstname={patient.firstName}
                       lastname={patient.lastName}
                       email={patient.email}
-                      dob={formattedBirthday(patient.dob)}
+                      dob={formattedBday(patient.dob)}
                     />
                   </>
                 );
