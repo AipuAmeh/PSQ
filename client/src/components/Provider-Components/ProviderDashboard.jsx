@@ -3,13 +3,12 @@ import {
   Text,
   Stack,
   Accordion,
-  Center,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import { useState } from "react";
+// import { useState } from "react";
 
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import DashboardAvatar from "../Avatar";
@@ -21,6 +20,7 @@ import Demographics from "../Profile/UserDemographicsRow";
 import { useQuery } from "@apollo/client";
 import PatientDetails from "./PatientDetails";
 import SignupForm from "../Forms/SignupForm";
+import { formattedBday } from "../../utils/validation/formattedBday";
 
 const ProviderDashboard = () => {
   const { currentUser } = useCurrentUserContext();
@@ -37,23 +37,9 @@ const ProviderDashboard = () => {
     data: patientData,
   } = useQuery(QUERY_ALL_PATIENTS);
 
-console.log('PATIENT DATA', patientData);
-
   // const [queriedPatientData, setQueriedPatientData] = useState(patientData);
   
-  // function for formatting each patient's birthday
-  const formattedBirthday = (bday) => {
-    if (isNaN(bday)) {
-      return
-    }
-    const date = new Date(parseInt(bday, 10));
-    const month = date.getMonth() + 1;
-    const day = date.getDate() + 1;
-    const year = date.getFullYear();
-    const newBirthday = `${month}/${day}/${year}`; 
-    // if day is one digit, add 0 in front of it 
-    return newBirthday;  
-  }
+
 
   // checking for loading and error states
   if (loading || patientLoading) return <p>Loading...</p>;
@@ -70,7 +56,6 @@ console.log('PATIENT DATA', patientData);
     return 0
   }
 });
-console.log('SORTED:', sortedPatients);
 
   return (
     <Box display="flex" mt={6} flexDirection="column">
@@ -109,7 +94,7 @@ console.log('SORTED:', sortedPatients);
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Box display='flex' justifyContent='space-between'  mr='20em' key={patientData.allPatients._id}>
+              <Box display='flex' justifyContent='space-between' gap={7}  key={patientData.allPatients._id}>
                 <Text fontSize='xl' className="accordion-header">Patient Name</Text>
                 <Text fontSize='xl' className="accordion-header">Email</Text>
                 <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
@@ -118,10 +103,11 @@ console.log('SORTED:', sortedPatients);
                 return (
                   <>
                     <PatientDetails
+                      id={patient._id}
                       firstname={patient.firstName}
                       lastname={patient.lastName}
                       email={patient.email}
-                      dob={formattedBirthday(patient.dob)}
+                      dob={formattedBday(patient.dob)}
                     />
                   </>
                 );

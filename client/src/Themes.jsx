@@ -10,7 +10,9 @@ const theme = extendTheme({
             accentBtns: "#93B48B",
             footer: "#F7FFF6",
             cardBorder: "#F7FFF6",
-            header: "#F7FFF6"
+            header: "#F7FFF6",
+            coolGray: '#8491A3',
+            cambridgeBlue: '#93B48B'
         }
     }
 })
