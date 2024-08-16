@@ -7,10 +7,6 @@ dateCreated: {
     required: true,
     trim: true
 },
-patientId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Patient'
-},
 subject: {
     type: String,
     required: true,
