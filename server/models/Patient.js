@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
+// find diff library for date format
+// import moment from 'moment'
 
 const patientSchema = new Schema({
     firstName: {
@@ -15,6 +17,9 @@ const patientSchema = new Schema({
     dob: {
         type: Date,
         required: true,
+        // get: (dobVal) => {
+        //     moment(dobVal).format('MM DD, YYY')
+        // },
         trim: true,
     },
     userName: {
@@ -33,6 +38,10 @@ const patientSchema = new Schema({
         // required: true,
         length: 8,
     },
+    chartNotes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'ChartNote'
+    }]
 });
 
 // if password is new or modified, hash it

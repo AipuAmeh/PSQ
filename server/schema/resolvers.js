@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
+import ChartNote from "../models/ChartNote.js";
 import { signPatientToken, signProviderToken, hashPassword } from "../utils/jwt.js";
 import AuthenticationError from "../utils/error.js";
 import BadRequestError from "../utils/error.js";
@@ -127,6 +128,22 @@ const resolvers = {
     deletePatientAccount: async (parent, { _id }) => {
       const deletedPatient = Patient.findByIdAndDelete({ _id });
       return deletedPatient;
+    },
+    addChartNote: async (parent, {patientId, dateCreated, subject, noteText}) => {
+      // create chart note
+      const chartNote = await ChartNote.create({
+        dateCreated,
+        subject,
+        noteText
+      });
+      // add chart note to patient
+      const addNoteToPatient = await Patient.findByIdAndUpdate(
+        patientId,
+        { $addToSet: { chartNotes: chartNote._id }},
+        { new: true }
+      )
+
+      console.log('NEW NOTE TO PATIENT:', addNoteToPatient);
     }
   },
 };
