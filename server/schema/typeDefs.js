@@ -3,7 +3,6 @@ const typeDefs = `#graphql
 type ChartNote {
     _id: ID
     dateCreated: String
-    patientId: ID
     subject: String
     noteText: String
 }
@@ -52,7 +51,7 @@ type Mutation {
     saveNewPassword(newPassword: String!, patientId: ID!, token: String!): patientAuth
     changePatientAccountDetails(_id: ID!, userName: String, email: String, password: String): Patient
     deletePatientAccount(_id: ID!): Patient
-    addChartNote(patientId: ID, dateCreated: String!, subject: String!, noteText: String!): ChartNote
+    addChartNoteToPatient(patientId: ID!, dateCreated: String!, subject: String!, noteText: String!): Patient
 }
 `;
 

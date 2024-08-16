@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
 import ChartNote from "../models/ChartNote.js";
-import { signPatientToken, signProviderToken, hashPassword } from "../utils/jwt.js";
+import {
+  signPatientToken,
+  signProviderToken,
+  hashPassword,
+} from "../utils/jwt.js";
 import AuthenticationError from "../utils/error.js";
 import BadRequestError from "../utils/error.js";
 import { sendPasswordResetEmail } from "../mail/mailService.js";
@@ -12,13 +16,13 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const resolvers = {
   Query: {
     patient: async (parent, { patientId }) => {
-      return await Patient.findById({ _id: patientId });
+      return await Patient.findById({ _id: patientId }).populate('chartNotes');
     },
     provider: async (parent, { providerId }) => {
       return await Provider.findById({ _id: providerId });
     },
     allPatients: async (parent) => {
-      return Patient.find();
+      return Patient.find().populate('chartNotes');
     },
   },
   Mutation: {
@@ -95,7 +99,10 @@ const resolvers = {
         console.error(error);
       }
     },
-    changePatientAccountDetails: async (parent, { _id, userName, email, password}) => {
+    changePatientAccountDetails: async (
+      parent,
+      { _id, userName, email, password }
+    ) => {
       try {
         // find one and update patient
         const updateFields = {};
@@ -106,45 +113,49 @@ const resolvers = {
           updateFields.password = password;
           const hashedPassword = await hashPassword(password);
           updateFields.password = hashedPassword;
-          console.log('HASHED PASSWORD', hashedPassword);
-        } 
+          console.log("HASHED PASSWORD", hashedPassword);
+        }
         console.log(updateFields);
-        const patient = await Patient.findByIdAndUpdate(
-       _id, updateFields,
-          { new: true,
-            returnDocument: "after"
-           }
-        );
+        const patient = await Patient.findByIdAndUpdate(_id, updateFields, {
+          new: true,
+          returnDocument: "after",
+        });
         if (!patient) {
-          throw new AuthenticationError;
+          throw new AuthenticationError();
         }
         console.log(`Updated patient: ${patient}`);
-        return patient ;
+        return patient;
       } catch (error) {
         console.log(error);
-     throw new Error('Failed to update patient details');
+        throw new Error("Failed to update patient details");
       }
     },
     deletePatientAccount: async (parent, { _id }) => {
       const deletedPatient = Patient.findByIdAndDelete({ _id });
       return deletedPatient;
     },
-    addChartNote: async (parent, {patientId, dateCreated, subject, noteText}) => {
+    addChartNoteToPatient: async (
+      parent,
+      { patientId, dateCreated, subject, noteText }
+    ) => {
       // create chart note
       const chartNote = await ChartNote.create({
         dateCreated,
         subject,
-        noteText
+        noteText,
       });
       // add chart note to patient
+      // populate notes to return chart note values
       const addNoteToPatient = await Patient.findByIdAndUpdate(
         patientId,
-        { $addToSet: { chartNotes: chartNote._id }},
+        {
+          $addToSet: { chartNotes: chartNote._id },
+        },
         { new: true }
-      )
+      ).populate('chartNotes');
 
-      console.log('NEW NOTE TO PATIENT:', addNoteToPatient);
-    }
+      return addNoteToPatient;
+    },
   },
 };
 
