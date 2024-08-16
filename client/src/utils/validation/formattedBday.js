@@ -11,3 +11,4 @@ export const formattedBday = (bday) => {
       return newBirthday; 
 };
 
+// fix birthday bug to make sure birthday is formatted corrrectly with the right contraints and is accurate
