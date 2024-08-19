@@ -140,3 +140,17 @@ export const DELETE_ACCOUNT = gql`
     }
   }
 `;
+
+export const ADD_PATIENT_NOTE = gql`
+  mutation addChartNoteToPatient($patientId: ID!, $dateCreated: String!, $subject: String!, $noteText: String!) {
+    addChartNoteToPatient(patientId: $patientId, dateCreated: $dateCreated, subject: $subject, noteText: $noteText){
+   _id
+   chartNotes {
+   dateCreated
+   subject
+   noteText
+   }
+    }
+  }
+
+`

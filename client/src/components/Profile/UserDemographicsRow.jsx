@@ -137,7 +137,7 @@ const Demographics = ({ field, value, _id }) => {
               variant="filled"
               flex={1}
               onChange={onChange}
-              borderColor={errorResponse ? 'crimson' : 'white'}
+              borderColor={errorResponse ? 'crimson' : 'brand.coolGray'}
               type={field === "Password" ? "password" : "text"}
             />
           </Box>

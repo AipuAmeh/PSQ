@@ -21,6 +21,11 @@ export const QUERY_CURRENT_PATIENT = gql`
       email
       password
       dob
+      chartNotes {
+        dateCreated
+        subject
+        noteText
+      }
     }
   }
 `;

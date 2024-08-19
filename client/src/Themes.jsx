@@ -12,7 +12,8 @@ const theme = extendTheme({
             cardBorder: "#F7FFF6",
             header: "#F7FFF6",
             coolGray: '#8491A3',
-            cambridgeBlue: '#93B48B'
+            cambridgeBlue: '#93B48B',
+            mintCream: '#F7FFF6'
         }
     }
 })

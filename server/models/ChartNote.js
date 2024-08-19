@@ -17,7 +17,6 @@ noteText: {
     type: String,
     required: true,
     trim: true,
-    maxLength: 280
 }
 });
 
