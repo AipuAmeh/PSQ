@@ -41,7 +41,7 @@ const PatientPage = () => {
   const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
     variables: { patientId: id },
   });
-
+console.log('CHART NOTES', data);
   // check for loading and error states
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
