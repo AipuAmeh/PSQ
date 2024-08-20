@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import DashboardAvatar from "../components/Avatar";
-import { formattedBday } from "../utils/validation/formattedBday";
+import { formattedDate } from "../utils/validation/formattedDate";
 import SinglePatientDemographics from "../components/Patient-Components/SinglePatientDemographics";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
@@ -48,6 +48,14 @@ const PatientPage = () => {
 
   const chartNotes = data.patient.chartNotes;
   console.log(chartNotes);
+  // const todaysDate = chartNotes[1].dateCreated
+  // const date = new Date(parseInt(todaysDate, 10));
+  // const month = date.getMonth() + 1;
+  // const day = date.getDate() + 1;
+  // const year = date.getFullYear();
+  // const newDate = `${month}/${day}/${year}`; 
+  // console.log(newDate);
+  
 
   return (
     <Box>
@@ -61,7 +69,7 @@ const PatientPage = () => {
         <Box display="flex" flexDirection="column">
           <SinglePatientDemographics
             field={"Date of Birth"}
-            value={formattedBday(data.patient.dob)}
+            value={formattedDate(data.patient.dob)}
           />
           <SinglePatientDemographics
             field={"Email"}
@@ -97,7 +105,7 @@ const PatientPage = () => {
                     <Stack divider={<StackDivider />} spacing="4">
                       <Box>
                         <Heading size="xs" textTransform="uppercase">
-                          {note.dateCreated} {note.subject}
+                          {formattedDate(note.dateCreated)} {note.subject}
                         </Heading>
                         <Text pt="2" fontSize="sm">
                           {note.noteText}
