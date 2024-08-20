@@ -20,7 +20,7 @@ import Demographics from "../Profile/UserDemographicsRow";
 import { useQuery } from "@apollo/client";
 import PatientDetails from "./PatientDetails";
 import SignupForm from "../Forms/SignupForm";
-import { formattedBday } from "../../utils/validation/formattedBday";
+import { formattedDate } from "../../utils/validation/formattedDate";
 
 const ProviderDashboard = () => {
   const { currentUser } = useCurrentUserContext();
@@ -107,7 +107,7 @@ const ProviderDashboard = () => {
                       firstname={patient.firstName}
                       lastname={patient.lastName}
                       email={patient.email}
-                      dob={formattedBday(patient.dob)}
+                      dob={formattedDate(patient.dob)}
                     />
                   </>
                 );

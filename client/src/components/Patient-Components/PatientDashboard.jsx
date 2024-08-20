@@ -13,7 +13,7 @@ import { QUERY_CURRENT_PATIENT } from "../../utils/queries";
 import Demographics from "../Profile/UserDemographicsRow";
 import ConfirmationModal from "../ConfirmationModal";
 import { useDisclosure } from "@chakra-ui/react";
-import { formattedBday } from "../../utils/validation/formattedBday";
+import { formattedDate } from "../../utils/validation/formattedDate";
 
 
 const PatientDashboard = () => {
@@ -40,7 +40,7 @@ if (error) return <p>Error: {error.message}</p>;
           Demographics
         </Text>
         <Demographics  field={'Name'} value={`${data.patient.firstName} ${data.patient.lastName}`} />
-        <Demographics field={'Date of Birth'} value={formattedBday(data.patient.dob)} />
+        <Demographics field={'Date of Birth'} value={formattedDate(data.patient.dob)} />
         <Demographics _id={currentUser._id} field={'Email'} value={data.patient.email} />
         <Demographics _id={currentUser._id} field={'Username'} value={data.patient.userName} />
         <Demographics _id={currentUser._id} field={'Password'} value={'******'} />
