@@ -24,6 +24,7 @@ type Patient {
     email: String
     password: String
     chartNotes: [ChartNote]
+    medications: [String]
 }
 
 type patientAuth {
@@ -52,6 +53,7 @@ type Mutation {
     changePatientAccountDetails(_id: ID!, userName: String, email: String, password: String): Patient
     deletePatientAccount(_id: ID!): Patient
     addChartNoteToPatient(patientId: ID!, dateCreated: String!, subject: String!, noteText: String!): Patient
+    addMedication(patientId: ID!, medications: String): Patient
 }
 `;
 

@@ -41,7 +41,10 @@ const patientSchema = new Schema({
     chartNotes: [{
         type: Schema.Types.ObjectId,
         ref: 'ChartNote'
-    }]
+    }],
+    medications: [{
+        type: String
+    }],
 });
 
 // if password is new or modified, hash it
