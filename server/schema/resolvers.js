@@ -113,9 +113,7 @@ const resolvers = {
           updateFields.password = password;
           const hashedPassword = await hashPassword(password);
           updateFields.password = hashedPassword;
-          console.log("HASHED PASSWORD", hashedPassword);
         }
-        console.log(updateFields);
         const patient = await Patient.findByIdAndUpdate(_id, updateFields, {
           new: true,
           returnDocument: "after",
@@ -123,7 +121,6 @@ const resolvers = {
         if (!patient) {
           throw new AuthenticationError();
         }
-        console.log(`Updated patient: ${patient}`);
         return patient;
       } catch (error) {
         console.log(error);
@@ -156,6 +153,16 @@ const resolvers = {
 
       return addNoteToPatient;
     },
+    addMedication: async (parent, { patientId,medications}) => {
+      // find patient by id and update
+      const addPatientMedication = await Patient.findByIdAndUpdate(
+       {_id: patientId},
+        // add medication name to drug list
+        { $addToSet: { medications: medications }},
+        { new: true }
+      )
+      return addPatientMedication;
+    }
   },
 };
 

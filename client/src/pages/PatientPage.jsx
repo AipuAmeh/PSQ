@@ -47,14 +47,8 @@ console.log('CHART NOTES', data);
   if (error) return <p>Error: {error.message}</p>;
 
   const chartNotes = data.patient.chartNotes;
-  console.log(chartNotes);
-  // const todaysDate = chartNotes[1].dateCreated
-  // const date = new Date(parseInt(todaysDate, 10));
-  // const month = date.getMonth() + 1;
-  // const day = date.getDate() + 1;
-  // const year = date.getFullYear();
-  // const newDate = `${month}/${day}/${year}`; 
-  // console.log(newDate);
+
+
   
 
   return (
@@ -118,7 +112,7 @@ console.log('CHART NOTES', data);
             );
           })}
         </Box>
-        <Box w="40%"  border="4px" borderColor="brand.cambridgeBlue">
+        <Box w="40%"  border="4px" borderColor="brand.cambridgeBlue" h='fit-content'>
           <Text
             fontSize="xl"
             display="flex"
@@ -127,6 +121,13 @@ console.log('CHART NOTES', data);
             mt={2}
           >
             Medication List
+            <IconButton
+              aria-label="Add medication"
+              // onClick={onOpen}
+              icon={<AddIcon />}
+              size="sm"
+              m={2}
+            />
           </Text>
         </Box>
 
