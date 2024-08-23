@@ -23,7 +23,7 @@ const resolvers = {
       return await Provider.findById({ _id: providerId });
     },
     allPatients: async (parent) => {
-      return Patient.find().populate('chartNotes');
+      return Patient.find().populate('chartNotes').populate('pharmacies');
     },
   },
   Mutation: {
