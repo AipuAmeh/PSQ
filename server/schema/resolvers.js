@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
 import ChartNote from "../models/ChartNote.js";
+import Pharmacy from "../models/Pharmacy.js";
 import {
   signPatientToken,
   signProviderToken,
@@ -16,7 +17,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const resolvers = {
   Query: {
     patient: async (parent, { patientId }) => {
-      return await Patient.findById({ _id: patientId }).populate('chartNotes');
+      return await Patient.findById({ _id: patientId }).populate('chartNotes').populate('pharmacies');
     },
     provider: async (parent, { providerId }) => {
       return await Provider.findById({ _id: providerId });
@@ -162,7 +163,25 @@ const resolvers = {
         { new: true }
       )
       return addPatientMedication;
-    }
+    },
+    addPharmacy: async (parent, { patientId, pharmacyName, address, state, zipcode, phone }) => {
+      // add pharmacy to database
+      const pharmacy = await Pharmacy.create({
+        pharmacyName,
+        address,
+        state,
+        zipcode,
+        phone
+      });
+      // add pharmacy to patient and populate output to return data
+      const addPharmacyToPatient = await Patient.findByIdAndUpdate(
+        patientId,
+        { $addToSet: { pharmacies: pharmacy._id }},
+        { new: true}
+      ).populate('pharmacies');
+      return addPharmacyToPatient;
+    },
+
   },
 };
 
