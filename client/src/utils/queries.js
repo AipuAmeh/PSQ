@@ -26,6 +26,14 @@ export const QUERY_CURRENT_PATIENT = gql`
         subject
         noteText
       }
+      medications
+      pharmacies {
+      pharmacyName
+      address
+      state
+      zipcode
+      phone
+      }
     }
   }
 `;
