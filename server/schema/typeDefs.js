@@ -1,5 +1,15 @@
 const typeDefs = `#graphql
 
+type Pharmacy {
+    _id: ID
+    pharmacyName: String
+    address: String
+    state: String
+    zipcode: Int
+    phone: Int
+}
+
+
 type ChartNote {
     _id: ID
     dateCreated: String
@@ -25,6 +35,7 @@ type Patient {
     password: String
     chartNotes: [ChartNote]
     medications: [String]
+    pharmacies: [Pharmacy]
 }
 
 type patientAuth {
@@ -54,6 +65,7 @@ type Mutation {
     deletePatientAccount(_id: ID!): Patient
     addChartNoteToPatient(patientId: ID!, dateCreated: String!, subject: String!, noteText: String!): Patient
     addMedication(patientId: ID!, medications: String): Patient
+    addPharmacy(patientId: ID!, pharmacyName: String!, address: String!, state: String!, zipcode: Int!, phone: Int!): Patient
 }
 `;
 
