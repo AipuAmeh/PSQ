@@ -142,15 +142,53 @@ export const DELETE_ACCOUNT = gql`
 `;
 
 export const ADD_PATIENT_NOTE = gql`
-  mutation addChartNoteToPatient($patientId: ID!, $dateCreated: String!, $subject: String!, $noteText: String!) {
-    addChartNoteToPatient(patientId: $patientId, dateCreated: $dateCreated, subject: $subject, noteText: $noteText){
-   _id
-   chartNotes {
-   dateCreated
-   subject
-   noteText
-   }
+  mutation addChartNoteToPatient(
+    $patientId: ID!
+    $dateCreated: String!
+    $subject: String!
+    $noteText: String!
+  ) {
+    addChartNoteToPatient(
+      patientId: $patientId
+      dateCreated: $dateCreated
+      subject: $subject
+      noteText: $noteText
+    ) {
+      _id
+      chartNotes {
+        dateCreated
+        subject
+        noteText
+      }
     }
   }
+`;
 
-`
+export const ADD_PHARMACY = gql`
+  mutation addPharmacy(
+  $patientId: ID!
+  $pharmacyName: String!
+  $address: String!
+  $state: String!
+  $zipcode: Int!
+  $phone: Int!
+  ) {
+  addPharmacy(
+  patientId: $patientId
+  pharmacyName: $pharmacyName
+  address: $address
+  state: $state
+  zipcode: $zipcode
+  phone: $phone
+  ) {
+  _id
+  pharmacies{
+  pharmacyName
+  address
+  state
+  zipcode
+  phone
+  }
+  }
+  }
+`;

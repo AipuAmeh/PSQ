@@ -294,7 +294,6 @@ const SignupForm = () => {
       <Center>
         <Button
           mt={6}
-          size="lg"
           onClick={handleSubmit}
           bg="brand.callToActionButtons"
         >
