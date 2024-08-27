@@ -18,6 +18,7 @@ import theme from "./Themes.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Contact from "./pages/Contact.jsx";
 import PatientPage from "./pages/PatientPage.jsx";
+import AddPharmacy from "./pages/AddPharmacy.jsx"
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: '/patient/:id',
         element: <PatientPage />
+      },
+      {
+        path: '/:id/add-pharmacy',
+        element: <AddPharmacy />
       }
     ],
   },
