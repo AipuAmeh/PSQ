@@ -171,7 +171,7 @@ export const ADD_PHARMACY = gql`
   $address: String!
   $state: String!
   $zipcode: Int!
-  $phone: Int!
+  $phone: String!
   ) {
   addPharmacy(
   patientId: $patientId

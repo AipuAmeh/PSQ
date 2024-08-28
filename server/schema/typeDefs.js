@@ -6,7 +6,7 @@ type Pharmacy {
     address: String
     state: String
     zipcode: Int
-    phone: Int
+    phone: String
 }
 
 
@@ -65,7 +65,7 @@ type Mutation {
     deletePatientAccount(_id: ID!): Patient
     addChartNoteToPatient(patientId: ID!, dateCreated: String!, subject: String!, noteText: String!): Patient
     addMedication(patientId: ID!, medications: String): Patient
-    addPharmacy(patientId: ID!, pharmacyName: String!, address: String!, state: String!, zipcode: Int!, phone: Int!): Patient
+    addPharmacy(patientId: ID!, pharmacyName: String!, address: String!, state: String!, zipcode: Int!, phone: String!): Patient
 }
 `;
 

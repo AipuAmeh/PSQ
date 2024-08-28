@@ -7,19 +7,18 @@ import {
   Text,
   IconButton,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Stack,
   StackDivider,
   Heading,
+  Button
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import DashboardAvatar from "../components/Avatar";
 import { formattedDate } from "../utils/validation/formattedDate";
 import SinglePatientDemographics from "../components/Patient-Components/SinglePatientDemographics";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import ChartNoteModal from "../components/Provider-Components/ChartNoteModal";
@@ -41,15 +40,12 @@ const PatientPage = () => {
   const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
     variables: { patientId: id },
   });
-console.log('CHART NOTES', data);
+  console.log("DATA", data);
   // check for loading and error states
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const chartNotes = data.patient.chartNotes;
-
-
-  
 
   return (
     <Box>
@@ -69,11 +65,25 @@ console.log('CHART NOTES', data);
             field={"Email"}
             value={data.patient.email}
           />
+                    {data.patient.pharmacies[0] == undefined ? (
+            <>
+              <Link to={`/${data.patient._id}/add-pharmacy`}>
+                <Button size="md" bg="brand.accentBtns" w='100%'>
+                  Add Pharmacy
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <SinglePatientDemographics
+              field="Pharmacy"
+              value={`${data.patient.pharmacies[0].pharmacyName} ${data.patient.pharmacies[0].address}, ${data.patient.pharmacies[0].state}, ${data.patient.pharmacies[0].zipcode}`}
+            />
+          )}
         </Box>
       </Box>
 
       <Flex gap={24} justifyContent="center" mb={4}>
-      <Box w="40%"  border="4px" borderColor="brand.cambridgeBlue" >
+        <Box w="40%" border="4px" borderColor="brand.cambridgeBlue">
           <Text
             display="flex"
             justifyContent="center"
@@ -112,7 +122,12 @@ console.log('CHART NOTES', data);
             );
           })}
         </Box>
-        <Box w="40%"  border="4px" borderColor="brand.cambridgeBlue" h='fit-content'>
+        <Box
+          w="40%"
+          border="4px"
+          borderColor="brand.cambridgeBlue"
+          h="fit-content"
+        >
           <Text
             fontSize="xl"
             display="flex"
@@ -130,7 +145,6 @@ console.log('CHART NOTES', data);
             />
           </Text>
         </Box>
-
       </Flex>
     </Box>
   );

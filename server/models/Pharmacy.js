@@ -22,8 +22,9 @@ const pharmacySchema = new Schema({
     trim: true,
   },
   phone: {
-    type: Number,
+    type: String,
     required: true,
+    maxlength: 10,
     trim: true,
   },
 });
