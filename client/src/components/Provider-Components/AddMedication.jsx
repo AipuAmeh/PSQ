@@ -1,9 +1,9 @@
 import { CheckIcon, AddIcon } from "@chakra-ui/icons";
-import { Box, IconButton, Input, ListItem, UnorderedList } from "@chakra-ui/react";
+import { Box, IconButton, Input, ListItem, UnorderedList,   VisuallyHidden, VisuallyHiddenInput } from "@chakra-ui/react";
 import { useState } from "react";
 
 const AddMedication = () => {
-  // const [addMed, setAddMeds] = useState(false);
+  const [addMed, setAddMeds] = useState(false);
   // const [formState, setFormState] = useState({
   //   Medication: field === "Medication" ? value : "",
   // });
@@ -13,15 +13,26 @@ const AddMedication = () => {
   //     [field]: e.target.value,
   //   });
   // };
+
+  const onClickMed = () => {
+    setAddMeds(true);
+  }
   return (
     <Box>
-    <IconButton
-  aria-label="Add medication"
-//   onClick={onOpen}
-  icon={<AddIcon />}
-  size="sm"
-  m={2}
-/>
+                {addMed ? (
+<VisuallyHidden><IconButton
+onClick={onClickMed}
+aria-label="Add medication"
+icon={<AddIcon />}
+size="sm"
+m={2}/></VisuallyHidden>
+            ): <IconButton
+            onClick={onClickMed}
+            aria-label="Add medication"
+            icon={<AddIcon />}
+            size="sm"
+            m={2}/>}
+
 {/* {addMed ? (
 <Box>
 <Input value={formState[field]} name="Medication" onChange={handleChange} type="text" />

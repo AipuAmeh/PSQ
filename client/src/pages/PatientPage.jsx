@@ -11,7 +11,8 @@ import {
   Stack,
   StackDivider,
   Heading,
-  Button
+  Button,
+
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import DashboardAvatar from "../components/Avatar";
@@ -19,7 +20,7 @@ import { formattedDate } from "../utils/validation/formattedDate";
 import SinglePatientDemographics from "../components/Patient-Components/SinglePatientDemographics";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import ChartNoteModal from "../components/Provider-Components/ChartNoteModal";
 import AddMedication from "../components/Provider-Components/AddMedication";
@@ -47,6 +48,7 @@ const PatientPage = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   const chartNotes = data.patient.chartNotes;
+
 
   return (
     <Box>
@@ -138,8 +140,9 @@ const PatientPage = () => {
             mt={2}
           >
             Medication List
-            <AddMedication />
+            <AddMedication/>
           </Text>
+
         </Box>
       </Flex>
     </Box>
