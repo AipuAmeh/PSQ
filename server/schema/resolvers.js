@@ -134,7 +134,7 @@ const resolvers = {
     },
     addChartNoteToPatient: async (
       parent,
-      { patientId, dateCreated, subject, noteText }
+      { patientId, dateCreated, subject, noteText}
     ) => {
       // create chart note
       const chartNote = await ChartNote.create({
@@ -142,6 +142,8 @@ const resolvers = {
         subject,
         noteText,
       });
+
+
       // add chart note to patient
       // populate notes to return chart note values
       const addNoteToPatient = await Patient.findByIdAndUpdate(

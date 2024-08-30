@@ -22,6 +22,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import ChartNoteModal from "../components/Provider-Components/ChartNoteModal";
+import AddMedication from "../components/Provider-Components/AddMedication";
 
 const PatientPage = () => {
   const { id } = useParams();
@@ -53,7 +54,7 @@ const PatientPage = () => {
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
         />
-        <Text mt={2} fontSize="3xl">
+        <Text my={4} fontSize="3xl">
           {data.patient.firstName} {data.patient.lastName}'s Chart
         </Text>
         <Box display="flex" flexDirection="column">
@@ -79,6 +80,7 @@ const PatientPage = () => {
               value={`${data.patient.pharmacies[0].pharmacyName} ${data.patient.pharmacies[0].address}, ${data.patient.pharmacies[0].state}, ${data.patient.pharmacies[0].zipcode}`}
             />
           )}
+          <SinglePatientDemographics field='Pharmacy Number' value={`${data.patient.pharmacies[0].phone}`}/>
         </Box>
       </Box>
 
@@ -136,13 +138,7 @@ const PatientPage = () => {
             mt={2}
           >
             Medication List
-            <IconButton
-              aria-label="Add medication"
-              // onClick={onOpen}
-              icon={<AddIcon />}
-              size="sm"
-              m={2}
-            />
+            <AddMedication />
           </Text>
         </Box>
       </Flex>

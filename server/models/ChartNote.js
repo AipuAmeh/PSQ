@@ -17,7 +17,7 @@ noteText: {
     type: String,
     required: true,
     trim: true,
-}
+},
 });
 
 const ChartNote = model('ChartNote', chartNoteSchema);

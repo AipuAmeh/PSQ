@@ -192,3 +192,19 @@ export const ADD_PHARMACY = gql`
   }
   }
 `;
+
+export const ADD_MED = gql`
+  mutation addMedication(
+  $patientId: ID!
+  $medications: String!
+  ) {
+  addMedication(
+  patientId: $patientId
+  medications: $medications
+  ) {
+  _id
+  medications
+  }
+  }
+`
+

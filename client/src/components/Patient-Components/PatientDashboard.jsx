@@ -74,6 +74,7 @@ const PatientDashboard = () => {
               value={`${data.patient.pharmacies[0].pharmacyName} ${data.patient.pharmacies[0].address}, ${data.patient.pharmacies[0].state}, ${data.patient.pharmacies[0].zipcode}`}
             />
           )}
+          <Demographics _id={currentUser._id} field='Pharmacy Number' value={`${data.patient.pharmacies[0].phone}`}/>
         </Stack>
       </Box>
       <Box h="20em" mt={4}>
