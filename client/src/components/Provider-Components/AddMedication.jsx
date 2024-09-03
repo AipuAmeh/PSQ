@@ -1,60 +1,40 @@
 import { CheckIcon, AddIcon } from "@chakra-ui/icons";
-import { Box, IconButton, Input, ListItem, UnorderedList,   VisuallyHidden, VisuallyHiddenInput } from "@chakra-ui/react";
+import {
+  Box,
+  IconButton,
+  Input,
+  ListItem,
+  UnorderedList,
+  VisuallyHidden,
+  VisuallyHiddenInput,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
-const AddMedication = () => {
+const AddMedication = ({ field, value, _id }) => {
   const [addMed, setAddMeds] = useState(false);
-  // const [formState, setFormState] = useState({
-  //   Medication: field === "Medication" ? value : "",
-  // });
-  // const handleChange = (e) => {
-  //   setFormState({
-  //     ...formState,
-  //     [field]: e.target.value,
-  //   });
-  // };
+  const [formState, setFormState] = useState({
+    Medication: field === "Medication" ? value : "",
+  });
+  const handleChange = (e) => {
+    setFormState({
+      ...formState,
+      [field]: e.target.value,
+    });
+  };
 
   const onClickMed = () => {
     setAddMeds(true);
-  }
+  };
+  // click on add button and hide btn
+  // show input on hide btn with save button
+  // on save, show add btn again and input as list item on section
   return (
     <Box>
-                {addMed ? (
-<VisuallyHidden><IconButton
-onClick={onClickMed}
-aria-label="Add medication"
-icon={<AddIcon />}
-size="sm"
-m={2}/></VisuallyHidden>
-            ): <IconButton
-            onClick={onClickMed}
-            aria-label="Add medication"
-            icon={<AddIcon />}
-            size="sm"
-            m={2}/>}
-
-{/* {addMed ? (
-<Box>
-<Input value={formState[field]} name="Medication" onChange={handleChange} type="text" />
-</Box>
-) : (
-<>
-<UnorderedList>
-<ListItem>{value}</ListItem>
-</UnorderedList>
-</>
-)} */}
-{/* <Box>
-<IconButton 
-          aria-label="Add Medication"
-          icon={addMed ? <AddIcon /> : <CheckIcon />}
-          size="sm"
-          m={2}
-/>
-</Box> */}
-</Box>
-  )
-
+      <UnorderedList>
+        <ListItem>{value}</ListItem>
+      </UnorderedList>
+    </Box>
+  );
 };
 
 export default AddMedication;

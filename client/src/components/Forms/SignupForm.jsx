@@ -106,7 +106,6 @@ const SignupForm = () => {
       const dataResponse = await addPatient({
         variables: { ...formState },
       });
-      console.log("DATA RESPONSE", dataResponse);
       const { token, patient } = dataResponse.data.addPatient;
       if (dataResponse !== null) {
         toast({
@@ -118,7 +117,6 @@ const SignupForm = () => {
         });
       }
       setCreatedPatient(dataResponse.data.addPatient.patient);
-      console.log("CREATED PATIENT FROM FORM", createdPatient);
       // navigate('/dashboard');
       // figure out a way to load date automatically without reload
       window.location.reload();
