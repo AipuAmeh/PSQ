@@ -1,5 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 
+
 // eslint-disable-next-line react/prop-types
 const SinglePatientDemographics = ({field, value}) => {
 return (

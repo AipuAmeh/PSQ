@@ -147,7 +147,7 @@ const Demographics = ({ field, value, _id }) => {
           </>
         )}
         <Box display="flex" flexDirection="row" justifyContent="flex-end">
-          {field == "Email" || field == "Username" || field == "Password" ? (
+          {field == "Email" || field == "Username" || field == "Password" || field == 'Pharmacy' || field == 'Pharmacy Number' ? (
             <IconButton
               lineHeight="32px"
               aria-label="Edit Button"

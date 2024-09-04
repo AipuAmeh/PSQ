@@ -39,6 +39,7 @@ const PatientPage = () => {
     medication: "",
   });
 
+  // if not a provider, return back to homepage
   useEffect(() => {
     if (!isProvider) {
       navigate("/");
@@ -71,7 +72,6 @@ const PatientPage = () => {
   };
 
   const onSubmit = async () => {
-    console.log("MEDICATION FORM STATE:", formState);
     try {
       const medResponse = await addMedication({
         variables: {
@@ -79,8 +79,9 @@ const PatientPage = () => {
           patientId: id,
         },
       });
-      console.log("MED RESPONSE", medResponse);
       setAddMeds(false);
+      setFormState('');
+      return medResponse;
     } catch (error) {
       console.log(error);
     }
@@ -128,7 +129,12 @@ const PatientPage = () => {
       </Box>
 
       <Flex gap={24} justifyContent="center" mb={4}>
-        <Box w="40%" border="4px" borderColor="brand.cambridgeBlue">
+        <Box
+          w="40%"
+          border="4px"
+          borderColor="brand.cambridgeBlue"
+          h="fit-content"
+        >
           <Text
             display="flex"
             justifyContent="center"
@@ -209,14 +215,17 @@ const PatientPage = () => {
                 name="medication"
               />
               <Button onClick={onSubmit}>Save</Button>
+              <Button
+              color='red'
+              onClick={() => setAddMeds(false)}
+              >Cancel</Button>
             </Box>
-          ) : (
-            <UnorderedList>
-              {medications.map((med) => {
-                return <ListItem key={1}>{med}</ListItem>;
-              })}
-            </UnorderedList>
-          )}
+          ) : null}
+          <UnorderedList px={4}>
+            {medications.map((med) => {
+              return <ListItem key={1}>{med}</ListItem>;
+            })}
+          </UnorderedList>
         </Box>
       </Flex>
     </Box>
