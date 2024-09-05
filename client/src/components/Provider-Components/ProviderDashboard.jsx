@@ -8,7 +8,6 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-// import { useState } from "react";
 
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import DashboardAvatar from "../Avatar";
@@ -36,10 +35,6 @@ const ProviderDashboard = () => {
     error: patientError,
     data: patientData,
   } = useQuery(QUERY_ALL_PATIENTS);
-
-  // const [queriedPatientData, setQueriedPatientData] = useState(patientData);
-  
-// i dont have to query all patients, the provider has patients on their page
 
   // checking for loading and error states
   if (loading || patientLoading) return <p>Loading...</p>;

@@ -22,7 +22,7 @@ type Provider {
     providerName: String
     email: String
     password: String
-    patients: [Patient]!
+    patients: [Patient]
 }
 
 type Patient {

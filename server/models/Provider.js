@@ -18,10 +18,6 @@ const providerSchema = new Schema({
         type: String,
         required: true,
         length: 8,
-    },
-    patients: {
-        type: Schema.Types.ObjectId,
-        ref: 'Patient'
     }
 });
 
