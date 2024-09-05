@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Box, Text, } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -11,5 +12,13 @@ return (
 )
 
 };
+
+PatientDetails.propTypes = {
+    firstname: PropTypes.bool.isRequired,
+    lastname: PropTypes.bool.isRequired,
+    email: PropTypes.bool.isRequired,
+    dob: PropTypes.bool.isRequired,
+    id: PropTypes.bool.isRequired
+}
 
 export default PatientDetails;

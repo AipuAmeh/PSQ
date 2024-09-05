@@ -281,11 +281,11 @@ const SignupForm = () => {
                 </InputRightElement> */}
               </Stack>
             </InputGroup>
-            {showChecklist ? (
+            {/* {showChecklist ? (
               <PasswordChecklistComp password={formState.password} />
             ) : (
               false
-            )}
+            )} */}
           </FormControl>
         </Box>
       )}

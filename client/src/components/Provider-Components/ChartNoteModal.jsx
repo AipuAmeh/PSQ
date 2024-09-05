@@ -84,6 +84,7 @@ return (
 };
 
 ChartNoteModal.propTypes = {
+  _id:  PropTypes.bool.isRequired,
     isOpen:  PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired
   };

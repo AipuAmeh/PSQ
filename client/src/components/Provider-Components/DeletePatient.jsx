@@ -16,8 +16,8 @@ const toast = useToast();
         const dataResponse = await deletePatientAccount({
           variables: { _id }
         });
-        console.log(dataResponse);
         navigate('/dashboard');
+        // add reload so list of patients changes
         toast({
           title: "Success",
           description: "Patients's account successfully deleted",
@@ -25,13 +25,14 @@ const toast = useToast();
           duration: 2000,
           isClosable: true,
       });
+      return dataResponse;
       } catch (error) {
         console.log(error);
       }
     }
     return (
-      <Box display='flex' justifyContent='flex-end' m={4}>
-      <Button variant='ghost' borderColor='red.400' onClick={handleSubmit}>Delete Patient Account</Button>
+      <Box display='flex' justifyContent='flex-start' m={4}>
+      <Button variant='ghost' borderColor='brand.coolGray' color='red' onClick={handleSubmit}>Delete Patient Account</Button>
     </Box>
     )
 }
