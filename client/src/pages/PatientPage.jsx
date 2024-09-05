@@ -28,6 +28,8 @@ import { useDisclosure } from "@chakra-ui/react";
 import ChartNoteModal from "../components/Provider-Components/ChartNoteModal";
 import { ADD_MED } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
+import DeletePatient from "../components/Provider-Components/DeletePatient";
+
 
 const PatientPage = () => {
   const { id } = useParams();
@@ -89,6 +91,7 @@ const PatientPage = () => {
 
   return (
     <Box>
+      <DeletePatient _id={id}/>
       <Box display="flex" m="6" flexDirection="column" alignItems="center">
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
@@ -128,7 +131,7 @@ const PatientPage = () => {
         </Box>
       </Box>
 
-      <Flex gap={24} justifyContent="center" mb={4}>
+      <Flex gap={24} justifyContent="center" my={4}>
         <Box
           w="40%"
           border="4px"
