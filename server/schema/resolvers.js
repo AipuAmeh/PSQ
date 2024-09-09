@@ -17,13 +17,15 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const resolvers = {
   Query: {
     patient: async (parent, { patientId }) => {
-      return await Patient.findById({ _id: patientId }).populate('chartNotes').populate('pharmacies');
+      return await Patient.findById({ _id: patientId })
+        .populate("chartNotes")
+        .populate("pharmacies");
     },
     provider: async (parent, { providerId }) => {
       return await Provider.findById({ _id: providerId });
     },
     allPatients: async (parent) => {
-      return Patient.find().populate('chartNotes').populate('pharmacies');
+      return Patient.find().populate("chartNotes").populate("pharmacies");
     },
   },
   Mutation: {
@@ -134,7 +136,7 @@ const resolvers = {
     },
     addChartNoteToPatient: async (
       parent,
-      { patientId, dateCreated, subject, noteText}
+      { patientId, dateCreated, subject, noteText }
     ) => {
       // create chart note
       const chartNote = await ChartNote.create({
@@ -142,7 +144,6 @@ const resolvers = {
         subject,
         noteText,
       });
-
 
       // add chart note to patient
       // populate notes to return chart note values
@@ -152,38 +153,61 @@ const resolvers = {
           $addToSet: { chartNotes: chartNote._id },
         },
         { new: true }
-      ).populate('chartNotes');
+      ).populate("chartNotes");
 
       return addNoteToPatient;
     },
-    addMedication: async (parent, { patientId,medications}) => {
+    addMedication: async (parent, { patientId, medications }) => {
       // find patient by id and update
       const addPatientMedication = await Patient.findByIdAndUpdate(
-       {_id: patientId},
+        { _id: patientId },
         // add medication name to drug list
-        { $addToSet: { medications: medications }},
+        { $addToSet: { medications: medications } },
         { new: true }
-      )
+      );
       return addPatientMedication;
     },
-    addPharmacy: async (parent, { patientId, pharmacyName, address, state, zipcode, phone }) => {
+    addPharmacy: async (
+      parent,
+      { patientId, pharmacyName, address, state, zipcode, phone }
+    ) => {
       // add pharmacy to database
       const pharmacy = await Pharmacy.create({
         pharmacyName,
         address,
         state,
         zipcode,
-        phone
+        phone,
       });
       // add pharmacy to patient and populate output to return data
       const addPharmacyToPatient = await Patient.findByIdAndUpdate(
         patientId,
-        { $addToSet: { pharmacies: pharmacy._id }},
-        { new: true}
-      ).populate('pharmacies');
+        { $addToSet: { pharmacies: pharmacy._id } },
+        { new: true }
+      ).populate("pharmacies");
       return addPharmacyToPatient;
     },
-
+    editChartNote: async (parent, { noteId, dateCreated, subject, noteText}) => {
+      try {
+          // update all aspects of note
+          const updatedFields = {};
+          if (dateCreated !== undefined) updatedFields.dateCreated = dateCreated;
+          if (subject !== undefined) updatedFields.subject = subject;
+          if (noteText !== undefined) updatedFields.noteText = noteText;
+              // find one and update note by noteid
+          const updatedNote = await ChartNote.findByIdAndUpdate(
+            { _id: noteId }, updatedFields,
+            { 
+              new: true, 
+              returnDocument: 'after'
+            },      
+          );
+          return updatedNote;
+      } catch (error) {
+        console.log(error);
+      }
+  
+    }
   },
 };
 
