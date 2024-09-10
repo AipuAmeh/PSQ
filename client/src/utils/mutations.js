@@ -166,45 +166,59 @@ export const ADD_PATIENT_NOTE = gql`
 
 export const ADD_PHARMACY = gql`
   mutation addPharmacy(
-  $patientId: ID!
-  $pharmacyName: String!
-  $address: String!
-  $state: String!
-  $zipcode: Int!
-  $phone: String!
+    $patientId: ID!
+    $pharmacyName: String!
+    $address: String!
+    $state: String!
+    $zipcode: Int!
+    $phone: String!
   ) {
-  addPharmacy(
-  patientId: $patientId
-  pharmacyName: $pharmacyName
-  address: $address
-  state: $state
-  zipcode: $zipcode
-  phone: $phone
-  ) {
-  _id
-  pharmacies{
-  pharmacyName
-  address
-  state
-  zipcode
-  phone
-  }
-  }
+    addPharmacy(
+      patientId: $patientId
+      pharmacyName: $pharmacyName
+      address: $address
+      state: $state
+      zipcode: $zipcode
+      phone: $phone
+    ) {
+      _id
+      pharmacies {
+        pharmacyName
+        address
+        state
+        zipcode
+        phone
+      }
+    }
   }
 `;
 
 export const ADD_MED = gql`
-  mutation addMedication(
-  $patientId: ID!
-  $medications: String!
-  ) {
-  addMedication(
-  patientId: $patientId
-  medications: $medications
-  ) {
-  _id
-  medications
+  mutation addMedication($patientId: ID!, $medications: String!) {
+    addMedication(patientId: $patientId, medications: $medications) {
+      _id
+      medications
+    }
   }
-  }
-`
+`;
 
+export const EDIT_NOTE = gql`
+  mutation editChartNote(
+    $noteId: ID!
+    $dateCreated: String
+    $subject: String
+    $noteText: String
+  ) {
+    editChartNote(
+      noteId: $noteId
+      dateCreated: $dateCreated
+      subject: $subject
+      noteText: $noteText
+    ) {
+      _id
+      dateCreated
+      subject
+      noteText
+    }
+  }
+`;

@@ -6,18 +6,13 @@ import {
   Flex,
   Text,
   IconButton,
-  Card,
-  CardBody,
-  Stack,
-  StackDivider,
-  Heading,
   Button,
   VisuallyHidden,
   UnorderedList,
   ListItem,
   Input,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, } from "@chakra-ui/icons";
 import DashboardAvatar from "../components/Avatar";
 import { formattedDate } from "../utils/validation/formattedDate";
 import SinglePatientDemographics from "../components/Patient-Components/SinglePatientDemographics";
@@ -29,7 +24,7 @@ import ChartNoteModal from "../components/Provider-Components/ChartNoteModal";
 import { ADD_MED } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import DeletePatient from "../components/Provider-Components/DeletePatient";
-
+import ChartNoteDetails from "../components/Provider-Components/ChartNoteDetails";
 
 const PatientPage = () => {
   const { id } = useParams();
@@ -65,7 +60,7 @@ const PatientPage = () => {
     setAddMeds(true);
   };
 
-  const handleChange = (e) => {
+  const handleMedChange = (e) => {
     const { name, value } = e.target;
     setFormState({
       ...formState,
@@ -73,7 +68,7 @@ const PatientPage = () => {
     });
   };
 
-  const onSubmit = async () => {
+  const onMedSubmit = async () => {
     try {
       const medResponse = await addMedication({
         variables: {
@@ -82,7 +77,7 @@ const PatientPage = () => {
         },
       });
       setAddMeds(false);
-      setFormState('');
+      setFormState("");
       return medResponse;
     } catch (error) {
       console.log(error);
@@ -91,7 +86,7 @@ const PatientPage = () => {
 
   return (
     <Box>
-      <DeletePatient _id={id}/>
+      <DeletePatient _id={id} />
       <Box display="flex" m="6" flexDirection="column" alignItems="center">
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
@@ -158,20 +153,7 @@ const PatientPage = () => {
           {chartNotes.map((note) => {
             return (
               <>
-                <Card>
-                  <CardBody>
-                    <Stack divider={<StackDivider />} spacing="4">
-                      <Box>
-                        <Heading size="xs" textTransform="uppercase">
-                          {formattedDate(note.dateCreated)} {note.subject}
-                        </Heading>
-                        <Text pt="2" fontSize="sm">
-                          {note.noteText}
-                        </Text>
-                      </Box>
-                    </Stack>
-                  </CardBody>
-                </Card>
+              <ChartNoteDetails noteId={note._id} dateCreated={note.dateCreated} subject={note.subject} noteText={note.noteText}/>
               </>
             );
           })}
@@ -213,15 +195,14 @@ const PatientPage = () => {
           {addMed ? (
             <Box display="flex" p={4} gap={2}>
               <Input
-                onChange={handleChange}
+                onChange={handleMedChange}
                 value={formState.medication}
                 name="medication"
               />
-              <Button onClick={onSubmit}>Save</Button>
-              <Button
-              color='red'
-              onClick={() => setAddMeds(false)}
-              >Cancel</Button>
+              <Button onClick={onMedSubmit}>Save</Button>
+              <Button color="red" onClick={() => setAddMeds(false)}>
+                Cancel
+              </Button>
             </Box>
           ) : null}
           <UnorderedList px={4}>

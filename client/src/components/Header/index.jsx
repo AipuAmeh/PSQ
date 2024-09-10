@@ -25,7 +25,7 @@ const Header = () => {
 
   // add sticy position?
   return (
-    <Flex minWidth="max-content" p={4} boxShadow="lg" alignItems='center'>
+    <Flex minWidth="max-content" p={4} boxShadow="lg" alignItems='center' className='header'>
       <Box>
         {" "}
         <Link to="/">

@@ -32,13 +32,13 @@ const toast = useToast();
     }
     return (
       <Box display='flex' justifyContent='flex-start' m={4}>
-      <Button variant='ghost' borderColor='brand.coolGray' color='red' onClick={handleSubmit}>Delete Patient Account</Button>
+      <Button variant='ghost' color='red' onClick={handleSubmit}>Delete Patient Account</Button>
     </Box>
     )
 }
 
 DeletePatient.propTypes = {
-  _id: PropTypes.bool.isRequired
+  _id: PropTypes.string.isRequired
 };
 
 export default DeletePatient;

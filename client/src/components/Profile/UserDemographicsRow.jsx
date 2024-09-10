@@ -90,7 +90,6 @@ const Demographics = ({ field, value, _id }) => {
           }
         }
       } 
-      console.log('UPDATED FIELDS', updatedFields);
       try {
         if (updatedFields) {
           console.log('Sending mutation with variables:', {
@@ -130,8 +129,7 @@ const Demographics = ({ field, value, _id }) => {
         </Text>
         {updateField ? (
           <Box>
-            <Input
-        
+            <Input       
               value={formState[field]}
               h="32px"
               variant="filled"
