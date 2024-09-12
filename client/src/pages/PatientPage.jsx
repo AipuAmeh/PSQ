@@ -49,6 +49,7 @@ const PatientPage = () => {
     variables: { patientId: id },
   });
 
+
   const [addMedication, { error: medError }] = useMutation(ADD_MED);
   // check for loading and error states
   if (loading) return <p>Loading...</p>;
@@ -56,6 +57,7 @@ const PatientPage = () => {
 
   const chartNotes = data.patient.chartNotes;
   const medications = data.patient.medications;
+
   const onClickMed = () => {
     setAddMeds(true);
   };

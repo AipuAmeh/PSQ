@@ -16,36 +16,61 @@ import {
 import { EditIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { formattedDate } from "../../utils/validation/formattedDate";
+import { useMutation } from "@apollo/client";
+import { EDIT_NOTE } from "../../utils/mutations";
 
 const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
   const [editNote, setEditNote] = useState(false);
   // just working on editing the note text for now
   const [formState, setFormState] = useState({
-    noteText: '',
+    noteText: "",
   });
+  const [editChartNote] = useMutation(EDIT_NOTE);
 
   const clickNoteEdit = () => {
-    setEditNote(true);
+    setEditNote(!false);
   };
 
   const handleNoteChange = (e) => {
     const { name, value } = e.target;
     setFormState({
       ...formState,
-      [name]: value
+      [name]: value,
     });
-  }; 
-
-  const clickNoteSave = () => {
-    setEditNote(false);
-    console.log(formState);
   };
 
+  const clickNoteSave = async () => {
+    setEditNote(false);
+    console.log(formState);
+  
+    if (formState.noteText === noteText) {
+      setEditNote(!editNote);
+      return;
+    }
+ 
+    if (formState.noteText === "") {
+      return;
+    } else if (formState.noteText === noteText) {
+      return;
+    }
 
+    try {
+      const result = await editChartNote({
+        variables: {
+          noteId,
+          ...formState
+        }
+      });
+      setEditNote(false)
+      console.log('RESULT:', result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box>
-      <Card>
+      <Card key={noteId}>
         <CardBody>
           <Stack divider={<StackDivider />} spacing="4">
             <Box>
@@ -54,7 +79,12 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
               </Heading>
               <Flex>
                 {editNote ? (
-                  <Input size="sm" onChange={handleNoteChange} value={formState.noteText} name='noteText' />
+                  <Input
+                    size="sm"
+                    onChange={handleNoteChange}
+                    value={formState.noteText}
+                    name="noteText"
+                  />
                 ) : (
                   <Text pt="2" fontSize="sm">
                     {noteText}
@@ -96,7 +126,7 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
 };
 
 ChartNoteDetails.propTypes = {
-  noteId: PropTypes.bool.isRequired,
+  noteId: PropTypes.string.isRequired,
   dateCreated: PropTypes.string.isRequired,
   subject: PropTypes.string.isRequired,
   noteText: PropTypes.string.isRequired,

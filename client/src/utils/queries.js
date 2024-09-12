@@ -22,6 +22,7 @@ export const QUERY_CURRENT_PATIENT = gql`
       password
       dob
       chartNotes {
+        _id
         dateCreated
         subject
         noteText

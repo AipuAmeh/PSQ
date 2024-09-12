@@ -156,6 +156,7 @@ export const ADD_PATIENT_NOTE = gql`
     ) {
       _id
       chartNotes {
+        _id
         dateCreated
         subject
         noteText

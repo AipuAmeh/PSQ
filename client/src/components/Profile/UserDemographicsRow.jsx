@@ -110,11 +110,8 @@ const Demographics = ({ field, value, _id }) => {
           })
           return result
          
-        } else {
-          console.log('im the problem');
         }
       } catch (error) {
-        console.log('ERROR UPDATING ACCOUNT');
         console.log(error.message);
       }
       // no values changed when clicked don't do anything
