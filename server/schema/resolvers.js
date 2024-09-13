@@ -206,7 +206,10 @@ const resolvers = {
       } catch (error) {
         console.log(error);
       }
-  
+    },
+    deleteChartNote: async (parent, { noteId }) => {
+      const deletedNote = ChartNote.findByIdAndDelete({ _id: noteId });
+      return deletedNote;
     }
   },
 };
