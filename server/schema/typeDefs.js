@@ -67,6 +67,7 @@ type Mutation {
     addMedication(patientId: ID!, medications: String): Patient
     addPharmacy(patientId: ID!, pharmacyName: String!, address: String!, state: String!, zipcode: Int!, phone: String!): Patient
     editChartNote(noteId: ID!, dateCreated: String, subject: String, noteText: String): ChartNote
+    deleteChartNote(noteId: ID!): ChartNote
 }
 `;
 

@@ -223,3 +223,11 @@ export const EDIT_NOTE = gql`
     }
   }
 `;
+
+export const DELETE_NOTE = gql`
+  mutation deleteChartNote($noteId: ID!) {
+    deleteChartNote(noteId: $noteId) {
+      _id
+    }
+  }
+`
