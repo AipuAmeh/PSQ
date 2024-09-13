@@ -17,7 +17,8 @@ import { EditIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { formattedDate } from "../../utils/validation/formattedDate";
 import { useMutation } from "@apollo/client";
-import { EDIT_NOTE } from "../../utils/mutations";
+import { EDIT_NOTE, DELETE_NOTE } from "../../utils/mutations";
+
 
 const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
   const [editNote, setEditNote] = useState(false);
@@ -26,6 +27,7 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
     noteText: "",
   });
   const [editChartNote] = useMutation(EDIT_NOTE);
+  const [deleteChartNote] = useMutation(DELETE_NOTE);
 
   const clickNoteEdit = () => {
     setEditNote(!false);
@@ -62,7 +64,33 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
         }
       });
       setEditNote(false)
-      console.log('RESULT:', result);
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onClickDelete = async () => {
+    try {
+      const deletedNote = await deleteChartNote({
+        variables: { noteId }
+      });
+      // what can i do to update automatically on delete
+      // update cache directly
+      // update: (cache) => {
+      //   // Read the existing data from the cache
+      //   const { notes } = cache.readQuery({ query: GET_NOTES_QUERY });
+
+      //   // Remove the deleted note from the cache
+      //   const updatedNotes = notes.filter(note => note.id !== noteId);
+
+      //   // Write the updated notes back to the cache
+      //   cache.writeQuery({
+      //     query: GET_NOTES_QUERY,
+      //     data: { notes: updatedNotes },
+      //   });
+      // },
+     return deletedNote;
     } catch (error) {
       console.log(error);
     }
@@ -114,6 +142,7 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
                     size="sm"
                     icon={<DeleteIcon />}
                     color="red"
+                    onClick={onClickDelete}
                   />
                 </ButtonGroup>
               </Flex>
