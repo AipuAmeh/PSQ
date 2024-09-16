@@ -52,6 +52,7 @@ type Query {
     patient(patientId: ID!): Patient
     provider(providerId: ID!): Provider 
     allPatients: [Patient]
+    allNotes: [ChartNote]
 }
 
 type Mutation {

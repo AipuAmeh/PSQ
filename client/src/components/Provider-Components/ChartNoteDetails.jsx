@@ -16,11 +16,13 @@ import {
 import { EditIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { formattedDate } from "../../utils/validation/formattedDate";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { EDIT_NOTE, DELETE_NOTE } from "../../utils/mutations";
+import { QUERY_ALL_NOTES } from "../../utils/queries";
 
 
-const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
+
+const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId}) => {
   const [editNote, setEditNote] = useState(false);
   // just working on editing the note text for now
   const [formState, setFormState] = useState({
@@ -28,6 +30,8 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
   });
   const [editChartNote] = useMutation(EDIT_NOTE);
   const [deleteChartNote] = useMutation(DELETE_NOTE);
+
+
 
   const clickNoteEdit = () => {
     setEditNote(!false);
@@ -77,19 +81,6 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId }) => {
       });
       // what can i do to update automatically on delete
       // update cache directly
-      // update: (cache) => {
-      //   // Read the existing data from the cache
-      //   const { notes } = cache.readQuery({ query: GET_NOTES_QUERY });
-
-      //   // Remove the deleted note from the cache
-      //   const updatedNotes = notes.filter(note => note.id !== noteId);
-
-      //   // Write the updated notes back to the cache
-      //   cache.writeQuery({
-      //     query: GET_NOTES_QUERY,
-      //     data: { notes: updatedNotes },
-      //   });
-      // },
      return deletedNote;
     } catch (error) {
       console.log(error);

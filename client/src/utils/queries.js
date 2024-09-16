@@ -52,3 +52,14 @@ export const QUERY_ALL_PATIENTS = gql`
     }
   }
 `;
+
+export const QUERY_ALL_NOTES = gql`
+  query getAllNotes {
+    allNotes {
+      _id
+      subject
+      noteText
+      dateCreated
+    }
+  }
+`;
