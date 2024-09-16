@@ -16,9 +16,9 @@ import {
 import { EditIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { formattedDate } from "../../utils/validation/formattedDate";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { EDIT_NOTE, DELETE_NOTE } from "../../utils/mutations";
-import { QUERY_ALL_NOTES } from "../../utils/queries";
+
 
 
 
