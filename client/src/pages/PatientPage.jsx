@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_CURRENT_PATIENT } from "../utils/queries";
+import { QUERY_ALL_NOTES, QUERY_CURRENT_PATIENT } from "../utils/queries";
 import {
   Box,
   Flex,
@@ -47,6 +47,7 @@ const PatientPage = () => {
   // query current patient
   const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
     variables: { patientId: id },
+    pollInterval: 500,
   });
 
 

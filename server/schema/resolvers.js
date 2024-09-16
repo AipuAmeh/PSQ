@@ -27,6 +27,9 @@ const resolvers = {
     allPatients: async (parent) => {
       return Patient.find().populate("chartNotes").populate("pharmacies");
     },
+    allNotes: async (parent) => {
+      return ChartNote.find()
+    }
   },
   Mutation: {
     addPatient: async (
