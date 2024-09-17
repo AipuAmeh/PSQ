@@ -45,6 +45,7 @@ const PatientPage = () => {
   });
 
   // query current patient
+  // use poll interval to "refresh" with any updates to patient page
   const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
     variables: { patientId: id },
     pollInterval: 500,

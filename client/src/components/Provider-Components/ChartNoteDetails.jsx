@@ -79,8 +79,6 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId}) => {
       const deletedNote = await deleteChartNote({
         variables: { noteId }
       });
-      // what can i do to update automatically on delete
-      // update cache directly
      return deletedNote;
     } catch (error) {
       console.log(error);

@@ -17,7 +17,6 @@ const toast = useToast();
           variables: { _id }
         });
         navigate('/dashboard');
-        // add reload so list of patients changes
         toast({
           title: "Success",
           description: "Patients's account successfully deleted",
