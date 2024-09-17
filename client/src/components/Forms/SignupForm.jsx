@@ -16,7 +16,6 @@ import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PATIENT } from "../../utils/mutations";
-import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 // import PasswordChecklistComp from "../components/Validation/PasswordChecklist";
 import { isInvalidEmail } from "../../utils/validation/invalidEmail";
@@ -117,9 +116,7 @@ const SignupForm = () => {
         });
       }
       setCreatedPatient(dataResponse.data.addPatient.patient);
-      // navigate('/dashboard');
-      // figure out a way to load date automatically without reload
-      window.location.reload();
+      navigate('/dashboard');
       return { token, patient };
     } catch (error) {
       console.log(error.message);

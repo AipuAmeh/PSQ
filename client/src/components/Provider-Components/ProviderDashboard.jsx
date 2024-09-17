@@ -34,7 +34,9 @@ const ProviderDashboard = () => {
     loading: patientLoading,
     error: patientError,
     data: patientData,
-  } = useQuery(QUERY_ALL_PATIENTS);
+  } = useQuery(QUERY_ALL_PATIENTS, {
+    pollInterval: 500
+  });
 
   // checking for loading and error states
   if (loading || patientLoading) return <p>Loading...</p>;
