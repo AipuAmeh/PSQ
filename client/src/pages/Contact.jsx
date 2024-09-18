@@ -1,7 +1,6 @@
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
   FormHelperText,
   Box,
   Input,
@@ -9,6 +8,7 @@ import {
   Text,
   Button,
   useToast,
+  Flex,
 } from "@chakra-ui/react";
 import { isInvalidEmail } from "../utils/validation/invalidEmail";
 import { useState } from "react";
@@ -20,12 +20,12 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  // add form error handling/validation
 
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (name === '' || email === '' || message === ''){
+      // form error handling/validation
+    if (name === "" || email === "" || message === "") {
       toast({
         title: "Error",
         description: "Please complete all fields",
@@ -33,7 +33,6 @@ const Contact = () => {
         duration: 2000,
         isClosable: true,
       });
-      
       return;
     }
     if (isInvalidEmail(email)) {
@@ -74,50 +73,63 @@ const Contact = () => {
     }
   };
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      px={10}
-      my={6}
-    >
-      <Text fontSize="3xl">Contact Us</Text>
-      <FormControl w="80%" isRequired >
-        <FormLabel mt={4}>Name</FormLabel>
-        <Input
-          type="text"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          placeholder="First and Last name"
-        />
-        <FormLabel mt={4}>Email address</FormLabel>
-        <Input
-          type="email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-      
-          }}
-          placeholder="Email"
-        />
-        <FormHelperText>We'll never share your email.</FormHelperText>
-        <FormLabel mt={4}>Message</FormLabel>
-        <Textarea
-          type="text"
-          value={message}
-          onChange={(e) => {
-            setMessage(e.target.value);
-    
-          }}
-          placeholder="How Can We Help?"
-        ></Textarea>
-      </FormControl>
-      <Button mt={6} bg="brand.callToActionButtons" onClick={handleFormSubmit}>
-        Send Message
-      </Button>
-    </Box>
+    <Flex p={5}>
+      <Box
+        w="40%"
+        display="flex"
+        justifyContent="flex-start"
+        flexDirection="column"
+        mx="3em"
+      >
+        <Text fontSize="1.8em" mt={8}>
+          Contact Us
+        </Text>
+        <Text fontSize="1em" mt="9em">
+          Leave us a message. We will be sure to get back to you.
+        </Text>
+      </Box>
+
+      <Box display="flex" flexDirection="column" w="60%" px={4} mt="5em">
+        <FormControl isRequired w="80%">
+          <FormLabel mt={4}>Name</FormLabel>
+          <Input
+            type="text"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            placeholder="First and Last name"
+          />
+          <FormLabel mt={4}>Email address</FormLabel>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="Email"
+          />
+          <FormHelperText>We'll never share your email.</FormHelperText>
+          <FormLabel mt={4}>Message</FormLabel>
+          <Textarea
+            type="text"
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
+            placeholder="How Can We Help?"
+          ></Textarea>
+        </FormControl>
+        <Button
+          w="fit-content"
+          mt={6}
+          bg="brand.callToActionButtons"
+          onClick={handleFormSubmit}
+        >
+          Send Message
+        </Button>
+      </Box>
+    </Flex>
   );
 };
 

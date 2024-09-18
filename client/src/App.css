@@ -1,6 +1,10 @@
 #root {
   max-height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .logo {
   height: 6em;
@@ -65,4 +69,11 @@ text-decoration: underline;
 
 .header {
   position: sticky;
+  width: 100%;
+}
+
+.footer {
+  position: sticky;
+  width: 100%;
+  margin-top: auto;
 }

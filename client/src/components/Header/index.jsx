@@ -39,7 +39,7 @@ const Header = () => {
         </Link>
       </Box>
       <Spacer gap={15} />
-      <Box display="flex" justifyContent="flex-end" gap={2} mr={4}>
+      <Box display="flex" justifyContent="flex-end" gap={5} mr={4}>
         {isLoggedIn() ? (
           <Box display="flex" flexDirection="row" gap={2} >
             <Button onClick={logout} cursor='pointer' bg='brand.callToActionButtons'>Logout</Button>
@@ -59,6 +59,16 @@ const Header = () => {
             </Text>
           </>
         )}
+                  <Text fontSize="md" lineHeight='40px'>
+              <Link to="/#">
+               About
+              </Link>
+            </Text>
+            <Text fontSize="md" lineHeight='40px'>
+              <Link to="/#">
+               Services
+              </Link>
+            </Text>
           <Text fontSize="md" lineHeight='40px'>
               <Link to="/contact">
                Contact
