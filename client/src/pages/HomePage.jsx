@@ -5,10 +5,8 @@ import { Icon } from "@chakra-ui/react";
 import { PiStethoscopeDuotone } from "react-icons/pi";
 import { BsClockHistory } from "react-icons/bs";
 import { FaHandHoldingHeart } from "react-icons/fa6";
-import { useCurrentUserContext } from "../utils/context/CurrentUser";
 
 const HomePage = () => {
-  // const { isLoggedIn } = useCurrentUserContext();
   return (
     <Flex alignItems="center" flexDirection="column">
       <Box
@@ -19,22 +17,20 @@ const HomePage = () => {
         m={6}
       >
         <Stack pt={10} gap={9}>
-          <Text fontSize="6xl" textShadow="3px 3px #93B48B">
+          <Text fontSize="5em" textShadow="3px 3px #93B48B">
             PSYCHQUICONSULT
           </Text>
-          <Text fontSize="xl">
+          <Text fontSize="1em">
             Bridging the gap in psychiatric management through consultation and
             integration.
           </Text>
 
-            <Link to="/contact">
+          <Link to="/contact">
             <Button size="md" w="fit-content" bg="brand.callToActionButtons">
-               Book Consultation Now!
-              </Button>
-            </Link>   
-
+              Book Your Consultation Now!
+            </Button>
+          </Link>
         </Stack>
-
         <Image
           boxSize="15%"
           src="src/images/logo-trans.png"
@@ -55,15 +51,15 @@ const HomePage = () => {
         flexDirection="column"
         bg="brand.homePageLoginSection"
       >
-        <Text fontSize="2xl" align="center">
+        <Text fontSize="1.8em" align="center">
           New Here? Login or Sign up
         </Text>
 
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
-          <Button bg="brand.homePageLoginBtns" size="md">
+          <Button bg="brand.homePageLoginBtns" size="lg" px={8}>
             Login
           </Button>
-          <Button bg="brand.homePageLoginBtns" size="md">
+          <Button bg="brand.homePageLoginBtns" size="lg" px={7}>
             Sign up
           </Button>
         </Box>
@@ -77,26 +73,26 @@ const HomePage = () => {
         p={4}
         className="how-we-help"
       >
-        <Text fontSize="2xl" m={6}>
+        <Text fontSize="1.8em" m={6}>
           How We Help
         </Text>
-        <Stack spacing={8} direction="row" mb={6}>
-          <Features
-            icon={<Icon as={PiStethoscopeDuotone} boxSize={8} />}
+        <Flex spacing={8} direction="row" mb={6} gap={5} px={6} py={6}>
+          <Features 
+            icon={<Icon as={PiStethoscopeDuotone} boxSize={6} />}
             title="Consultations"
             desc="Speak directly to a healthcare provider at  your own convenience."
           />
           <Features
-            icon={<Icon as={BsClockHistory} boxSize={8} />}
+            icon={<Icon as={BsClockHistory} boxSize={6} />}
             title="Timely Responses"
-            desc="We respond to e-consultations from your Primary Care Providers so you don't have to."
+            desc="Guaranteed quick responses between us and your Primary Care Provider."
           />
           <Features
-            icon={<Icon as={FaHandHoldingHeart} boxSize={8} />}
+            icon={<Icon as={FaHandHoldingHeart} boxSize={6} />}
             title="Care"
-            desc="Utilize a customized treatment plan to meet your individual mental health needs."
+            desc="Utilize a customized treatment plan to meet your individual needs."
           />
-        </Stack>
+        </Flex>
       </Box>
     </Flex>
   );
