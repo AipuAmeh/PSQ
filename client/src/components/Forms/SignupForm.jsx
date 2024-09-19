@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import {
   FormControl,
   FormLabel,
@@ -41,15 +41,14 @@ const SignupForm = () => {
     email: false,
     password: false,
   });
-  const [show, setShow] = React.useState(false);
-  const [showChecklist, setShowChecklist] = useState(false);
+  // const [show, setShow] = React.useState(false);
+  // const [showChecklist, setShowChecklist] = useState(false);
   const [input, setInput] = useState("");
-  const [createdPatient, setCreatedPatient] = useState();
-  const handlePasswordClick = () => setShow(!show);
+  // const handlePasswordClick = () => setShow(!show);
 
-  const showListOnClick = () => {
-    setShowChecklist(true);
-  };
+  // const showListOnClick = () => {
+  //   setShowChecklist(true);
+  // };
 
   const [addPatient, { error, data }] = useMutation(ADD_PATIENT);
 
@@ -115,7 +114,6 @@ const SignupForm = () => {
           isClosable: true,
         });
       }
-      setCreatedPatient(dataResponse.data.addPatient.patient);
       navigate('/dashboard');
       return { token, patient };
     } catch (error) {
@@ -125,7 +123,7 @@ const SignupForm = () => {
   return (
     <Box
       className="signup-form"
-      w="100%"
+      w="60%"
       display="flex"
       justifyContent="center"
       flexDirection="column"
@@ -256,10 +254,10 @@ const SignupForm = () => {
                 <Input
                   placeholder="******"
                   name="password"
-                  type={show ? "text" : "password"}
+                  // type={show ? "text" : "password"}
                   onChange={handleChange}
                   value={formState.password}
-                  onClick={showListOnClick}
+                  // onClick={showListOnClick}
                 />
 
                 {/* <InputRightElement width="4.5rem">

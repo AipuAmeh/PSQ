@@ -6,6 +6,7 @@ import { PiStethoscopeDuotone } from "react-icons/pi";
 import { BsClockHistory } from "react-icons/bs";
 import { FaHandHoldingHeart } from "react-icons/fa6";
 
+// add links to homepage buttons
 const HomePage = () => {
   return (
     <Flex alignItems="center" flexDirection="column">

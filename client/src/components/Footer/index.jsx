@@ -1,6 +1,7 @@
 import { Box, Text, Image, Spacer, Flex, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+// for dashboard link, make clickable only when logged in
 const Footer = () => {
   return (
     <Box bg='brand.footer' className='footer'>
@@ -18,7 +19,7 @@ const Footer = () => {
             <Link to='/'>  <li>HOME</li></Link>
           
             <Link to='#'>  <li>ABOUT</li></Link>
-            <Link to='/dashboard'>  <li>DASHBOARD</li></Link>
+            <Link to='#'>  <li>DASHBOARD</li></Link>
             <Link to='/contact'>  <li>CONTACT</li></Link>
             <Link to='#'>  <li>SERVICES</li></Link>
           </ul>

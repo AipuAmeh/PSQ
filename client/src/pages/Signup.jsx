@@ -121,16 +121,13 @@ const Signup = () => {
   };
 
   return (
-    <Box
+    <Center
       className="signup-form"
-      w="100%"
       display="flex"
-      justifyContent="center"
       flexDirection="column"
-      mb={6}
-      px={10}
+      justifyItems="center"
     >
-      <Text fontSize="2xl" display="flex" justifyContent="center" my={6}>
+      <Text fontSize="1.8em" mt={8}>
         Sign Up
       </Text>
 
@@ -139,18 +136,14 @@ const Signup = () => {
           <Link to="/"></Link>
         </p>
       ) : (
-        <Box mx={4}>
-          <Text fontSize="xl" m={8}>
-            General Information
-          </Text>
+        <Box w='60%'>
           <FormControl
             isInvalid={formErrors.firstName}
             isRequired
-            mt={4}
+            mt='4em'
             display="flex"
             flexDirection="row"
             justifyContent="center"
-            w="100%"
           >
             <Stack mr={3} flex="1">
               <FormLabel>First name</FormLabel>
@@ -218,9 +211,6 @@ const Signup = () => {
               ) : null}
             </Stack>
           </FormControl>
-          <Text fontSize="xl" m={8}>
-            Account Information
-          </Text>
 
           
           <FormControl
@@ -296,7 +286,7 @@ const Signup = () => {
         </Button>
       </Center>
       {error ? <div>{error.message}</div> : null}
-    </Box>
+    </Center>
   );
 };
 
