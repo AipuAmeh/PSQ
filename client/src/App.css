@@ -44,15 +44,18 @@
 
 .footer-list{
   list-style-type: none;
+  font-size: 0.85em;
+  line-height: 1.5em;
 }
 
 .sources-list {
   list-style-type: none;
+  font-size: 0.85em;
 }
 
 .vertical-line {
   border-left: 4px solid #93B48B;
-  height: 85px;
+  height: 110px;
 }
 
 .reset-password-link {

@@ -8,7 +8,7 @@ const Features = ({ title, desc, icon, ...rest }) => {
       <Box p={5} shadow='md' borderWidth='2px' {...rest} borderColor='brand.cardBorder'>
         {icon}
         <Heading fontSize='1.3em' pt={2}>{title}</Heading>
-        <Text mt={4}>{desc}</Text>
+        <Text mt={3}>{desc}</Text>
       </Box>
     )
   };
@@ -16,6 +16,6 @@ const Features = ({ title, desc, icon, ...rest }) => {
   Features.propTypes = {
     title: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.object.isRequired,
   }
   export default Features;

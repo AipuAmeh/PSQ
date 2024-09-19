@@ -51,7 +51,7 @@ const HomePage = () => {
         flexDirection="column"
         bg="brand.homePageLoginSection"
       >
-        <Text fontSize="1.8em" align="center">
+        <Text fontSize="1.6em" align="center">
           New Here? Login or Sign up
         </Text>
 
@@ -73,7 +73,7 @@ const HomePage = () => {
         p={4}
         className="how-we-help"
       >
-        <Text fontSize="1.8em" m={6}>
+        <Text fontSize="1.6em" m={6}>
           How We Help
         </Text>
         <Flex spacing={8} direction="row" mb={6} gap={5} px={6} py={6}>
