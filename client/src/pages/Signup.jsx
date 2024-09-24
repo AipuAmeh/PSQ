@@ -48,6 +48,8 @@ const Signup = () => {
   const [showChecklist, setShowChecklist] = useState(false);
   const [input, setInput] = useState("");
 
+  // add styling for password checklist
+  
   const handlePasswordClick = () => setShow(!show);
 
   const showListOnClick = () => {
@@ -149,6 +151,7 @@ const Signup = () => {
               <FormLabel>First name</FormLabel>
               <Input
                 placeholder="First name"
+                id='first-name'
                 name="firstName"
                 onChange={handleChange}
                 type="text"
@@ -163,6 +166,7 @@ const Signup = () => {
               <FormLabel>Last name</FormLabel>
               <Input
                 placeholder="Last name"
+                id='last-name'
                 name="lastName"
                 type="text"
                 onChange={handleChange}
@@ -214,6 +218,7 @@ const Signup = () => {
 
        <Box>
        <FormControl
+            as="form"
             isInvalid={formErrors.userName}
             isRequired
             mt={4}
@@ -225,6 +230,7 @@ const Signup = () => {
             <FormLabel>Username</FormLabel>
             <Input
               placeholder="Username"
+              id='username'
               name="userName"
               type="text"
               onChange={handleChange}
@@ -237,10 +243,12 @@ const Signup = () => {
               <FormLabel>Password</FormLabel>
               <Input
                 placeholder="******"
+                id='password'
                 name="password"
                 type={show ? "text" : "password"}
                 onChange={handleChange}
                 value={formState.password}
+                autoComplete="password"
                 onClick={showListOnClick}
               />
            
