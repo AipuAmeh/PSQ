@@ -121,16 +121,13 @@ const Signup = () => {
   };
 
   return (
-    <Box
+    <Center
       className="signup-form"
-      w="100%"
       display="flex"
-      justifyContent="center"
       flexDirection="column"
-      mb={6}
-      px={10}
+      justifyItems="center"
     >
-      <Text fontSize="2xl" display="flex" justifyContent="center" my={6}>
+      <Text fontSize="1.8em" mt='3em'>
         Sign Up
       </Text>
 
@@ -139,18 +136,14 @@ const Signup = () => {
           <Link to="/"></Link>
         </p>
       ) : (
-        <Box mx={4}>
-          <Text fontSize="xl" m={8}>
-            General Information
-          </Text>
+        <Box w='80%'>
           <FormControl
             isInvalid={formErrors.firstName}
             isRequired
-            mt={4}
+            mt='4em'
             display="flex"
             flexDirection="row"
             justifyContent="center"
-            w="100%"
           >
             <Stack mr={3} flex="1">
               <FormLabel>First name</FormLabel>
@@ -218,19 +211,15 @@ const Signup = () => {
               ) : null}
             </Stack>
           </FormControl>
-          <Text fontSize="xl" m={8}>
-            Account Information
-          </Text>
 
-          
-          <FormControl
+       <Box>
+       <FormControl
             isInvalid={formErrors.userName}
             isRequired
             mt={4}
             display="flex"
             flexDirection="row"
             justifyContent="center"
-            w="65%"
           >
             <Stack mr={3} flex="1">
             <FormLabel>Username</FormLabel>
@@ -242,19 +231,9 @@ const Signup = () => {
               value={formState.userName}
             />
             </Stack>
-          </FormControl>
 
-          <FormControl
-            isInvalid={formErrors.password}
-            isRequired
-            mt={4}
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            w="65%"
-          >
-            <InputGroup>
-            <Stack mr={3} flex="1">
+            {/* <InputGroup> */}
+            <Stack flex="1">
               <FormLabel>Password</FormLabel>
               <Input
                 placeholder="******"
@@ -281,22 +260,24 @@ const Signup = () => {
               
               </InputRightElement> */}
               </Stack>
-            </InputGroup>
+            {/* </InputGroup> */}
             {showChecklist ? (
               <PasswordChecklistComp password={formState.password} />
             ) : (
               false
             )}
           </FormControl>
+        </Box>   
+
         </Box>
       )}
-      <Center>
-        <Button mt={6} size="lg" onClick={handleSubmit} bg="brand.callToActionButtons">
+      <Center my={6}>
+        <Button onClick={handleSubmit} bg="brand.callToActionButtons">
           Create Your Account
         </Button>
       </Center>
       {error ? <div>{error.message}</div> : null}
-    </Box>
+    </Center>
   );
 };
 

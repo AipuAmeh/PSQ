@@ -20,8 +20,6 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
       // form error handling/validation
@@ -81,7 +79,7 @@ const Contact = () => {
         flexDirection="column"
         mx="3em"
       >
-        <Text fontSize="1.8em" mt={8}>
+        <Text fontSize="1.8em" mt='3em'>
           Contact Us
         </Text>
         <Text fontSize="1em" mt="9em">
@@ -89,7 +87,7 @@ const Contact = () => {
         </Text>
       </Box>
 
-      <Box display="flex" flexDirection="column" w="60%" px={4} mt="5em">
+      <Box display="flex" flexDirection="column" w="60%" px={4} mt="6.5em">
         <FormControl isRequired w="80%">
           <FormLabel mt={4}>Name</FormLabel>
           <Input
