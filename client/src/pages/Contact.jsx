@@ -20,8 +20,6 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
       // form error handling/validation

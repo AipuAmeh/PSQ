@@ -108,7 +108,7 @@ const Login = () => {
 
   return (
     <Stack>
-      <Center className="login-form" display="flex" flexDirection="column"> 
+      <Center className="login-form" display="flex" flexDirection="column">
         <Box display="flex" justifyContent="center" flexDirection="column">
           <Text fontSize="1.8em" mt="3em">
             Login To Your Account
@@ -116,6 +116,7 @@ const Login = () => {
         </Box>
 
         <FormControl
+          as="form"
           isRequired
           mt="4em"
           display="flex"
@@ -125,8 +126,10 @@ const Login = () => {
         >
           <FormLabel>Email</FormLabel>
           <Input
+            id="email"
             placeholder="Email"
             value={formState.email}
+            autoComplete="email"
             type="text"
             name="email"
             onChange={handleChange}
@@ -136,6 +139,7 @@ const Login = () => {
           <Input
             placeholder="Password"
             value={formState.password}
+            autoComplete="password"
             type="password"
             name="password"
             onChange={handleChange}

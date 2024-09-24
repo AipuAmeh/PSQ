@@ -127,7 +127,7 @@ const Signup = () => {
       flexDirection="column"
       justifyItems="center"
     >
-      <Text fontSize="1.8em" mt={8}>
+      <Text fontSize="1.8em" mt='3em'>
         Sign Up
       </Text>
 
@@ -136,7 +136,7 @@ const Signup = () => {
           <Link to="/"></Link>
         </p>
       ) : (
-        <Box w='60%'>
+        <Box w='80%'>
           <FormControl
             isInvalid={formErrors.firstName}
             isRequired
@@ -212,15 +212,14 @@ const Signup = () => {
             </Stack>
           </FormControl>
 
-          
-          <FormControl
+       <Box>
+       <FormControl
             isInvalid={formErrors.userName}
             isRequired
             mt={4}
             display="flex"
             flexDirection="row"
             justifyContent="center"
-            w="65%"
           >
             <Stack mr={3} flex="1">
             <FormLabel>Username</FormLabel>
@@ -232,19 +231,9 @@ const Signup = () => {
               value={formState.userName}
             />
             </Stack>
-          </FormControl>
 
-          <FormControl
-            isInvalid={formErrors.password}
-            isRequired
-            mt={4}
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            w="65%"
-          >
-            <InputGroup>
-            <Stack mr={3} flex="1">
+            {/* <InputGroup> */}
+            <Stack flex="1">
               <FormLabel>Password</FormLabel>
               <Input
                 placeholder="******"
@@ -271,17 +260,19 @@ const Signup = () => {
               
               </InputRightElement> */}
               </Stack>
-            </InputGroup>
+            {/* </InputGroup> */}
             {showChecklist ? (
               <PasswordChecklistComp password={formState.password} />
             ) : (
               false
             )}
           </FormControl>
+        </Box>   
+
         </Box>
       )}
-      <Center>
-        <Button mt={6} size="lg" onClick={handleSubmit} bg="brand.callToActionButtons">
+      <Center my={6}>
+        <Button onClick={handleSubmit} bg="brand.callToActionButtons">
           Create Your Account
         </Button>
       </Center>
