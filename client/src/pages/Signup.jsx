@@ -12,9 +12,9 @@ import {
   Center,
   Stack,
   Link,
-  IconButton
+  IconButton,
 } from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
@@ -234,46 +234,41 @@ const Signup = () => {
                 />
               </Stack>
 
-             
               <Stack flex="1">
-
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
-                <Input
-                  placeholder="******"
-                  id="password"
-                  name="password"
-                  // type='password'
-                  type={show ? "text" : "password"}
-                  onChange={handleChange}
-                  value={formState.password}
-                  autoComplete="password"
-                  onClick={showListOnClick}
-                />
+                  <Input
+                    placeholder="******"
+                    id="password"
+                    name="password"
+                    // type='password'
+                    type={show ? "text" : "password"}
+                    onChange={handleChange}
+                    value={formState.password}
+                    autoComplete="password"
+                    onClick={showListOnClick}
+                  />
 
-                <InputRightElement width="4.5rem">
-                <IconButton
-                  h="1.75rem"
-                  size="sm"
-                  onClick={handlePasswordClick}
-                >
-                  {show ? <ViewIcon />  : <ViewOffIcon />}
-
-                </IconButton>
-              
-              </InputRightElement>
-              </InputGroup>
+                  <InputRightElement width="4.5rem">
+                    <IconButton
+                      h="1.75rem"
+                      size="sm"
+                      onClick={handlePasswordClick}
+                    >
+                      {show ? <ViewIcon /> : <ViewOffIcon />}
+                    </IconButton>
+                  </InputRightElement>
+                </InputGroup>
               </Stack>
-         
             </FormControl>
             <Box display="flex">
               <Box flex="1"></Box>
               <Box flex="1">
-                {showChecklist ? 
+                {showChecklist ? (
                   <PasswordChecklistComp password={formState.password} />
-                 : 
+                ) : (
                   false
-                }
+                )}
               </Box>
             </Box>
           </Box>
