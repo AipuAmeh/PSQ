@@ -1,3 +1,4 @@
+import React from "react";
 import { useMutation } from "@apollo/client";
 import {
   FormControl,
@@ -10,7 +11,11 @@ import {
   Stack,
   Box,
   Link,
+  InputGroup,
+  InputRightElement,
+  IconButton,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { LOGIN_PATIENT, LOGIN_PROVIDER } from "../utils/mutations";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
@@ -35,9 +40,12 @@ const Login = () => {
     email: false,
     password: false,
   });
+  const [show, setShow] = React.useState(false);
   const [input, setInput] = useState("");
   const [loginPatient] = useMutation(LOGIN_PATIENT);
   const [loginProvider] = useMutation(LOGIN_PROVIDER);
+
+  const handlePasswordClick = () => setShow(!show);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -136,14 +144,22 @@ const Login = () => {
             mb={4}
           />
           <FormLabel>Password</FormLabel>
-          <Input
-            placeholder="Password"
-            value={formState.password}
-            autoComplete="password"
-            type="password"
-            name="password"
-            onChange={handleChange}
-          />
+          <InputGroup>
+            <Input
+              placeholder="Password"
+              value={formState.password}
+              autoComplete="password"
+              type={show ? "text" : "password"}
+              name="password"
+              onChange={handleChange}
+            />
+            <InputRightElement width="4.5rem">
+              <IconButton h="1.75rem" size="sm" onClick={handlePasswordClick}>
+                {show ? <ViewIcon /> : <ViewOffIcon />}
+              </IconButton>
+            </InputRightElement>
+          </InputGroup>
+
           <Center gap={10} mt={5}>
             <Button
               my={6}

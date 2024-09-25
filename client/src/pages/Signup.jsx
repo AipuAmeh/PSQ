@@ -12,7 +12,9 @@ import {
   Center,
   Stack,
   Link,
+  IconButton,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
@@ -21,7 +23,6 @@ import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 import PasswordChecklistComp from "../components/Validation/PasswordChecklist";
 import { isInvalidEmail } from "../utils/validation/invalidEmail";
-
 
 // mobile development once screen gets smaller
 const Signup = () => {
@@ -90,7 +91,7 @@ const Signup = () => {
         duration: 2000,
         isClosable: true,
       });
-    } 
+    }
 
     if (isInvalidEmail(formState.email)) {
       toast({
@@ -104,17 +105,14 @@ const Signup = () => {
     }
 
     setFormErrors(errors);
-    
+
     try {
-        const dataResponse = await addPatient({
-          variables: { ...formState },
-        });
-        // remove this console log
-        console.log(dataResponse);
-        const { token, patient } = dataResponse.data.addPatient;
-        loginUser(patient, token);
-        navigate("/");
-      
+      const dataResponse = await addPatient({
+        variables: { ...formState },
+      });
+      const { token, patient } = dataResponse.data.addPatient;
+      loginUser(patient, token);
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }
@@ -127,7 +125,7 @@ const Signup = () => {
       flexDirection="column"
       justifyItems="center"
     >
-      <Text fontSize="1.8em" mt='3em'>
+      <Text fontSize="1.8em" mt="3em">
         Sign Up
       </Text>
 
@@ -136,11 +134,11 @@ const Signup = () => {
           <Link to="/"></Link>
         </p>
       ) : (
-        <Box w='80%'>
+        <Box w="80%">
           <FormControl
             isInvalid={formErrors.firstName}
             isRequired
-            mt='4em'
+            mt="4em"
             display="flex"
             flexDirection="row"
             justifyContent="center"
@@ -149,6 +147,7 @@ const Signup = () => {
               <FormLabel>First name</FormLabel>
               <Input
                 placeholder="First name"
+                id="first-name"
                 name="firstName"
                 onChange={handleChange}
                 type="text"
@@ -163,12 +162,13 @@ const Signup = () => {
               <FormLabel>Last name</FormLabel>
               <Input
                 placeholder="Last name"
+                id="last-name"
                 name="lastName"
                 type="text"
                 onChange={handleChange}
                 value={formState.lastName}
               />
-                            {isError ? (
+              {isError ? (
                 <FormErrorMessage>Last name is required.</FormErrorMessage>
               ) : null}
             </Stack>
@@ -192,7 +192,7 @@ const Signup = () => {
                 onChange={handleChange}
                 value={formState.email}
               />
-                            {isError ? (
+              {isError ? (
                 <FormErrorMessage>Email is required.</FormErrorMessage>
               ) : null}
             </Stack>
@@ -206,69 +206,72 @@ const Signup = () => {
                 onChange={handleChange}
                 value={formState.dob}
               />
-                            {isError ? (
+              {isError ? (
                 <FormErrorMessage>Date of birth is required.</FormErrorMessage>
               ) : null}
             </Stack>
           </FormControl>
 
-       <Box>
-       <FormControl
-            isInvalid={formErrors.userName}
-            isRequired
-            mt={4}
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-          >
-            <Stack mr={3} flex="1">
-            <FormLabel>Username</FormLabel>
-            <Input
-              placeholder="Username"
-              name="userName"
-              type="text"
-              onChange={handleChange}
-              value={formState.userName}
-            />
-            </Stack>
-
-            {/* <InputGroup> */}
-            <Stack flex="1">
-              <FormLabel>Password</FormLabel>
-              <Input
-                placeholder="******"
-                name="password"
-                type={show ? "text" : "password"}
-                onChange={handleChange}
-                value={formState.password}
-                onClick={showListOnClick}
-              />
-           
-   
-              {/* <InputRightElement width="4.5rem">
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  // backgroundColor='#371236'
-                  // _hover={{ bg: '#F7F9F7', color: 'black' }}
-                  // color='white'
-                  onClick={handlePasswordClick}
-                >
-                  {show ? "Hide" : "Show"}
-
-                </Button>
-              
-              </InputRightElement> */}
+          <Box>
+            <FormControl
+              as="form"
+              isInvalid={formErrors.userName}
+              isRequired
+              mt={4}
+              display="flex"
+              flexDirection="row"
+              justifyContent="center"
+            >
+              <Stack mr={3} flex="1">
+                <FormLabel>Username</FormLabel>
+                <Input
+                  placeholder="Username"
+                  id="username"
+                  name="userName"
+                  type="text"
+                  onChange={handleChange}
+                  value={formState.userName}
+                />
               </Stack>
-            {/* </InputGroup> */}
-            {showChecklist ? (
-              <PasswordChecklistComp password={formState.password} />
-            ) : (
-              false
-            )}
-          </FormControl>
-        </Box>   
 
+              <Stack flex="1">
+                <FormLabel>Password</FormLabel>
+                <InputGroup>
+                  <Input
+                    placeholder="******"
+                    id="password"
+                    name="password"
+                    // type='password'
+                    type={show ? "text" : "password"}
+                    onChange={handleChange}
+                    value={formState.password}
+                    autoComplete="password"
+                    onClick={showListOnClick}
+                  />
+
+                  <InputRightElement width="4.5rem">
+                    <IconButton
+                      h="1.75rem"
+                      size="sm"
+                      onClick={handlePasswordClick}
+                    >
+                      {show ? <ViewIcon /> : <ViewOffIcon />}
+                    </IconButton>
+                  </InputRightElement>
+                </InputGroup>
+              </Stack>
+            </FormControl>
+            <Box display="flex">
+              <Box flex="1"></Box>
+              <Box flex="1">
+                {showChecklist ? (
+                  <PasswordChecklistComp password={formState.password} />
+                ) : (
+                  false
+                )}
+              </Box>
+            </Box>
+          </Box>
         </Box>
       )}
       <Center my={6}>
