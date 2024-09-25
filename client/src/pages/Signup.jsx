@@ -1,18 +1,20 @@
-// import React from "react";
+import React from "react";
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  // InputRightElement,
+  InputRightElement,
   Box,
   Input,
   Text,
   Button,
-  // InputGroup,
+  InputGroup,
   Center,
   Stack,
   Link,
+  IconButton
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
@@ -43,11 +45,11 @@ const Signup = () => {
     email: false,
     password: false,
   });
-  // const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
   const [input, setInput] = useState("");
 
-  // const handlePasswordClick = () => setShow(!show);
+  const handlePasswordClick = () => setShow(!show);
 
   const showListOnClick = () => {
     setShowChecklist(true);
@@ -232,37 +234,37 @@ const Signup = () => {
                 />
               </Stack>
 
-              {/* <InputGroup> */}
+             
               <Stack flex="1">
+
                 <FormLabel>Password</FormLabel>
+                <InputGroup>
                 <Input
                   placeholder="******"
                   id="password"
                   name="password"
-                  type='password'
-                  // type={show ? "text" : "password"}
+                  // type='password'
+                  type={show ? "text" : "password"}
                   onChange={handleChange}
                   value={formState.password}
                   autoComplete="password"
                   onClick={showListOnClick}
                 />
 
-                {/* <InputRightElement width="4.5rem">
-                <Button
+                <InputRightElement width="4.5rem">
+                <IconButton
                   h="1.75rem"
                   size="sm"
-                  // backgroundColor='#371236'
-                  // _hover={{ bg: '#F7F9F7', color: 'black' }}
-                  // color='white'
                   onClick={handlePasswordClick}
                 >
-                  {show ? "Hide" : "Show"}
+                  {show ? <ViewIcon />  : <ViewOffIcon />}
 
-                </Button>
+                </IconButton>
               
-              </InputRightElement> */}
+              </InputRightElement>
+              </InputGroup>
               </Stack>
-              {/* </InputGroup> */}
+         
             </FormControl>
             <Box display="flex">
               <Box flex="1"></Box>
