@@ -8,6 +8,9 @@ import { FaHandHoldingHeart } from "react-icons/fa6";
 
 // add links to homepage buttons
 const HomePage = () => {
+
+  // breakpoint for site name
+
   return (
     <Flex alignItems="center" flexDirection="column">
       <Box
