@@ -10,10 +10,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   IconButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
@@ -29,7 +25,7 @@ const Header = () => {
     logoutUser();
     navigate("/");
   };
-  
+
   // header for mobile screens
   const isMobile = useBreakpointValue({ base: true, md: false, sm: false });
 
