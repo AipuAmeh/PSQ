@@ -9,12 +9,24 @@ import {
   Button,
   useToast,
   Flex,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { isInvalidEmail } from "../utils/validation/invalidEmail";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+
+  // breakpoint for contact us box on mobile screens
+const mobileScreenDirection = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', lg: 'row' });
+const mobileWidthContact = useBreakpointValue({ base: '100%', sm: '100%', md: '40%', lg: '40%'});
+const mobileWidthFormBox = useBreakpointValue({ base: '100%', sm: '100%', md: '60%', lg: '60%'});
+const mobileFormControl = useBreakpointValue({ base: '100%', sm: '100%', md: '80%', lg: '80%'});
+const mobileBoxMargin = useBreakpointValue({ base: '1.5em', sm: '1.5em', md: '3em', lg: '3em'});
+const mobileTextMargin = useBreakpointValue({ base: '3em', sm: '3em', md: '9em', lg: '9em'});
+const mobileFormMargin = useBreakpointValue({ base: '3em', sm: '3em', md: '6.5em', lg: '6.5em'});
+
+
   const toast = useToast();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -71,24 +83,24 @@ const Contact = () => {
     }
   };
   return (
-    <Flex p={5}>
+    <Flex px={5} direction={mobileScreenDirection}>
       <Box
-        w="40%"
+        w={mobileWidthContact}
         display="flex"
         justifyContent="flex-start"
         flexDirection="column"
-        mx="3em"
+        mx={mobileBoxMargin}
       >
         <Text fontSize="1.8em" mt='3em'>
           Contact Us
         </Text>
-        <Text fontSize="1em" mt="9em">
+        <Text fontSize="1em" mt={mobileTextMargin}>
           Leave us a message. We will be sure to get back to you.
         </Text>
       </Box>
 
-      <Box display="flex" flexDirection="column" w="60%" px={4} mt="6.5em">
-        <FormControl isRequired w="80%">
+      <Box display="flex" flexDirection="column" w={mobileWidthFormBox} px={4} mt={mobileFormMargin} mb='1em'>
+        <FormControl isRequired w={mobileFormControl}>
           <FormLabel mt={4}>Name</FormLabel>
           <Input
             type="text"
