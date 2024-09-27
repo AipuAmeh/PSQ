@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, Stack, Image } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Stack, Image, useBreakpointValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Features from "../components/HomePageFeature";
 import { Icon } from "@chakra-ui/react";
@@ -10,18 +10,26 @@ import { FaHandHoldingHeart } from "react-icons/fa6";
 const HomePage = () => {
 
   // breakpoint for site name
+const siteName = useBreakpointValue({ base: '2.2em', sm: '2.2em', md: '4em', lg: '5em'});
+const boxLayout = useBreakpointValue({ base: 'center', sm: 'center', md: 'space-evenly', lg: 'space-evenly'})
+const boxMobileLayout = useBreakpointValue({ base: 'center', sm: 'center', md: 'none', lg: 'none'})
+const heroDirection = useBreakpointValue({ base: "column-reverse", md: "row", lg: "row"});
+const heroSize = useBreakpointValue({ base: "30%", sm: "30%", md: "17%", lg: '15%'});
+// const mobilePadding = useBreakpointValue({ base: "2em", sm: "2em", md: "0", lg: "0"});
+const mobileSiteNamePadding = useBreakpointValue({ base: "0.5em", sm: "0.5em", md: "2.5em", lg: "2.5em"})
 
   return (
     <Flex alignItems="center" flexDirection="column">
       <Box
         className="brand-hero"
         display="flex"
-        flexDirection="row"
-        justifyContent="space-evenly"
+        flexDirection={heroDirection}
+        justifyContent={boxLayout}
+        alignItems={boxMobileLayout}
         m={6}
       >
-        <Stack pt={10} gap={9}>
-          <Text fontSize="5em" textShadow="3px 3px #93B48B">
+        <Stack pt={mobileSiteNamePadding} gap={9} alignItems={boxMobileLayout}>
+          <Text fontSize={siteName} textShadow="3px 3px #93B48B" >
             PSYCHQUICONSULT
           </Text>
           <Text fontSize="1em">
@@ -36,7 +44,7 @@ const HomePage = () => {
           </Link>
         </Stack>
         <Image
-          boxSize="15%"
+          boxSize={heroSize}
           src="src/images/logo-trans.png"
           alt="psychquiconsult-logo"
           className="brand-logo-homepage"
