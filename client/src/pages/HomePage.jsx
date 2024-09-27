@@ -9,14 +9,14 @@ import { FaHandHoldingHeart } from "react-icons/fa6";
 // add links to homepage buttons
 const HomePage = () => {
 
-  // breakpoint for site name
+  // breakpoint for all home page sections
 const siteName = useBreakpointValue({ base: '2.2em', sm: '2.2em', md: '4em', lg: '5em'});
 const boxLayout = useBreakpointValue({ base: 'center', sm: 'center', md: 'space-evenly', lg: 'space-evenly'})
 const boxMobileLayout = useBreakpointValue({ base: 'center', sm: 'center', md: 'none', lg: 'none'})
 const heroDirection = useBreakpointValue({ base: "column-reverse", md: "row", lg: "row"});
 const heroSize = useBreakpointValue({ base: "30%", sm: "30%", md: "17%", lg: '15%'});
-// const mobilePadding = useBreakpointValue({ base: "2em", sm: "2em", md: "0", lg: "0"});
-const mobileSiteNamePadding = useBreakpointValue({ base: "0.5em", sm: "0.5em", md: "2.5em", lg: "2.5em"})
+const mobileSiteNamePadding = useBreakpointValue({ base: "0.5em", sm: "0.5em", md: "2.5em", lg: "2.5em"});
+const howWeHelp = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', lg: 'row' });
 
   return (
     <Flex alignItems="center" flexDirection="column">
@@ -88,7 +88,7 @@ const mobileSiteNamePadding = useBreakpointValue({ base: "0.5em", sm: "0.5em", m
         <Text fontSize="1.6em" m={6}>
           How We Help
         </Text>
-        <Flex spacing={8} direction="row" mb={6} gap={5} px={6} py={6}>
+        <Flex spacing={8} direction={howWeHelp} mb={6} gap={5} px={6} py={6}>
           <Features 
             icon={<Icon as={PiStethoscopeDuotone} boxSize={6} />}
             title="Consultations"
