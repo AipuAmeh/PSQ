@@ -14,11 +14,11 @@ return (
 };
 
 PatientDetails.propTypes = {
-    firstname: PropTypes.bool.isRequired,
-    lastname: PropTypes.bool.isRequired,
-    email: PropTypes.bool.isRequired,
-    dob: PropTypes.bool.isRequired,
-    id: PropTypes.bool.isRequired
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    dob: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
 }
 
 export default PatientDetails;

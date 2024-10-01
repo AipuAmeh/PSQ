@@ -91,14 +91,14 @@ const ProviderDashboard = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Box display='flex' justifyContent='space-between' gap={7}  key={patientData.allPatients._id}>
+              <Box display='flex' justifyContent='space-between' gap={7} >
                 <Text fontSize='xl' className="accordion-header">Patient Name</Text>
                 <Text fontSize='xl' className="accordion-header">Email</Text>
                 <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
               </Box>
               {sortedPatients.map((patient) => {
                 return (
-                  <>
+                  <Box key={patient._id}>
                     <PatientDetails
                       id={patient._id}
                       firstname={patient.firstName}
@@ -106,7 +106,7 @@ const ProviderDashboard = () => {
                       email={patient.email}
                       dob={formattedDate(patient.dob)}
                     />
-                  </>
+                  </Box>
                 );
               })}
             </AccordionPanel>

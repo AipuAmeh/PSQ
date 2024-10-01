@@ -78,10 +78,10 @@ const Header = () => {
               ) : (
                 <>
                   <MenuItem>
-                    <Link>Sign up</Link>
+                    <Link to='/signup'>Sign up</Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link>Login</Link>
+                    <Link to='/login'>Login</Link>
                   </MenuItem>
                 </>
               )}
