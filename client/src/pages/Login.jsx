@@ -14,6 +14,7 @@ import {
   InputGroup,
   InputRightElement,
   IconButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useState } from "react";
@@ -25,6 +26,10 @@ import ForgotPasswordModal from "../components/ForgotPasswordModal";
 import { useDisclosure } from "@chakra-ui/react";
 
 const Login = () => {
+
+  // breakpoints for mobile screens
+  const mobileFormWidth = useBreakpointValue({ base: '80%', sm: '80%', md: '60%', lg: '60%'});
+
   // SEE USER DEMOGRAPHICS ROW FOR ERRORS AND OUTLINE
   // LESS TOAST MESSAGES
   const { loginUser } = useCurrentUserContext();
@@ -126,11 +131,11 @@ const Login = () => {
         <FormControl
           as="form"
           isRequired
-          mt="4em"
+          mt="3em"
           display="flex"
           flexDirection="column"
           justifyContent="center"
-          w="60%"
+          w={mobileFormWidth}
         >
           <FormLabel>Email</FormLabel>
           <Input
@@ -183,7 +188,7 @@ const Login = () => {
           </Center>
         </FormControl>
       </Center>
-      <Box display="flex" justifyContent="center" flexDirection="row" gap={10}>
+      <Box display="flex" justifyContent="center" flexDirection="row" gap={10} mb={5}>
         <Text lineHeight="1.5em">Forgot Password?</Text>
         <Text className="reset-password-link">
           <Link onClick={onOpen}>Reset Password</Link>

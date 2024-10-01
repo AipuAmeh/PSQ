@@ -13,6 +13,7 @@ import {
   Stack,
   Link,
   IconButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
@@ -26,6 +27,11 @@ import { isInvalidEmail } from "../utils/validation/invalidEmail";
 
 // mobile development once screen gets smaller
 const Signup = () => {
+
+  // breakpoints for mobile screens
+const mobileFormLayout = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', lg: 'row'});
+const mobileFormMargin = useBreakpointValue({ base: '1em', sm: '1em', md: 0, lg: 0});
+
   const toast = useToast();
   const { loginUser } = useCurrentUserContext();
   const navigate = useNavigate();
@@ -138,9 +144,9 @@ const Signup = () => {
           <FormControl
             isInvalid={formErrors.firstName}
             isRequired
-            mt="4em"
+            mt="3em"
             display="flex"
-            flexDirection="row"
+            flexDirection={mobileFormLayout}
             justifyContent="center"
           >
             <Stack mr={3} flex="1">
@@ -159,7 +165,7 @@ const Signup = () => {
             </Stack>
 
             <Stack flex="1">
-              <FormLabel>Last name</FormLabel>
+              <FormLabel mt={mobileFormMargin}>Last name</FormLabel>
               <Input
                 placeholder="Last name"
                 id="last-name"
@@ -179,7 +185,7 @@ const Signup = () => {
             isRequired
             mt={4}
             display="flex"
-            flexDirection="row"
+            flexDirection={mobileFormLayout}
             justifyContent="center"
             w="100%"
           >
@@ -198,7 +204,7 @@ const Signup = () => {
             </Stack>
 
             <Stack flex="1">
-              <FormLabel>Date of Birth</FormLabel>
+              <FormLabel mt={mobileFormMargin}>Date of Birth</FormLabel>
               <Input
                 placeholder="MM/DD/YYYY"
                 name="dob"
@@ -219,7 +225,7 @@ const Signup = () => {
               isRequired
               mt={4}
               display="flex"
-              flexDirection="row"
+              flexDirection={mobileFormLayout}
               justifyContent="center"
             >
               <Stack mr={3} flex="1">
@@ -235,7 +241,7 @@ const Signup = () => {
               </Stack>
 
               <Stack flex="1">
-                <FormLabel>Password</FormLabel>
+                <FormLabel mt={mobileFormMargin}>Password</FormLabel>
                 <InputGroup>
                   <Input
                     placeholder="******"
