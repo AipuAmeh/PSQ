@@ -244,10 +244,9 @@ const mobileFormMargin = useBreakpointValue({ base: '1em', sm: '1em', md: 0, lg:
                 <FormLabel mt={mobileFormMargin}>Password</FormLabel>
                 <InputGroup>
                   <Input
-                    placeholder="******"
+                    placeholder="Password"
                     id="password"
                     name="password"
-                    // type='password'
                     type={show ? "text" : "password"}
                     onChange={handleChange}
                     value={formState.password}
