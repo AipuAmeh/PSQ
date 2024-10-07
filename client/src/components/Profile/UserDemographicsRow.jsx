@@ -18,6 +18,7 @@ const Demographics = ({ field, value, _id }) => {
     Password: field === "Password" ? value : ''
   });
   const [errorResponse, setErrorResponse] = useState(false);
+
   // query all patients and make sure username is not the same as one that already exists
   const { loading, error, data } = useQuery(QUERY_ALL_PATIENTS);
   const [changePatientAccountDetails] = useMutation(CHANGE_ACCOUNT_DETAILS);
@@ -121,7 +122,7 @@ const Demographics = ({ field, value, _id }) => {
   return (
     <>
       <Box display="flex" gap={6}>
-        <Text flex={1} lineHeight="30px">
+        <Text flex={1} lineHeight="30px" fontSize='1.1em'>
           {field}:
         </Text>
         {updateField ? (
@@ -138,7 +139,7 @@ const Demographics = ({ field, value, _id }) => {
           </Box>
         ) : (
           <>
-            <Text lineHeight="32px">{value}</Text>{" "}
+            <Text lineHeight="32px" fontSize='1.1em'>{value}</Text>{" "}
           </>
         )}
         <Box display="flex" flexDirection="row" justifyContent="flex-end">

@@ -72,16 +72,19 @@ const Header = () => {
               {isLoggedIn() ? (
                 <>
                   <MenuItem>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </MenuItem>
+                  <MenuItem>
                     <Link onClick={logout}>Logout</Link>
                   </MenuItem>
                 </>
               ) : (
                 <>
                   <MenuItem>
-                    <Link to='/signup'>Sign up</Link>
+                    <Link to="/signup">Sign up</Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to='/login'>Login</Link>
+                    <Link to="/login">Login</Link>
                   </MenuItem>
                 </>
               )}
@@ -91,7 +94,7 @@ const Header = () => {
       ) : (
         <Box display="flex" justifyContent="flex-end" gap={5} mr={4}>
           {isLoggedIn() ? (
-            <Box display="flex" flexDirection="row" gap={2}>
+            <Box display="flex" flexDirection="row" gap={5}>
               <Button
                 onClick={logout}
                 cursor="pointer"

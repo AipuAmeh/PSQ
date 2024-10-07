@@ -7,6 +7,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
@@ -22,6 +23,33 @@ import SignupForm from "../Forms/SignupForm";
 import { formattedDate } from "../../utils/validation/formattedDate";
 
 const ProviderDashboard = () => {
+  // breakpoints for mobile screens
+  const mobileDemographics = useBreakpointValue({
+    base: "column",
+    sm: "column",
+    md: "row",
+    lg: "row",
+  });
+  const demographicsLayout = useBreakpointValue({
+    base: "center",
+    sm: "center",
+    md: "0",
+    lg: "0",
+  });
+  const demographicsMargin = useBreakpointValue({
+    base: "0em",
+    sm: "0em",
+    md: "3em",
+    lg: "3em",
+  });
+  const demographicsGap = useBreakpointValue({
+    base: "10",
+    sm: "10",
+    md: "20",
+    lg: "20",
+  });
+  const patientLayout = useBreakpointValue({ base: "column" });
+
   const { currentUser } = useCurrentUserContext();
 
   // retrieving provider data for demographics
@@ -35,42 +63,40 @@ const ProviderDashboard = () => {
     error: patientError,
     data: patientData,
   } = useQuery(QUERY_ALL_PATIENTS, {
-    pollInterval: 500
+    pollInterval: 500,
   });
 
   // checking for loading and error states
   if (loading || patientLoading) return <p>Loading...</p>;
   if (error || patientError) return <p>Error: {error.message}</p>;
 
-    // sort patient data by alphabetical order
-    const sortedPatients = [...patientData.allPatients]
- .sort((a,b) => {
-  if (a.lastName < b.lastName) {
-    return -1
-  } else if (a.lastName > b.lastName) {
-    return 1 
-  } else {
-    return 0
-  }
-});
-
+  // sort patient data by alphabetical order
+  const sortedPatients = [...patientData.allPatients].sort((a, b) => {
+    if (a.lastName < b.lastName) {
+      return -1;
+    } else if (a.lastName > b.lastName) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  // create 3 different columns for: patient name, email, dob
   return (
     <Box display="flex" mt={6} flexDirection="column">
-      <Text display="flex" justifyContent="center" fontSize="2xl">
+      <Text display="flex" justifyContent="center" fontSize="1.8em" mt="3em">
         Provider Portal
       </Text>
       <Box
+        className="provider-details"
+        alignItems={demographicsLayout}
         display="flex"
-        flexDirection="row"
+        flexDirection={mobileDemographics}
         justifyContent="center"
-        gap={20}
-        mt={10}
+        gap={demographicsGap}
+        mt={demographicsMargin}
       >
         <DashboardAvatar name={data.provider.providerName} />
-        <Stack>
-          <Text fontSize="xl" mt="3em">
-            Demographics
-          </Text>
+        <Stack className="demographics" mt="2em">
           <Demographics
             field={"Provider Name"}
             value={data.provider.providerName}
@@ -84,14 +110,14 @@ const ProviderDashboard = () => {
           <AccordionItem>
             <h2>
               <AccordionButton>
-                <Box as="span" flex="1" textAlign="left" fontSize='xl'>
+                <Box as="span" flex="1" textAlign="left" fontSize="xl">
                   View All Patients
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            <AccordionPanel pb={4}>
-              <Box display='flex' justifyContent='space-between' gap={7} >
+            <AccordionPanel pb={4} className="patient-accordion">
+              {/* <Box display='flex' justifyContent='space-between' gap={7} >
                 <Text fontSize='xl' className="accordion-header">Patient Name</Text>
                 <Text fontSize='xl' className="accordion-header">Email</Text>
                 <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
@@ -108,14 +134,29 @@ const ProviderDashboard = () => {
                     />
                   </Box>
                 );
-              })}
+              })} */}
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                flexDirection="row"
+              >
+                <Box id="patient-name">
+                  <Text fontSize="xl">Patient Name</Text>
+                </Box>
+                <Box id="email">
+                  <Text fontSize="xl">Email</Text>
+                </Box>
+                <Box id="date-of-birth">
+                  <Text fontSize="xl">Date of Birth</Text>
+                </Box>
+              </Box>
             </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem>
             <h2>
               <AccordionButton>
-                <Box as="span" flex="1" textAlign="left" fontSize='xl'>
+                <Box as="span" flex="1" textAlign="left" fontSize="xl">
                   Add a Patient
                 </Box>
                 <AccordionIcon />
