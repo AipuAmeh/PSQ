@@ -23,8 +23,8 @@ const mobileWidthContact = useBreakpointValue({ base: '100%', sm: '100%', md: '4
 const mobileWidthFormBox = useBreakpointValue({ base: '100%', sm: '100%', md: '60%', lg: '60%'});
 const mobileFormControl = useBreakpointValue({ base: '100%', sm: '100%', md: '80%', lg: '80%'});
 const mobileBoxMargin = useBreakpointValue({ base: '1.5em', sm: '1.5em', md: '3em', lg: '3em'});
-const mobileTextMargin = useBreakpointValue({ base: '3em', sm: '3em', md: '9em', lg: '9em'});
-const mobileFormMargin = useBreakpointValue({ base: '3em', sm: '3em', md: '6.5em', lg: '6.5em'});
+const mobileTextMargin = useBreakpointValue({ base: '1.5em', sm: '1.5em', md: '9em', lg: '9em'});
+const mobileFormMargin = useBreakpointValue({ base: '1.5em', sm: '1.5em', md: '6.5em', lg: '6.5em'});
 
 
   const toast = useToast();
@@ -130,6 +130,7 @@ const mobileFormMargin = useBreakpointValue({ base: '3em', sm: '3em', md: '6.5em
             placeholder="How Can We Help?"
           ></Textarea>
         </FormControl>
+        <Box mb={5}>
         <Button
           w="fit-content"
           mt={6}
@@ -138,6 +139,8 @@ const mobileFormMargin = useBreakpointValue({ base: '3em', sm: '3em', md: '6.5em
         >
           Send Message
         </Button>
+        </Box>
+
       </Box>
     </Flex>
   );
