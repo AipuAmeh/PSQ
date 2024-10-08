@@ -30,7 +30,7 @@ const toast = useToast();
       }
     }
     return (
-      <Box display='flex' justifyContent='flex-start' m={4} >
+      <Box display='flex' justifyContent='center' my='2em' >
       <Button variant='ghost' color='red' onClick={handleSubmit} borderColor='red'>Delete Patient Account</Button>
     </Box>
     )

@@ -108,7 +108,7 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId}) => {
                   </Text>
                 )}
                 <Spacer />
-                <ButtonGroup gap="2">
+                <ButtonGroup gap="2" pt="2">
                   {editNote ? (
                     <IconButton
                       aria-label="Save note"
@@ -120,6 +120,7 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId}) => {
                   ) : (
                     <IconButton
                       aria-label="Edit Chart note"
+                         lineHeight="32px"
                       size="sm"
                       icon={<EditIcon />}
                       onClick={clickNoteEdit}
@@ -128,6 +129,7 @@ const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId}) => {
 
                   <IconButton
                     aria-label="Delete Chart note"
+                       lineHeight="32px"
                     size="sm"
                     icon={<DeleteIcon />}
                     color="red"

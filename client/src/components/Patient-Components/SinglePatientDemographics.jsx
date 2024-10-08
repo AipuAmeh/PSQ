@@ -5,8 +5,8 @@ import { Box, Text } from "@chakra-ui/react";
 const SinglePatientDemographics = ({field, value}) => {
 return (
 <Box display='flex' gap={6}>
-    <Text flex={1} lineHeight='30px'>{field}:</Text>
-    <Text lineHeight='32px'>{value}</Text>{" "}
+    <Text flex={1} lineHeight='30px' fontSize='1.1em'>{field}:</Text>
+    <Text lineHeight='32px' >{value}</Text>{" "}
 </Box>
 )
 };
