@@ -101,7 +101,7 @@ const ProviderDashboard = () => {
         mt={demographicsMargin}
       >
         <DashboardAvatar name={data.provider.providerName} />
-        <Stack className="demographics" mt="2em">
+        <Stack className="demographics" my="2em">
           <Demographics
             field={"Provider Name"}
             value={data.provider.providerName}
@@ -110,11 +110,11 @@ const ProviderDashboard = () => {
           <Demographics field={"Password"} value={"******"} />
         </Stack>
       </Box>
-      <Box px={10} display="flex" flexDirection="column" mt={6}>
-        <Accordion defaultIndex={[0]} allowToggle mt={8}>
+      <Box px={10} display="flex" flexDirection="column" mb={'2em'}>
+        <Accordion defaultIndex={[0]} allowToggle mt={8} >
           <AccordionItem>
             <h2>
-              <AccordionButton>
+              <AccordionButton _expanded={{ bg: 'brand.cambridgeBlue', color: 'black' }}>
                 <Box as="span" flex="1" textAlign="left" fontSize="xl">
                   View All Patients
                 </Box>
@@ -172,7 +172,7 @@ const ProviderDashboard = () => {
 
           <AccordionItem>
             <h2>
-              <AccordionButton>
+              <AccordionButton _expanded={{ bg: 'brand.cambridgeBlue', color: 'black' }}>
                 <Box as="span" flex="1" textAlign="left" fontSize="xl">
                   Add a Patient
                 </Box>
