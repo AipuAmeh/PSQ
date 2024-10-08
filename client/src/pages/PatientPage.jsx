@@ -101,7 +101,7 @@ const PatientPage = () => {
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
         />
-        <Text mt='2em' fontSize="1.8em">
+        <Text mt='1.5em' fontSize="1.8em">
           {data.patient.firstName} {data.patient.lastName}'s Chart
         </Text>
         <Box display="flex" flexDirection="column" my='2em'>
