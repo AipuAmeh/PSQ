@@ -15,12 +15,12 @@ import DashboardAvatar from "../Avatar";
 
 import { QUERY_PROVIDER } from "../../utils/queries";
 import { QUERY_ALL_PATIENTS } from "../../utils/queries";
-
+import PatientDetails from "../Provider-Components/PatientDetails";
 import Demographics from "../Profile/UserDemographicsRow";
 import { useQuery } from "@apollo/client";
-import PatientDetails from "./PatientDetails";
 import SignupForm from "../Forms/SignupForm";
 import { formattedDate } from "../../utils/validation/formattedDate";
+import { Link } from "react-router-dom";
 
 const ProviderDashboard = () => {
   // breakpoints for mobile screens
@@ -48,8 +48,13 @@ const ProviderDashboard = () => {
     md: "20",
     lg: "20",
   });
-  const patientLayout = useBreakpointValue({ base: "column" });
-
+  const accordionLayout = useBreakpointValue({
+    base: "column",
+    sm: "column",
+    md: "row",
+    lg: "row",
+  });
+  const accordionMargin = useBreakpointValue({ base: '1em', sm: '1em', md: 0, lg: 0});
   const { currentUser } = useCurrentUserContext();
 
   // retrieving provider data for demographics
@@ -117,37 +122,49 @@ const ProviderDashboard = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4} className="patient-accordion">
-              {/* <Box display='flex' justifyContent='space-between' gap={7} >
-                <Text fontSize='xl' className="accordion-header">Patient Name</Text>
-                <Text fontSize='xl' className="accordion-header">Email</Text>
-                <Text fontSize='xl' className="accordion-header" >Date of Birth</Text>
-              </Box>
-              {sortedPatients.map((patient) => {
-                return (
-                  <Box key={patient._id}>
-                    <PatientDetails
-                      id={patient._id}
-                      firstname={patient.firstName}
-                      lastname={patient.lastName}
-                      email={patient.email}
-                      dob={formattedDate(patient.dob)}
-                    />
-                  </Box>
-                );
-              })} */}
               <Box
                 display="flex"
                 justifyContent="space-between"
-                flexDirection="row"
+                flexDirection={accordionLayout}
               >
                 <Box id="patient-name">
-                  <Text fontSize="xl">Patient Name</Text>
+                  <Text fontSize="xl" className="accordion-header">
+                    Patient Name
+                  </Text>
+                  {sortedPatients.map((patient) => {
+                    return (
+                      <Box key={patient._id}>
+                        <Text fontSize="lg">
+                          <Link
+                            className="pt-page-link"
+                            to={`/patient/${patient._id}`}
+                          >
+                            {patient.lastName}, {patient.firstName}
+                          </Link>
+                        </Text>
+                      </Box>
+                    );
+                  })}
                 </Box>
                 <Box id="email">
-                  <Text fontSize="xl">Email</Text>
+                  <Text fontSize="xl" className="accordion-header"     mt={accordionMargin}>
+                    Email
+                  </Text>
+                  {sortedPatients.map((patient) => {
+                    return (
+                      <PatientDetails key={patient._id} field={patient.email}/>
+                    );
+                  })}
                 </Box>
                 <Box id="date-of-birth">
-                  <Text fontSize="xl">Date of Birth</Text>
+                  <Text fontSize="xl" className="accordion-header"     mt={accordionMargin}>
+                    Date of Birth
+                  </Text>
+                  {sortedPatients.map((patient) => {
+                    return (
+                      <PatientDetails key={patient._id} field={formattedDate(patient.dob)}/>
+                    );
+                  })}
                 </Box>
               </Box>
             </AccordionPanel>
