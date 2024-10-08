@@ -12,6 +12,7 @@ import {
   InputRightElement,
   useBreakpointValue
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -26,7 +27,10 @@ import { isInvalidEmail } from "../../utils/validation/invalidEmail";
 const SignupForm = () => {
 
   // breakpoints for mobile screens
+  const isMobile = useBreakpointValue({ base: '0', sm: '0', md: '1', lg: '1' });
   const mobileFormLayout = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', lg: 'row'});
+  const mobileFormMargin = useBreakpointValue({ base: '1em', sm: '1em', md: 0, lg: 0});
+  const mobileRightMargin = useBreakpointValue({ base: 0, sm: 0, md: 3, lg: 3});
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -137,7 +141,7 @@ const SignupForm = () => {
           <Link to="/"></Link>
         </p>
       ) : (
-        <Box w="80%">
+        <Box w="100%">
           <FormControl
             isInvalid={formErrors.firstName}
             isRequired
@@ -145,8 +149,9 @@ const SignupForm = () => {
             display="flex"
             flexDirection={mobileFormLayout}
             justifyContent="center"
+        
           >
-            <Stack mr={3} flex="1">
+            <Stack mr={mobileRightMargin} flex="1">
               <FormLabel>First name</FormLabel>
               <Input
                 placeholder="First name"
@@ -161,7 +166,7 @@ const SignupForm = () => {
             </Stack>
 
             <Stack flex="1">
-              <FormLabel>Last name</FormLabel>
+              <FormLabel mt={mobileFormMargin}>Last name</FormLabel>
               <Input
                 placeholder="Last name"
                 name="lastName"
@@ -182,9 +187,8 @@ const SignupForm = () => {
             display="flex"
             flexDirection={mobileFormLayout}
             justifyContent="center"
-            w="100%"
           >
-            <Stack mr={3} flex="1">
+            <Stack mr={mobileRightMargin} flex="1">
               <FormLabel>Email address</FormLabel>
               <Input
                 placeholder="Email address"
@@ -199,7 +203,7 @@ const SignupForm = () => {
             </Stack>
 
             <Stack flex="1">
-              <FormLabel>Date of Birth</FormLabel>
+              <FormLabel mt={mobileFormMargin}>Date of Birth</FormLabel>
               <Input
                 placeholder="MM/DD/YYYY"
                 name="dob"
@@ -222,8 +226,9 @@ const SignupForm = () => {
               display="flex"
               flexDirection={mobileFormLayout}
               justifyContent="center"
+              
             >
-              <Stack mr={3} flex="1">
+              <Stack mr={mobileRightMargin} flex="1">
                 <FormLabel>Username</FormLabel>
                 <Input
                   placeholder="Username"
@@ -234,11 +239,11 @@ const SignupForm = () => {
                 />
               </Stack>
 
-              <Stack mr={3} flex="1">
-                <FormLabel>Password</FormLabel>
+              <Stack  flex="1">
+                <FormLabel mt={mobileFormMargin}>Password</FormLabel>
                 <InputGroup>
                   <Input
-                    placeholder="******"
+                    placeholder="Password"
                     name="password"
                     type={show ? "text" : "password"}
                     onChange={handleChange}
@@ -249,14 +254,14 @@ const SignupForm = () => {
 
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handlePasswordClick}>
-                      {show ? "Hide" : "Show"}
+                      {show ? <ViewIcon /> : <ViewOffIcon />}
                     </Button>
                   </InputRightElement>
                 </InputGroup>
               </Stack>
             </FormControl>
             <Box display="flex">
-              <Box flex="1"></Box>
+              <Box flex={isMobile}></Box>
               <Box flex="1">
                 {showChecklist ? (
                   <PasswordChecklistComp password={formState.password} />
