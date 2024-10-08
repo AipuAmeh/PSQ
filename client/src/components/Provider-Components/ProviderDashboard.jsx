@@ -85,7 +85,7 @@ const ProviderDashboard = () => {
       return 0;
     }
   });
-  // create 3 different columns for: patient name, email, dob
+
   return (
     <Box display="flex" mt={6} flexDirection="column">
       <Text display="flex" justifyContent="center" fontSize="1.8em" mt="3em">
