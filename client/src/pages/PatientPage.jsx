@@ -13,7 +13,7 @@ import {
   Input,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { AddIcon, } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import DashboardAvatar from "../components/Avatar";
 import { formattedDate } from "../utils/validation/formattedDate";
 import SinglePatientDemographics from "../components/Patient-Components/SinglePatientDemographics";
@@ -28,11 +28,20 @@ import DeletePatient from "../components/Provider-Components/DeletePatient";
 import ChartNoteDetails from "../components/Provider-Components/ChartNoteDetails";
 
 const PatientPage = () => {
-
   // breakpoints for mobile screens
-  const mobileLayout = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', lg: 'row'});
-  const mobileBoxLayout = useBreakpointValue({ base: '100%', sm: '100%', md: '40%', lg: '40%'});
-  const mobileBoxGap = useBreakpointValue({base: 10, sm: 10, md: 24, lg: 24});
+  const mobileLayout = useBreakpointValue({
+    base: "column",
+    sm: "column",
+    md: "row",
+    lg: "row",
+  });
+  const mobileBoxLayout = useBreakpointValue({
+    base: "100%",
+    sm: "100%",
+    md: "40%",
+    lg: "40%",
+  });
+  const mobileBoxGap = useBreakpointValue({ base: 10, sm: 10, md: 24, lg: 24 });
 
   const { id } = useParams();
   const { isProvider } = useCurrentUserContext();
@@ -57,7 +66,6 @@ const PatientPage = () => {
     variables: { patientId: id },
     pollInterval: 500,
   });
-
 
   const [addMedication, { error: medError }] = useMutation(ADD_MED);
   // check for loading and error states
@@ -97,14 +105,20 @@ const PatientPage = () => {
 
   return (
     <Box>
-      <Box display="flex" my="6" flexDirection="column" alignItems="center" px='2em'>
+      <Box
+        display="flex"
+        my="6"
+        flexDirection="column"
+        alignItems="center"
+        px="2em"
+      >
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
         />
-        <Text mt='1.5em' fontSize="1.8em">
+        <Text mt="1.5em" fontSize="1.8em">
           {data.patient.firstName} {data.patient.lastName}'s Chart
         </Text>
-        <Box display="flex" flexDirection="column" my='2em'>
+        <Box display="flex" flexDirection="column" my="2em">
           <SinglePatientDemographics
             field={"Date of Birth"}
             value={formattedDate(data.patient.dob)}
@@ -136,13 +150,19 @@ const PatientPage = () => {
         </Box>
       </Box>
 
-      <Flex gap={mobileBoxGap} justifyContent="center" my={3} flexDirection={mobileLayout} mx='2em'>
+      <Flex
+        gap={mobileBoxGap}
+        justifyContent="center"
+        my={3}
+        flexDirection={mobileLayout}
+        mx="2em"
+      >
         <Box
           w={mobileBoxLayout}
           border="4px"
           borderColor="brand.cambridgeBlue"
           h="fit-content"
-            p='1em'
+          p="1em"
         >
           <Text
             display="flex"
@@ -164,7 +184,12 @@ const PatientPage = () => {
           {chartNotes.map((note) => {
             return (
               <>
-              <ChartNoteDetails noteId={note._id} dateCreated={note.dateCreated} subject={note.subject} noteText={note.noteText}/>
+                <ChartNoteDetails
+                  noteId={note._id}
+                  dateCreated={note.dateCreated}
+                  subject={note.subject}
+                  noteText={note.noteText}
+                />
               </>
             );
           })}
@@ -174,7 +199,7 @@ const PatientPage = () => {
           border="4px"
           borderColor="brand.cambridgeBlue"
           h="fit-content"
-          p='1em'
+          p="1em"
         >
           <Text
             fontSize="xl"

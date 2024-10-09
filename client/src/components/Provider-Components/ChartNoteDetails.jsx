@@ -21,7 +21,6 @@ import { EDIT_NOTE, DELETE_NOTE } from "../../utils/mutations";
 
 
 
-
 const ChartNoteDetails = ({ dateCreated, subject, noteText, noteId}) => {
   const [editNote, setEditNote] = useState(false);
   // just working on editing the note text for now
