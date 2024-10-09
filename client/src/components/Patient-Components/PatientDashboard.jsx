@@ -29,7 +29,7 @@ const PatientDashboard = () => {
     md: "20",
     lg: "20",
   });
-  const mobileDemographics = useBreakpointValue({
+  const mobileLayout = useBreakpointValue({
     base: "column",
     sm: "column",
     md: "row",
@@ -46,12 +46,6 @@ const PatientDashboard = () => {
     sm: "0em",
     md: "3em",
     lg: "3em",
-  });
-  const mobileLayout = useBreakpointValue({
-    base: "column",
-    sm: "column",
-    md: "row",
-    lg: "row",
   });
   const mobileBoxLayout = useBreakpointValue({
     base: "100%",
@@ -81,13 +75,13 @@ const PatientDashboard = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <Flex display="flex" mt={6} flexDirection="column">
+    <Flex display="flex" flexDirection="column">
       <Text fontSize="1.8em" display="flex" justifyContent="center" mt="3em">
         Patient Portal
       </Text>
       <Box
         display="flex"
-        flexDirection={mobileDemographics}
+        flexDirection={mobileLayout}
         justifyContent="center"
         mt={demographicsMargin}
         mx="20%"
@@ -123,34 +117,38 @@ const PatientDashboard = () => {
           />
         </Stack>
       </Box>
+
       <Flex
-        gap={24}
+        gap={mobileBoxGap}
         justifyContent="center"
-        mb={4}
-        flexDirection={mobileDemographics}
+        my={3}
+        mx="2em"
+        flexDirection={mobileLayout}
       >
         <Box
-          mt={4}
-          ml={8}
-          w="40%"
+          w={mobileBoxLayout}
           border="4px"
           borderColor="brand.cambridgeBlue"
           h="fit-content"
-          p={2}
+          p={'1em'}
         >
-          <Text fontSize="2xl" ml={8}>
-            Pharmacy Information
+          <Text
+            display="flex"
+            justifyContent="center"
+            fontSize="xl"
+            lineHeight="2.3em"
+            mt={2}
+          >
+            Pharmacy Info
             {data.patient.pharmacies[0] == undefined ? (
               <Link to={`/${currentUser._id}/add-pharmacy`}>
                 <IconButton
                   aria-label="Add pharmacy"
                   m={2}
-                  size="md"
+                  size="sm"
                   icon={<AddIcon />}
                   w="100"
-                >
-                  Add Pharmacy
-                </IconButton>
+                ></IconButton>
               </Link>
             ) : (
               <>
@@ -169,15 +167,19 @@ const PatientDashboard = () => {
           </Text>
         </Box>
         <Box
-          mt={4}
-          ml={8}
-          w="40%"
+          w={mobileBoxLayout}
           border="4px"
           borderColor="brand.cambridgeBlue"
           h="fit-content"
           p={2}
         >
-          <Text fontSize="2xl" ml={8}>
+          <Text
+            display="flex"
+            justifyContent="center"
+            fontSize="xl"
+            lineHeight="2.3em"
+            mt={2}
+          >
             Medication List
           </Text>
           <UnorderedList ml={10} mt={4}>
@@ -190,12 +192,14 @@ const PatientDashboard = () => {
         </Box>
       </Flex>
 
-      <Box display="flex" justifyContent="center" mt={8}>
+      <Box display="flex" justifyContent="center" my={8}>
         <Button
           onClick={onOpen}
           size="md"
           w="fit-content"
-          bg="brand.accentBtns"
+          variant="ghost"
+          color="red"
+          borderColor="red"
         >
           Delete My Account
         </Button>

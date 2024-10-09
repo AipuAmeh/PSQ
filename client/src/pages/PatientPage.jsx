@@ -107,7 +107,7 @@ const PatientPage = () => {
     <Box>
       <Box
         display="flex"
-        my="6"
+        mt="3em"
         flexDirection="column"
         alignItems="center"
         px="2em"
@@ -115,7 +115,7 @@ const PatientPage = () => {
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
         />
-        <Text mt="1.5em" fontSize="1.8em">
+        <Text mt="1em" fontSize="1.8em">
           {data.patient.firstName} {data.patient.lastName}'s Chart
         </Text>
         <Box display="flex" flexDirection="column" my="2em">
@@ -128,13 +128,13 @@ const PatientPage = () => {
             value={data.patient.email}
           />
           {data.patient.pharmacies[0] == undefined ? (
-            <>
+            <Box mt='2em'>
               <Link to={`/${data.patient._id}/add-pharmacy`}>
                 <Button size="md" bg="brand.accentBtns" w="100%">
                   Add Pharmacy
                 </Button>
               </Link>
-            </>
+            </Box>
           ) : (
             <>
               <SinglePatientDemographics
