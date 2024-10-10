@@ -107,17 +107,16 @@ const PatientPage = () => {
     <Box>
       <Box
         display="flex"
-        mt="3em"
+        mt={6}
         flexDirection="column"
         alignItems="center"
-        px="2em"
       >
+        <Text mt='3em' fontSize="1.8em">
+          {data.patient.firstName} {data.patient.lastName}'s Chart
+        </Text>
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
         />
-        <Text mt="1em" fontSize="1.8em">
-          {data.patient.firstName} {data.patient.lastName}'s Chart
-        </Text>
         <Box display="flex" flexDirection="column" my="2em">
           <SinglePatientDemographics
             field={"Date of Birth"}
