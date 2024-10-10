@@ -1,13 +1,15 @@
 import {
   Box,
   Text,
-  Spacer,
+  useBreakpointValue,
   Stack,
   Flex,
   Button,
   UnorderedList,
   ListItem,
+  IconButton,
 } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 import { useCurrentUserContext } from "../../utils/context/CurrentUser";
 import { useQuery } from "@apollo/client";
 import DashboardAvatar from "../Avatar";
@@ -20,6 +22,39 @@ import { Link } from "react-router-dom";
 
 // spacing issue with patients that have pharmacies
 const PatientDashboard = () => {
+  // breakpoints for mobile screens
+  const demographicsGap = useBreakpointValue({
+    base: "10",
+    sm: "10",
+    md: "20",
+    lg: "20",
+  });
+  const mobileLayout = useBreakpointValue({
+    base: "column",
+    sm: "column",
+    md: "row",
+    lg: "row",
+  });
+  const demographicsLayout = useBreakpointValue({
+    base: "center",
+    sm: "center",
+    md: "0",
+    lg: "0",
+  });
+  const demographicsMargin = useBreakpointValue({
+    base: "0em",
+    sm: "0em",
+    md: "3em",
+    lg: "3em",
+  });
+  const mobileBoxLayout = useBreakpointValue({
+    base: "100%",
+    sm: "100%",
+    md: "40%",
+    lg: "40%",
+  });
+  const mobileBoxGap = useBreakpointValue({ base: 10, sm: 10, md: 24, lg: 24 });
+
   const { currentUser } = useCurrentUserContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, error, data } = useQuery(QUERY_CURRENT_PATIENT, {
@@ -40,20 +75,23 @@ const PatientDashboard = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <Flex display="flex" mt={6} flexDirection="column">
-      <Text fontSize="2xl" display="flex" justifyContent="center">
+    <Flex display="flex" flexDirection="column">
+      <Text fontSize="1.8em" display="flex" justifyContent="center" mt="3em">
         Patient Portal
       </Text>
-      <Box display="flex" flexDirection="row" mt={10} mx="20%">
+      <Box
+        display="flex"
+        flexDirection={mobileLayout}
+        justifyContent="center"
+        mt={demographicsMargin}
+        mx="20%"
+        gap={demographicsGap}
+        alignItems={demographicsLayout}
+      >
         <DashboardAvatar
           name={`${data.patient.firstName} ${data.patient.lastName}`}
         />
-
-        <Spacer />
-        <Stack>
-          <Text fontSize="2xl" mt="3em" mb="1em">
-            Demographics
-          </Text>
+        <Stack my="2em">
           <Demographics
             field={"Name"}
             value={`${data.patient.firstName} ${data.patient.lastName}`}
@@ -79,52 +117,69 @@ const PatientDashboard = () => {
           />
         </Stack>
       </Box>
-      <Flex gap={24} justifyContent="center" mb={4}>
+
+      <Flex
+        gap={mobileBoxGap}
+        justifyContent="center"
+        my={3}
+        mx="2em"
+        flexDirection={mobileLayout}
+      >
         <Box
-          mt={4}
-          ml={8}
-          w="40%"
+          w={mobileBoxLayout}
           border="4px"
           borderColor="brand.cambridgeBlue"
           h="fit-content"
-          p={2}
+          p={'1em'}
         >
-          <Text fontSize="2xl" ml={8}>
-            Pharmacy Information
-          </Text>
-          {data.patient.pharmacies[0] == undefined ? (
-            <Box p={3} ml={4}>
+          <Text
+            display="flex"
+            justifyContent="center"
+            fontSize="xl"
+            lineHeight="2.3em"
+            mt={2}
+          >
+            Pharmacy Info
+            {data.patient.pharmacies[0] == undefined ? (
               <Link to={`/${currentUser._id}/add-pharmacy`}>
-                <Button size="md" bg="brand.accentBtns" w="100">
-                  Add Pharmacy
-                </Button>
+                <IconButton
+                  aria-label="Add pharmacy"
+                  m={2}
+                  size="sm"
+                  icon={<AddIcon />}
+                  w="100"
+                ></IconButton>
               </Link>
-            </Box>
-          ) : (
-            <>
-              <Demographics
-                _id={currentUser._id}
-                field="Pharmacy"
-                value={`${data.patient.pharmacies[0].pharmacyName} ${data.patient.pharmacies[0].address}, ${data.patient.pharmacies[0].state}, ${data.patient.pharmacies[0].zipcode}`}
-              />
-              <Demographics
-                _id={currentUser._id}
-                field="Pharmacy Number"
-                value={`${data.patient.pharmacies[0].phone}`}
-              />
-            </>
-          )}
+            ) : (
+              <>
+                <Demographics
+                  _id={currentUser._id}
+                  field="Pharmacy"
+                  value={`${data.patient.pharmacies[0].pharmacyName} ${data.patient.pharmacies[0].address}, ${data.patient.pharmacies[0].state}, ${data.patient.pharmacies[0].zipcode}`}
+                />
+                <Demographics
+                  _id={currentUser._id}
+                  field="Pharmacy Number"
+                  value={`${data.patient.pharmacies[0].phone}`}
+                />
+              </>
+            )}
+          </Text>
         </Box>
         <Box
-          mt={4}
-          ml={8}
-          w="40%"
+          w={mobileBoxLayout}
           border="4px"
           borderColor="brand.cambridgeBlue"
           h="fit-content"
           p={2}
         >
-          <Text fontSize="2xl" ml={8}>
+          <Text
+            display="flex"
+            justifyContent="center"
+            fontSize="xl"
+            lineHeight="2.3em"
+            mt={2}
+          >
             Medication List
           </Text>
           <UnorderedList ml={10} mt={4}>
@@ -137,12 +192,14 @@ const PatientDashboard = () => {
         </Box>
       </Flex>
 
-      <Box display="flex" justifyContent="center" mt={8}>
+      <Box display="flex" justifyContent="center" my={8}>
         <Button
           onClick={onOpen}
           size="md"
           w="fit-content"
-          bg="brand.accentBtns"
+          variant="ghost"
+          color="red"
+          borderColor="red"
         >
           Delete My Account
         </Button>

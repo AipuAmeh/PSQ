@@ -58,6 +58,7 @@ const Header = () => {
               as={IconButton}
               aria-label="Menu Options"
               icon={<HamburgerIcon />}
+              variant='outline'
             />
             <MenuList>
               <MenuItem>
