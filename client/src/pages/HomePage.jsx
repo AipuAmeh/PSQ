@@ -1,22 +1,68 @@
-import { Box, Button, Flex, Text, Stack, Image, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  Stack,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Features from "../components/HomePageFeature";
 import { Icon } from "@chakra-ui/react";
 import { PiStethoscopeDuotone } from "react-icons/pi";
 import { BsClockHistory } from "react-icons/bs";
 import { FaHandHoldingHeart } from "react-icons/fa6";
+import { useCurrentUserContext } from "../utils/context/CurrentUser";
+import { useNavigate } from "react-router-dom";
+import HomeButtons from "../components/HomeButtons";
 
-// add links to homepage buttons
 const HomePage = () => {
+  const { isLoggedIn } = useCurrentUserContext();
+  const navigate = useNavigate();
 
   // breakpoint for all home page sections
-const siteName = useBreakpointValue({ base: '2.2em', sm: '2.2em', md: '4em', lg: '5em'});
-const boxLayout = useBreakpointValue({ base: 'center', sm: 'center', md: 'space-evenly', lg: 'space-evenly'})
-const boxMobileLayout = useBreakpointValue({ base: 'center', sm: 'center', md: 'none', lg: 'none'})
-const heroDirection = useBreakpointValue({ base: "column-reverse", md: "row", lg: "row"});
-const heroSize = useBreakpointValue({ base: "30%", sm: "30%", md: "17%", lg: '15%'});
-const mobileSiteNamePadding = useBreakpointValue({ base: "0.5em", sm: "0.5em", md: "2.5em", lg: "2.5em"});
-const howWeHelp = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', lg: 'row' });
+  const siteName = useBreakpointValue({
+    base: "2.2em",
+    sm: "2.2em",
+    md: "4em",
+    lg: "5em",
+  });
+  const boxLayout = useBreakpointValue({
+    base: "center",
+    sm: "center",
+    md: "space-evenly",
+    lg: "space-evenly",
+  });
+  const boxMobileLayout = useBreakpointValue({
+    base: "center",
+    sm: "center",
+    md: "none",
+    lg: "none",
+  });
+  const heroDirection = useBreakpointValue({
+    base: "column-reverse",
+    md: "row",
+    lg: "row",
+  });
+  const heroSize = useBreakpointValue({
+    base: "30%",
+    sm: "30%",
+    md: "17%",
+    lg: "15%",
+  });
+  const mobileSiteNamePadding = useBreakpointValue({
+    base: "0.5em",
+    sm: "0.5em",
+    md: "2.5em",
+    lg: "2.5em",
+  });
+  const howWeHelp = useBreakpointValue({
+    base: "column",
+    sm: "column",
+    md: "row",
+    lg: "row",
+  });
 
   return (
     <Flex alignItems="center" flexDirection="column">
@@ -29,7 +75,7 @@ const howWeHelp = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', 
         m={6}
       >
         <Stack pt={mobileSiteNamePadding} gap={9} alignItems={boxMobileLayout}>
-          <Text fontSize={siteName} textShadow="3px 3px #93B48B" >
+          <Text fontSize={siteName} textShadow="3px 3px #93B48B">
             PSYCHQUICONSULT
           </Text>
           <Text fontSize="1em">
@@ -68,12 +114,25 @@ const howWeHelp = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', 
         </Text>
 
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
-          <Button bg="brand.homePageLoginBtns" size="lg" px={8}>
-            Login
-          </Button>
-          <Button bg="brand.homePageLoginBtns" size="lg" px={7}>
-            Sign up
-          </Button>
+          {isLoggedIn() ? (
+            // <Link to="/">
+              <HomeButtons title="Login" />
+            // </Link>
+          ) : (
+            // <Link to="/login">
+              <HomeButtons title="Login" />
+            // </Link>
+          )}
+
+          {isLoggedIn() ? (
+            <Link to="/">
+              <HomeButtons title="Sign up" />
+            </Link>
+          ) : (
+            <Link to="/signup">
+              <HomeButtons title="Sign up" />
+            </Link>
+          )}
         </Box>
       </Box>
       <Box
@@ -89,7 +148,7 @@ const howWeHelp = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', 
           How We Help
         </Text>
         <Flex spacing={8} direction={howWeHelp} mb={6} gap={5} px={6} py={6}>
-          <Features 
+          <Features
             icon={<Icon as={PiStethoscopeDuotone} boxSize={6} />}
             title="Consultations"
             desc="Speak directly to a healthcare provider at  your own convenience."
