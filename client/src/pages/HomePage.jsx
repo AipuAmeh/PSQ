@@ -115,13 +115,13 @@ const HomePage = () => {
 
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
           {isLoggedIn() ? (
-            // <Link to="/">
+            <Link to="/">
               <HomeButtons title="Login" />
-            // </Link>
+        </Link>
           ) : (
-            // <Link to="/login">
+            <Link to="/login">
               <HomeButtons title="Login" />
-            // </Link>
+          </Link>
           )}
 
           {isLoggedIn() ? (
