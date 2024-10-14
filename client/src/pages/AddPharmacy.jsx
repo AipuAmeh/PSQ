@@ -7,7 +7,8 @@ import {
   InputLeftAddon,
   InputGroup,
   Text,
-  useToast
+  useToast,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -17,6 +18,10 @@ import { useNavigate } from "react-router-dom";
 
 
 const AddPharmacy = () => {
+
+    // breakpoints for mobile screens
+    const mobileFormWidth = useBreakpointValue({ base: '100%', sm: '100%', md: '70%', lg: '70%'});
+
   const { id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
@@ -110,10 +115,10 @@ const AddPharmacy = () => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" px={10}>
-      <Text fontSize="3xl" mt={6}>
+      <Text fontSize="3xl" mt='3em'>
         Pharmacy Details
       </Text>
-      <FormControl mt={8} isRequired>
+      <FormControl mt={8} isRequired w={mobileFormWidth}>
         <FormLabel>Pharmacy Name</FormLabel>
         <Input placeholder="Pharmacy Name" onChange={handleChange} name='pharmacyName'/>
 
@@ -128,7 +133,7 @@ const AddPharmacy = () => {
 
           <FormControl isRequired>
             <FormLabel mt={4}>Zipcode</FormLabel>
-            <Input w="80%" placeholder='99999' onChange={handleChange} name='zipcode' type='number'/>
+            <Input placeholder='99999' onChange={handleChange} name='zipcode' type='number'/>
           </FormControl>
         </Box>
         <FormLabel mt={4} >Phone</FormLabel>
@@ -138,7 +143,10 @@ const AddPharmacy = () => {
   </InputGroup>
 
       </FormControl>
+      <Box my={5}>
       <Button onClick={handleSubmit} bg='brand.callToActionButtons'>Add Pharmacy</Button>
+      </Box>
+
     </Box>
   );
 };
