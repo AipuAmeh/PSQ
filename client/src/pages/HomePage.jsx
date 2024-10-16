@@ -14,12 +14,10 @@ import { PiStethoscopeDuotone } from "react-icons/pi";
 import { BsClockHistory } from "react-icons/bs";
 import { FaHandHoldingHeart } from "react-icons/fa6";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
-import { useNavigate } from "react-router-dom";
 import HomeButtons from "../components/HomeButtons";
 
 const HomePage = () => {
   const { isLoggedIn } = useCurrentUserContext();
-  const navigate = useNavigate();
 
   // breakpoint for all home page sections
   const siteName = useBreakpointValue({
