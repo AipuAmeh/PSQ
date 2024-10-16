@@ -62,7 +62,7 @@ const Header = () => {
             />
             <MenuList>
               <MenuItem>
-                <Link to="#">About</Link>
+                <Link to="/about">About</Link>
               </MenuItem>
               <MenuItem>
                 <Link to="#">Services</Link>
@@ -118,7 +118,7 @@ const Header = () => {
             </>
           )}
           <Text fontSize="md" lineHeight="40px">
-            <Link to="/#">About</Link>
+            <Link to="/about">About</Link>
           </Text>
           <Text fontSize="md" lineHeight="40px">
             <Link to="/#">Services</Link>

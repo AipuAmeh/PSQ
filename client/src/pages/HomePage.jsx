@@ -14,12 +14,10 @@ import { PiStethoscopeDuotone } from "react-icons/pi";
 import { BsClockHistory } from "react-icons/bs";
 import { FaHandHoldingHeart } from "react-icons/fa6";
 import { useCurrentUserContext } from "../utils/context/CurrentUser";
-import { useNavigate } from "react-router-dom";
 import HomeButtons from "../components/HomeButtons";
 
 const HomePage = () => {
   const { isLoggedIn } = useCurrentUserContext();
-  const navigate = useNavigate();
 
   // breakpoint for all home page sections
   const siteName = useBreakpointValue({
@@ -115,13 +113,13 @@ const HomePage = () => {
 
         <Box display="flex" flexDirection="row" gap={10} mt={6}>
           {isLoggedIn() ? (
-            // <Link to="/">
+            <Link to="/">
               <HomeButtons title="Login" />
-            // </Link>
+        </Link>
           ) : (
-            // <Link to="/login">
+            <Link to="/login">
               <HomeButtons title="Login" />
-            // </Link>
+          </Link>
           )}
 
           {isLoggedIn() ? (
@@ -147,7 +145,7 @@ const HomePage = () => {
         <Text fontSize="1.6em" m={6}>
           How We Help
         </Text>
-        <Flex spacing={8} direction={howWeHelp} mb={6} gap={5} px={6} py={6}>
+        <Flex spacing={8} direction={howWeHelp} mb={6} gap={5} px={6} py='3em'>
           <Features
             icon={<Icon as={PiStethoscopeDuotone} boxSize={6} />}
             title="Consultations"
