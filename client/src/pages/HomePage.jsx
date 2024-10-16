@@ -145,7 +145,7 @@ const HomePage = () => {
         <Text fontSize="1.6em" m={6}>
           How We Help
         </Text>
-        <Flex spacing={8} direction={howWeHelp} mb={6} gap={5} px={6} py={6}>
+        <Flex spacing={8} direction={howWeHelp} mb={6} gap={5} px={6} py='3em'>
           <Features
             icon={<Icon as={PiStethoscopeDuotone} boxSize={6} />}
             title="Consultations"
