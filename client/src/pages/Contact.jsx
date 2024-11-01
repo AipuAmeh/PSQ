@@ -119,7 +119,7 @@ const mobileFormMargin = useBreakpointValue({ base: '1.5em', sm: '1.5em', md: '6
             }}
             placeholder="Email"
           />
-          <FormHelperText>We'll never share your email.</FormHelperText>
+          <FormHelperText>We&lsquo;ll never share your email.</FormHelperText>
           <FormLabel mt={4}>Message</FormLabel>
           <Textarea
             type="text"
