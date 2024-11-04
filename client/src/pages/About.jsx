@@ -6,11 +6,12 @@ import {
   Text,
   UnorderedList,
   useBreakpointValue,
-  Icon
+  Icon,
 } from "@chakra-ui/react";
 import { FaBriefcaseMedical } from "react-icons/fa";
 import { FaFileMedicalAlt } from "react-icons/fa";
 import { CgPill } from "react-icons/cg";
+import ContactUsBlock from "../components/ContactUsBlock";
 
 const About = () => {
   // breakpoints for responsiveness
@@ -39,10 +40,10 @@ const About = () => {
     lg: "6em",
   });
   const mobileHeading = useBreakpointValue({
-    base: 'center',
-    sm: 'center',
-    md: 'none',
-    lg: 'none'
+    base: "center",
+    sm: "center",
+    md: "none",
+    lg: "none",
   });
   // add logos for nursing at the bottom of screen
   // contact us block
@@ -68,14 +69,7 @@ const About = () => {
             objectFit="cover"
             rounded="md"
           />
-          <Text
-            textAlign="center"
-            mt="2em"
-            fontWeight="bold"
-            fontSize="1em"
-            mb="3em"
-            fontFamily="cursive"
-          >
+          <Text textAlign="center" mt="2em" fontSize="1em" mb="3em">
             Mary Ameh, DNP, MSN, APRN, FNP-BC, PMHNP-BC
           </Text>
         </Box>
@@ -86,14 +80,14 @@ const About = () => {
             conditions across the lifespan.
           </Text>
           <br />
-          <Text fontSize="1.1em" >
+          <Text fontSize="1.1em">
             Following her Undergraduate studies, she received a Master&lsquo;s
             degree from Winston Salem State University in North Carolina. She
             then completed her Doctor of Nursing Practice from East Tennessee
             State University in Johnson City Tennessee.{" "}
           </Text>
           <br />
-          <Text fontSize="1.1em" >
+          <Text fontSize="1.1em">
             Ameh is an ardent believer in patient centered care using Evidence
             Based Practice with Motivational approach within the safety confines
             of mental health management. Ameh also believes that the
@@ -118,20 +112,18 @@ const About = () => {
           <br />
         </Box>
       </Box>
-      <Box my={8} display='flex' justifyContent='center'>
-       <Icon boxSize='3em' color='brand.callToActionButtons'>
-       <FaBriefcaseMedical />
-       </Icon>
-       <Icon boxSize='3em' color='brand.callToActionButtons'>
-       <FaFileMedicalAlt />
-       </Icon>
-       <Icon boxSize='3em' color='brand.callToActionButtons'>
-       <CgPill />
-       </Icon>
+      <Box my={8} display="flex" justifyContent="center">
+        <Icon boxSize="3em" color="brand.callToActionButtons">
+          <FaBriefcaseMedical />
+        </Icon>
+        <Icon boxSize="3em" color="brand.callToActionButtons">
+          <FaFileMedicalAlt />
+        </Icon>
+        <Icon boxSize="3em" color="brand.callToActionButtons">
+          <CgPill />
+        </Icon>
       </Box>
-      <Box>
-        Contact Us Block
-      </Box>
+      <ContactUsBlock />
     </Box>
   );
 };
