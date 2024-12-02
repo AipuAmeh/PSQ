@@ -20,6 +20,7 @@ import Contact from "./pages/Contact.jsx";
 import PatientPage from "./pages/PatientPage.jsx";
 import AddPharmacy from "./pages/AddPharmacy.jsx"
 import About from "./pages/About.jsx";
+import Services from "./pages/Services.jsx";
 
 
 const router = createBrowserRouter([
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: <About />
+      },
+      {
+        path: '/services',
+        element: <Services />
       }
     ],
   },
