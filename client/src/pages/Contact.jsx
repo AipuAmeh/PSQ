@@ -94,7 +94,7 @@ const mobileFormMargin = useBreakpointValue({ base: '1.5em', sm: '1.5em', md: '6
         <Text fontSize="1.8em" mt='3em'>
           Contact Us
         </Text>
-        <Text fontSize="1em" mt={mobileTextMargin} fontFamily="cursive">
+        <Text fontSize="1em" mt={mobileTextMargin}>
           Leave us a message. We will be sure to get back to you.
         </Text>
       </Box>

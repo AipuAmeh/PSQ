@@ -29,7 +29,7 @@ const Header = () => {
   // header for mobile screens
   const isMobile = useBreakpointValue({ base: true, md: false, sm: false });
 
-  // add sticy position?
+  // add sticky position?
   return (
     <Flex
       minWidth="max-content"
@@ -65,7 +65,7 @@ const Header = () => {
                 <Link to="/about">About</Link>
               </MenuItem>
               <MenuItem>
-                <Link to="#">Services</Link>
+                <Link to="/services">Services</Link>
               </MenuItem>
               <MenuItem>
                 <Link to="/contact">Contact</Link>
@@ -121,7 +121,7 @@ const Header = () => {
             <Link to="/about">About</Link>
           </Text>
           <Text fontSize="md" lineHeight="40px">
-            <Link to="/#">Services</Link>
+            <Link to="/services">Services</Link>
           </Text>
           <Text fontSize="md" lineHeight="40px">
             <Link to="/contact">Contact</Link>
