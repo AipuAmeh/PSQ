@@ -17,9 +17,11 @@ const pharmacySchema = new Schema({
     trim: true,
   },
   zipcode: {
-    type: Number,
+    type: String,
     required: true,
     trim: true,
+    maxlength: 9,
+    minlength: 5
   },
   phone: {
     type: String,

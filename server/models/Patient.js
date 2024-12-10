@@ -46,6 +46,11 @@ const patientSchema = new Schema({
 // if password is new or modified, hash it
 patientSchema.pre('save', async function(next) {
     if (this.isNew || this.isModified('password')) {
+
+        if (!this.password) {
+            throw new Error('Password must be provided');
+        }
+        
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds)
     };

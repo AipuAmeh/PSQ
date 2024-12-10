@@ -19,10 +19,12 @@
     "url": "https://github.com/AipuAmeh/PSQ/issues"
   },
   "jest": {
-    "transform": {}
+    "transform": {},
+    "testEnvironment": "node"
   },
   "homepage": "https://github.com/AipuAmeh/PSQ#readme",
   "dependencies": {
+    "@apollo/client": "^3.12.2",
     "@apollo/server": "^4.10.4",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
@@ -32,14 +34,15 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "graphql": "^16.8.1",
+    "graphql": "^16.9.0",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
-    "mongoose": "^8.3.4",
     "nodemailer": "^6.9.13"
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.1.2",
+    "mongoose": "^8.8.4",
     "nodemon": "^3.1.0"
   }
 }
