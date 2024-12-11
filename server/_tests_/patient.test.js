@@ -9,7 +9,7 @@ let mongoServer;
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
-  await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect(uri);
 });
 
 afterAll(async () => {
@@ -17,7 +17,7 @@ afterAll(async () => {
   await mongoServer.stop();
 });
 
-describe('Patient Resolver', () => {
+describe('Current Patient Resolver', () => {
   it('should return a patient from the database', async () => {
     // Create and save ChartNote documents
     const chartNote1 = new ChartNote({
