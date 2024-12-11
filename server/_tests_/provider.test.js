@@ -7,8 +7,7 @@ let mongoServer;
 beforeAll(async () => {
     mongoServer = await MongoMemoryServer.create();
     const uri = mongoServer.getUri();
-    await mongoose.connect(uri, { useNewUrlParser: true
-    });
+    await mongoose.connect(uri);
 });
 
 afterAll(async () => {
@@ -30,5 +29,6 @@ describe('Current Provider Resolver', () => {
         const foundProvider = await Provider.findById(provider._id);
 
         expect(foundProvider).toBeDefined();
+        expect(foundProvider.providerName).toBe('Jane Doe');
     })
 })
