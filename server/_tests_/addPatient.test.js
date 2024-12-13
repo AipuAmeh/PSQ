@@ -33,17 +33,18 @@ beforeAll(async () => {
                 password: 'testuserpassword',
             };
 
-        const testToken = {
-            email: 'email@email.com',
+    const testToken = {
+            email: 'johndoe@email.com',
             userName: 'testuser2',
             _id: testPatient._id
         };
 
     signPatientToken(testToken);
 
-    const result = await resolvers.Mutation.addPatient(null, testPatient)
+    const result = await resolvers.Mutation.addPatient(null, testPatient);
+
         // testing for token
-        expect(testToken).toBeDefined();
+        expect(result.testToken).toBeDefined();
 
         // testing for adding a patient
         expect(result).toBeDefined();
