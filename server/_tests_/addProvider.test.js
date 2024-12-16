@@ -31,19 +31,19 @@ beforeAll(async () => {
       };
 
       const testToken = {
-        email: 'janedoe@gmail.com',
-        providerName: 'Jane Doe',
+        email: testProvider.email,
+        providerName: testProvider.providerName,
         _id: testProvider._id
       };
 
-      signProviderToken(testToken);
+      const token = signProviderToken(testToken);
 
       const result = await resolvers.Mutation.addProvider(null, testProvider);
 
-      // expect(result.testToken).toBeDefined();
+      expect(token).toBeDefined();
 
       expect(result).toBeDefined();
-
-      
+      expect(result.provider.providerName).toBe(testProvider.providerName);
+      expect(result.provider.email).toBe(testProvider.email);    
     })
   })
