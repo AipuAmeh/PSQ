@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import Patient from "../models/Patient";
-import { signPatientToken, hashPassword } from "../utils/jwt";
+import { signPatientToken } from "../utils/jwt";
 import resolvers from "../schema/resolvers";
 
 let mongoServer;
