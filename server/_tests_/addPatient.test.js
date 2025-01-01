@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import Patient from "../models/Patient";
-import { signPatientToken } from "../utils/jwt";
+import { signPatientToken, hashPassword } from "../utils/jwt";
 import resolvers from "../schema/resolvers";
 
 let mongoServer;
@@ -24,13 +24,13 @@ beforeAll(async () => {
   describe('Add Patient Resolver', () => {
     it('should return created patient', async () => {
 
-    const testPatient = {
+    let testPatient = {
                 firstName: 'John',
                 lastName: 'Doe',
                 dob: new Date('1999-01-15'),
                 userName: 'testuser2',
                 email: 'johndoe@email.com',
-                password: 'testuserpassword',
+                password: expect.anything(),
             };
 
     const testToken = {
@@ -55,6 +55,6 @@ beforeAll(async () => {
         expect(result.patient.email).toBe(testPatient.email);
     
         // password is hashed so wont be defined
-        // expect(result.patient.password).toBe(testPatient.password);
+        expect(result.patient.password).toStrictEqual(testPatient.password);
     })
   })
