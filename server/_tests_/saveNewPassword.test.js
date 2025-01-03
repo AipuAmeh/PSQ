@@ -2,11 +2,8 @@ import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import Patient from "../models/Patient";
 import resolvers from "../schema/resolvers";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { signPatientToken } from "../utils/jwt";
-
-const JWT_SECRET = "testsecret";
 
 let mongoServer;
 
