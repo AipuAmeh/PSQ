@@ -3,9 +3,10 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import Patient from "../models/Patient";
 import resolvers from "../schema/resolvers";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import { signPatientToken } from "../utils/jwt";
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = "testsecret";
 
 let mongoServer;
 
@@ -26,38 +27,52 @@ afterEach(async () => {
 
 describe("Save New Password", () => {
     it("should save a new password", async () => {
+
+        // create an original password
+        const originalPassword = 'testuserpassword';
+        // hash password and place into new patient object
+        // like model does in 'pre save'
+        const hashedPassword = await bcrypt.hash(originalPassword, 10);
+
+        // create a test patient and save them
         const testPatient = new Patient({
             firstName: "John",
             lastName: "Doe",
             dob: new Date("1999-01-15"),
             userName: "testuser2",
             email: "johndoe@email.com",
-            password: 'testuserpassword',
+            password: hashedPassword,
         });
         await testPatient.save();
 
-        const testToken = {
+        // generate token using JWT
+        const tokenPayload = {
             email: testPatient.email,
             userName: testPatient.userName,
             _id: testPatient._id
         };
+        const token = await signPatientToken(tokenPayload);
 
-        const token = await signPatientToken(testToken);
-
-        console.log('PATIENT:' + testPatient);
-
+        // create a new password that we want to save and update
+        // test patient with
         let newPassword = "testpassword234";
-        testPatient.password = newPassword;
 
-        const updatedPatient = await testPatient.save();
-
-        console.log('UPDATED PATIENT PASSWORD:' + updatedPatient);
-
+        // test the saveNewPassword resolver using parameters
+        // set patient ID to String to stringify the ID for
+        // identification
         const result = await resolvers.Mutation.saveNewPassword(null, {
-            newPassword: updatedPatient.password, patientId: updatedPatient._id, token: token
+            newPassword, 
+            patientId: testPatient._id.toString(), 
+            token
         });
 
-        expect(result).toBeDefined();
+          // Verify results
+    const updatedPatient = await Patient.findById(testPatient._id);
+    const isPasswordUpdated = await bcrypt.compare(newPassword, updatedPatient.password);
 
+        expect(result).toBeDefined();
+        expect(result.updatedPatient).toBeDefined();
+        expect(isPasswordUpdated).toBe(true);
+        expect(testPatient.email).toBe(updatedPatient.email);
     })
 })

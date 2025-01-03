@@ -59,7 +59,7 @@ const resolvers = {
     loginPatient: async (parent, { email, password }) => {
       const patient = await Patient.findOne({ email });
       if (!patient) {
-        throw AuthenticationError;
+        throw new AuthenticationError("Authentication failed");
       }
       const correctPw = await patient.isCorrectPassword(password);
       if (!correctPw) {
