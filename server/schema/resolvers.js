@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
 import ChartNote from "../models/ChartNote.js";
