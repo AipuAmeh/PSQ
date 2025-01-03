@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 import Patient from "../models/Patient.js";
 import Provider from "../models/Provider.js";
 import ChartNote from "../models/ChartNote.js";
@@ -59,7 +58,7 @@ const resolvers = {
     loginPatient: async (parent, { email, password }) => {
       const patient = await Patient.findOne({ email });
       if (!patient) {
-        throw new AuthenticationError("Authentication failed");
+        throw AuthenticationError;
       }
       const correctPw = await patient.isCorrectPassword(password);
       if (!correctPw) {
