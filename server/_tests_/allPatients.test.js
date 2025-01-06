@@ -20,6 +20,10 @@ afterAll(async () => {
     await mongoServer.stop();
 });
 
+afterEach(async () => {
+  await Patient.deleteMany({});
+});
+
 describe('All Patients Resolver', () => {
     beforeEach(async () => {
 
