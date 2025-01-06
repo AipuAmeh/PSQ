@@ -15,6 +15,7 @@ const pharmacySchema = new Schema({
     type: String,
     required: true,
     trim: true,
+    maxlength: 2
   },
   zipcode: {
     type: String,
@@ -27,6 +28,7 @@ const pharmacySchema = new Schema({
     type: String,
     required: true,
     maxlength: 10,
+    minlength: 9,
     trim: true,
   },
 });

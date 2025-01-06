@@ -134,12 +134,12 @@ const PatientDashboard = () => {
         >
           <Text
             display="flex"
+            flexDirection="column"
             justifyContent="center"
             fontSize="xl"
             lineHeight="2.3em"
             mt={2}
           >
-            Pharmacy Info
             {data.patient.pharmacies[0] == undefined ? (
               <Link to={`/${currentUser._id}/add-pharmacy`}>
                 <IconButton
