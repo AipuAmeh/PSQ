@@ -128,7 +128,7 @@ const AddPharmacy = () => {
         <Box display="flex" justifyContent="center" gap={4}>
           <FormControl isRequired>
             <FormLabel mt={4}>State</FormLabel>
-            <Input placeholder="e.g. Washington" onChange={handleChange} name='state'/>
+            <Input placeholder="e.g. WA" onChange={handleChange} name='state'/>
           </FormControl>
 
           <FormControl isRequired>
