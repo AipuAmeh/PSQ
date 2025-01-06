@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import Patient from "../models/Patient";
-import ChartNote from "../models/ChartNote";
 import resolvers from "../schema/resolvers";
 
 let mongoServer;
@@ -19,20 +18,11 @@ afterAll(async () => {
 
 afterEach(async () => {
     await Patient.deleteMany({});
-    await ChartNote.deleteMany({});
 });
 
-describe("Add a Chart Note to a Patient", () => {
-    it("should add a chart note to patient account", async () => {
-        // create a chart note
-        const chartNote1 = new ChartNote({
-            dateCreated: new Date(),
-            subject: 'Test Note 1',
-            noteText: 'This is a test note content 1',
-          });
-          await chartNote1.save();
-
-        // create a patient
+describe("Add Medication to Patient", () => {
+    it("should return a patient with an added medication", async () => {
+        // create patient and save to database
         const patient = new Patient({
             _id: new mongoose.Types.ObjectId(),
             firstName: 'John',
@@ -42,18 +32,16 @@ describe("Add a Chart Note to a Patient", () => {
             password: 'testuserpassword',
           });
           await patient.save();
-
-        // find patient and add chart note to set and populate chart 
-        // notes
-        const results =  await resolvers.Mutation.addChartNoteToPatient(null, {
+        // set medication name to const variable
+        const medication = 'Lisinopril'
+        // set results to resolver mutation 
+        const results = await resolvers.Mutation.addMedication(null, {
             patientId: patient._id,
-            dateCreated: chartNote1.dateCreated,
-            subject: chartNote1.subject,
-            noteText: chartNote1.noteText
+            medications: medication
         });
 
+        // verify results are defined
         expect(results).toBeDefined();
-        expect(patient).toBeDefined();
-        expect(chartNote1).toBeDefined();
+        expect(results.medications[0]).toBe(medication);
     })
 })
