@@ -1,4 +1,4 @@
-import { Box, Text, IconButton, Input, useToast } from "@chakra-ui/react";
+import { Box, Text, IconButton, Input, useToast, useBreakpointValue } from "@chakra-ui/react";
 import { CheckIcon, EditIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { isInvalidEmail }from "../../utils/validation/invalidEmail.js";
@@ -9,7 +9,13 @@ import { CHANGE_ACCOUNT_DETAILS } from "../../utils/mutations.js";
 
 
 // eslint-disable-next-line react/prop-types
-const Demographics = ({ field, value, _id }) => {
+const PharmacyDemographics = ({ field, value, _id }) => {
+  const mobileLayout = useBreakpointValue({
+    base: "column",
+    sm: "column",
+    md: "column",
+    lg: "row",
+  });
   const toast = useToast();
   const [updateField, setUpdates] = useState(false);
   const [formState, setFormState] = useState({
@@ -121,7 +127,7 @@ const Demographics = ({ field, value, _id }) => {
 
   return (
     <>
-      <Box display="flex" gap={6}>
+      <Box display="flex" gap={6} flexDirection={mobileLayout} class='trying-to-find'>
         <Text flex={1} lineHeight="30px" fontSize='1.1em' fontWeight='bold'>
           {field}:
         </Text>
@@ -138,9 +144,9 @@ const Demographics = ({ field, value, _id }) => {
             />
           </Box>
         ) : (
-          <>
-            <Text lineHeight="32px" fontSize='1em'>{value}</Text>{" "}
-          </>
+          <Box >
+            <Text  lineHeight="32px" fontSize='1em'>{value}</Text>{" "}
+          </Box>
         )}
         <Box display="flex" justifyContent="flex-end">
           {field == "Email" || field == "Username" || field == "Password" || field == 'Pharmacy' || field == 'Pharmacy Number' ? (
@@ -160,4 +166,4 @@ const Demographics = ({ field, value, _id }) => {
   );
 };
 
-export default Demographics;
+export default PharmacyDemographics;
