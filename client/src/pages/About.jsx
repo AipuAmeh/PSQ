@@ -45,7 +45,7 @@ const About = () => {
     md: "none",
     lg: "none",
   });
-  // add logos for nursing at the bottom of screen
+
   // contact us block
   return (
     <Box>
@@ -91,10 +91,7 @@ const About = () => {
             Ameh is an ardent believer in patient centered care using Evidence
             Based Practice with Motivational approach within the safety confines
             of mental health management. Ameh also believes that the
-            Patient&lsquo;s wellbeing is primary to care delivery. As such, she
-            is compassionate, empathetic, and casual with her patients as
-            necessary to maintain provider-patient relationships, an integral in
-            planning care and effective therapeutic management.{" "}
+            Patient&lsquo;s wellbeing is primary to care delivery.{" "}
           </Text>
           <br />
 

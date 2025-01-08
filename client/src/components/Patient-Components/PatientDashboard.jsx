@@ -19,6 +19,7 @@ import ConfirmationModal from "../ConfirmationModal";
 import { useDisclosure } from "@chakra-ui/react";
 import { formattedDate } from "../../utils/validation/formattedDate";
 import { Link } from "react-router-dom";
+import PharmacyDemographics from "../Profile/PharmacyDemographics";
 
 // spacing issue with patients that have pharmacies
 const PatientDashboard = () => {
@@ -152,12 +153,12 @@ const PatientDashboard = () => {
               </Link>
             ) : (
               <>
-                <Demographics
+                <PharmacyDemographics
                   _id={currentUser._id}
                   field="Pharmacy"
                   value={`${data.patient.pharmacies[0].pharmacyName} ${data.patient.pharmacies[0].address}, ${data.patient.pharmacies[0].state}, ${data.patient.pharmacies[0].zipcode}`}
                 />
-                <Demographics
+                <PharmacyDemographics
                   _id={currentUser._id}
                   field="Pharmacy Number"
                   value={`${data.patient.pharmacies[0].phone}`}
