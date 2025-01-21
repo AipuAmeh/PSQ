@@ -48,8 +48,9 @@
   line-height: 1.5em;
 }
 
-.login-link {
-
+.login-link:hover {
+text-decoration: underline;
+color: #93B48B;
 }
 
 .sources-list {
