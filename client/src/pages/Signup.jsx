@@ -11,10 +11,10 @@ import {
   InputGroup,
   Center,
   Stack,
-  Link,
   IconButton,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
@@ -286,6 +286,9 @@ const mobileRightMargin = useBreakpointValue({ base: 0, sm: 0, md: 3, lg: 3});
           Create Your Account
         </Button>
       </Center>
+      <Text mb={4} fontSize='lg'>Already have an account? 
+        <Link to="/login" className="login-link"> Login here!</Link>
+        </Text>
       {error ? <div>{error.message}</div> : null}
     </Center>
   );
