@@ -48,6 +48,10 @@
   line-height: 1.5em;
 }
 
+.login-link {
+
+}
+
 .sources-list {
   list-style-type: none;
   font-size: 0.85em;
@@ -69,6 +73,8 @@ text-decoration: underline;
 .pt-page-link:hover {
   text-decoration: underline;
 }
+
+
 
 .header {
   position: sticky;
