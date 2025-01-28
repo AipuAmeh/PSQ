@@ -128,7 +128,7 @@ const PharmacyDemographics = ({ field, value, _id }) => {
   return (
     <>
       <Box display="flex" gap={6} flexDirection={mobileLayout} class='trying-to-find'>
-        <Text flex={1} lineHeight="30px" fontSize='1.1em' fontWeight='bold'>
+        <Text flex={1} lineHeight="30px" fontSize='1em' fontWeight='bold'>
           {field}:
         </Text>
         {updateField ? (
@@ -145,7 +145,7 @@ const PharmacyDemographics = ({ field, value, _id }) => {
           </Box>
         ) : (
           <Box >
-            <Text  lineHeight="32px" fontSize='1em'>{value}</Text>{" "}
+            <Text  lineHeight="32px" fontSize='0.75em'>{value}</Text>{" "}
           </Box>
         )}
         <Box display="flex" justifyContent="flex-end">
