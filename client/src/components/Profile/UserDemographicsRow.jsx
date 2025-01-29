@@ -9,7 +9,7 @@ import { CHANGE_ACCOUNT_DETAILS } from "../../utils/mutations.js";
 
 
 // eslint-disable-next-line react/prop-types
-const Demographics = ({ field, value, _id }) => {
+const  Demographics = ({ field, value, _id }) => {
   const toast = useToast();
   const [updateField, setUpdates] = useState(false);
   const [formState, setFormState] = useState({

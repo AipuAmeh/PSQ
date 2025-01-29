@@ -112,20 +112,14 @@ const Header = () => {
                 <Link to='/signup'>
                   <Button backgroundColor='brand.callToActionButtons'>Signup/Login</Button>
                 </Link>
-              {/* <Text fontSize="md" lineHeight="40px">
-                <Link to="/signup">Sign up</Link>
-              </Text>
-              <Text fontSize="md" lineHeight="40px">
-                <Link to="/login">Login</Link>
-              </Text> */}
             </>
           )}
           <Text fontSize="md" lineHeight="40px">
             <Link to="/about">About</Link>
           </Text>
-          <Text fontSize="md" lineHeight="40px">
+          {/* <Text fontSize="md" lineHeight="40px">
             <Link to="/services">Services</Link>
-          </Text>
+          </Text> */}
           <Text fontSize="md" lineHeight="40px">
             <Link to="/contact">Contact</Link>
           </Text>

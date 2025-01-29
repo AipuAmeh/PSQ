@@ -24,10 +24,10 @@ import { useCurrentUserContext } from "../utils/context/CurrentUser";
 import { useNavigate } from "react-router-dom";
 import PasswordChecklistComp from "../components/Validation/PasswordChecklist";
 import { isInvalidEmail } from "../utils/validation/invalidEmail";
+import { isInvalidBday } from "../utils/validation/validatedBday";
 
 // mobile development once screen gets smaller
 const Signup = () => {
-
   // breakpoints for mobile screens
   const isMobile = useBreakpointValue({ base: '0', sm: '0', md: '1', lg: '1' });
 const mobileFormLayout = useBreakpointValue({ base: 'column', sm: 'column', md: 'row', lg: 'row'});
@@ -105,6 +105,17 @@ const mobileRightMargin = useBreakpointValue({ base: 0, sm: 0, md: 3, lg: 3});
       toast({
         title: "Error",
         description: "Please enter a valid email.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (isInvalidBday(formState.dob)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid birthday.",
         status: "error",
         duration: 2000,
         isClosable: true,
